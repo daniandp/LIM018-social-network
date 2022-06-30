@@ -1,0 +1,30 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Quicksand:wght@300&display=swap');
+
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+main{
+    height: 100vh;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: flex-end;
+    row-gap: 50px;
+}
+.title{
+    font-family: 'Press Start 2P';
+    line-height: 40px;
+    /* identical to box height */
+    text-align: center;
+    color: #FFFFFF;
+    text-shadow: 0px 4px 7px #000000;
+}
+
+.logo{
+    height: 200px;
+    width: auto;
+
+}
