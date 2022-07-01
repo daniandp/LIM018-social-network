@@ -127,6 +127,44 @@ body {
 
 .links-redirect {
   color: #FFFFFF;
-  font-weight: 00px;
+  font-weight: 300px;
 }
 
+/* -------------  Register ------------- */
+
+.screen-register {
+  height: 100vh;
+  display: flex;
+  flex-wrap: wrap;
+  align-content: center;
+  justify-content: center;
+}
+
+.form-register {
+  display: flex;
+  flex-wrap: wrap;
+  row-gap: 30px;
+  align-self: end;
+  align-content: center;
+  justify-content: center;
+  height: 78.5%;
+  padding-top: 40px;
+}
+
+.slogan-register {
+  font-size: 20px;
+}
+
+.cont-inputs-register {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 300px;
+}
+
+.input-register {
+  width: 350px;
+  height: 60px;
+  border-radius: 8px;
+  padding: 0 20px;
+}
