@@ -1,30 +1,75 @@
 @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Quicksand:wght@300&display=swap');
 
-*{
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
-main{
-    height: 100vh;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: flex-end;
-    row-gap: 50px;
-}
-.title{
-    font-family: 'Press Start 2P';
-    line-height: 40px;
-    /* identical to box height */
-    text-align: center;
-    color: #FFFFFF;
-    text-shadow: 0px 4px 7px #000000;
+body {
+  background: #5C16C5;
 }
 
-.logo{
-    height: 200px;
-    width: auto;
+/* Pantalla de bienvenida */
 
+.screen-welcome {
+  height: 100vh;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  row-gap: 80px;
+  align-content: center;
 }
+
+.title {
+  font-family: 'Press Start 2P';
+  font-weight: 400;
+  font-size: 34px;
+  line-height: 40px;
+  text-align: center;
+  color: #FFFFFF;
+  text-shadow: 0px 4px 7px #000000;
+}
+
+.logo {
+  height: 220px;
+  width: auto;
+}
+
+.slogan {
+  font-family: 'Quicksand';
+  font-size: 34px;
+  text-align: center;
+  color: #FFFFFF;
+  padding: 0px 30px
+}
+
+.group-btn {
+  display: flex;
+  flex-direction: column;
+  row-gap: 15px;
+}
+
+.btn-general {
+  font-family: 'Quicksand';
+  font-weight: 900;
+  font-size: 20px;
+  width: 150px;
+  height: 50px;
+  border-radius: 8px;
+  border: none;
+  filter: drop-shadow(4px 4px 10px rgba(0, 0, 0, 0.5));
+}
+
+.btn-login {
+  background: #1D9BF0;
+  color: #FFFFFF;
+}
+
+.btn-singup {
+  background: #FFFFFF;
+}
+
+/* Login */
+
