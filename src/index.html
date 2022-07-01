@@ -4,17 +4,46 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link href="https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css" rel="stylesheet">
+  <link rel="icon" type="image/png" href="img/mando.png" />
   <link rel="stylesheet" href="style.css">
   <title>Twitchtter</title>
 </head>
 <body>
   <header></header>
   <main>
-    <h1 class="title">TWITCHTTER</h1>
-    <img class="logo" src="./img/mando 5.png" alt="logoTwitchtter">
-    <h3 class="slogan">¡La red social creada por gamers para gamers!</h3>
-    <button class="btn-login btn-general" type="button" id="logIn">Iniciar Sesión</button>
-    <button class="btn-singup btn-general" type="button" id="singUp">Registrarse</button>
+    <!-- <section class="screen-welcome">
+      <h1 class="title">TWITCHTTER</h1>
+      <img class="logo" src="./img/mando.png" alt="logoTwitchtter">
+      <h2 class="slogan">¡La red social creada por gamers para gamers!</h2>
+      <div class="group-btn">
+        <button class="btn-login btn-general" type="button" id="logIn">Iniciar sesión</button>
+        <button class="btn-singup btn-general" type="button" id="singUp">Registrarse</button>
+      </div>
+    </section> -->
+    <section class="screen-login">
+      <h1 class="title">TWITCHTTER</h1>
+      <h2 class="slogan">¡Bienvenido gamer!</h2>
+      <form>
+        <div>
+          <input type="text" placeholder="Nombre de usuario o correo">
+          <input type="text" placeholder="Contraseña">
+          <a href="#">¿Olvidaste tu contraseña?</a>
+        </div>
+        <div>
+          <button class="btn-enter btn-general">Entrar</button>
+        </div>
+        <div>
+          <hr>O<hr>
+        </div>
+        <div>
+          <button class="btn-google"><i class="bx bxl-google"></i>Iniciar sesión con google</button>
+        </div>
+        <div>
+          ¿No eres miembro?<a href="#">Regístrate ahora</a>
+        </div>
+      </form>
+    </section>
   </main>
   <footer></footer>
   <script type="module" src="main.js"></script>
