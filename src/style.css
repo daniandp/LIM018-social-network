@@ -1,23 +1,23 @@
-@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Quicksand:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Quicksand:wght@300;700&display=swap');
 
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  font-family: 'Quicksand';
 }
 
 body {
   background: #5C16C5;
 }
 
-/* Pantalla de bienvenida */
+/* -------------  Pantalla de bienvenida ------------- */
 
 .screen-welcome {
   height: 100vh;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  align-items: center;
   row-gap: 80px;
   align-content: center;
 }
@@ -38,11 +38,10 @@ body {
 }
 
 .slogan {
-  font-family: 'Quicksand';
   font-size: 34px;
   text-align: center;
   color: #FFFFFF;
-  padding: 0px 30px
+  padding: 0px 30px;
 }
 
 .group-btn {
@@ -52,14 +51,14 @@ body {
 }
 
 .btn-general {
-  font-family: 'Quicksand';
-  font-weight: 900;
+  font-weight: 700;
   font-size: 20px;
   width: 150px;
   height: 50px;
   border-radius: 8px;
   border: none;
   filter: drop-shadow(4px 4px 10px rgba(0, 0, 0, 0.5));
+  background: #FFFFFF;
 }
 
 .btn-login {
@@ -67,9 +66,67 @@ body {
   color: #FFFFFF;
 }
 
-.btn-singup {
-  background: #FFFFFF;
+/* -------------  Login ------------- */
+
+.screen-login {
+  height: 100vh;
+  display: flex;
+  flex-wrap: wrap;
+  align-content: center;
+  justify-content: center;
 }
 
-/* Login */
+.form-login {
+  display: flex;
+  flex-wrap: wrap;
+  row-gap: 30px;
+  align-content: center;
+  justify-content: center;
+  height: 78.5%;
+}
+
+.cont-inputs-login {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  height: 250px;
+}
+
+.input-login {
+  width: 350px;
+  height: 60px;
+  border-radius: 8px;
+  margin-top: 32px;
+  padding: 0 20px;
+}
+
+.separator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #FFFFFF;
+}
+
+.hr {
+  width: 150px;
+  height: 1px;
+  margin: 20px;
+}
+
+.google-icon {
+  height: 100%;
+}
+
+.btn-google {
+  display: flex;
+  width: 350px;
+  background: #EEE9E9;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.links-redirect {
+  color: #FFFFFF;
+  font-weight: 00px;
+}
 
