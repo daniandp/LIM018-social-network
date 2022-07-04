@@ -17,7 +17,7 @@ const showLogin = () => {
 
 const showRegister = () => {
   container.removeAttribute('class');
-  container.setAttribute('class', 'screen-login');
+  container.setAttribute('class', 'screen-register');
   container.innerHTML = components.register();
   return container;
 };

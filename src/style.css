@@ -176,7 +176,7 @@ body {
 }
 
 
-@media (min-width: 992px) {
+@media (min-width: 820px) {
 /* -------------  Pantalla de bienvenida ------------- */
 .hidden {
   display: flex;
