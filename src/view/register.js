@@ -1,8 +1,10 @@
 export default () => {
   const viewRegister = `<div class="cont-title">
   <h1 class="title">TWITCHTTER</h1>
+  <div class="cont-logo">
   <img src="./img/mando.png" class="logo hidden" alt="logoTwitchtter">
-  <h2 class="slogan hidden">¡La red social creada por gamers para gamers!</h2>
+  </div>
+  <h2 class="slogan hidden main-slogan">¡La red social creada por gamers para gamers!</h2>
   </div>
   <div class="cont-form">
     <form class="form-register">
@@ -17,7 +19,7 @@ export default () => {
         <input class="input-register" type="password" placeholder="Contraseña">
       </div>
       <a href="#"><button type="button" class="btn-enter btn-general">Registrar</button></a>
-      <div class="links-redirect">¿Ya eres miembro? <a class="links-redirect" href="#">Inicia sesión ahora</a></div>
+      <div class="links-redirect">¿Ya eres miembro? <a class="links-redirect" href="#/login">Inicia sesión ahora</a></div>
     </form>
   </div>`;
 

@@ -1,3 +1,4 @@
+/* eslint-disable import/no-unresolved */
 import { getAuth, signInWithPopup, GoogleAuthProvider } from 'https://www.gstatic.com/firebasejs/9.8.4/firebase-auth.js';
 
 const auth = getAuth();
