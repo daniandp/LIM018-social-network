@@ -1,4 +1,5 @@
 import { components } from '../view/index.js';
+import { prueba } from '../firebase/authGoogle.js';
 
 const container = document.getElementById('container');
 const showWelcome = () => {
@@ -12,6 +13,8 @@ const showLogin = () => {
   container.removeAttribute('class');
   container.setAttribute('class', 'screen-login');
   container.innerHTML = components.login();
+  const btnGoogle = container.querySelector('#btn-google-login');
+  btnGoogle.addEventListener('click', prueba);
   return container;
 };
 
@@ -31,5 +34,8 @@ const changeView = (route) => {
   }
   // console.log(route);
 };
+// console.log(showLogin);
+// const btnGoogle = showLogin().getElementById('btn-google-login');
 
+// btnGoogle.addEventListener('click', prueba());
 export { changeView };

@@ -1,5 +1,7 @@
+/* eslint-disable import/no-unresolved */
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.8.4/firebase-app.js';
 
+// console.log(auth)
 const firebaseConfig = {
   apiKey: 'AIzaSyDd_ToyOT-LhZp2vTrANXRkY-IpkioTsh8',
   authDomain: 'social-twitchtter.firebaseapp.com',
