@@ -1,5 +1,5 @@
 import { components } from '../view/index.js';
-import { prueba } from '../firebase/authGoogle.js';
+import { authGoogle, registerUser } from '../firebase/auth.js';
 
 const container = document.getElementById('container');
 const showWelcome = () => {
@@ -14,7 +14,7 @@ const showLogin = () => {
   container.setAttribute('class', 'screen-login');
   container.innerHTML = components.login();
   const btnGoogle = container.querySelector('#btn-google-login');
-  btnGoogle.addEventListener('click', prueba);
+  btnGoogle.addEventListener('click', authGoogle);
   return container;
 };
 
@@ -22,8 +22,18 @@ const showRegister = () => {
   container.removeAttribute('class');
   container.setAttribute('class', 'screen-register');
   container.innerHTML = components.register();
+  const btnRegister = container.querySelector('.btn-enter');
+  btnRegister.addEventListener('click', () => {
+    registerUser(
+      container.querySelector('#email').value,
+      container.querySelector('#name').value,
+      container.querySelector('#nickname').value,
+      container.querySelector('#password').value,
+    );
+  });
   return container;
 };
+
 const changeView = (route) => {
   container.innerHTML = '';
   switch (route) {
@@ -38,4 +48,5 @@ const changeView = (route) => {
 // const btnGoogle = showLogin().getElementById('btn-google-login');
 
 // btnGoogle.addEventListener('click', prueba());
+
 export { changeView };

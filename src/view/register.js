@@ -13,10 +13,10 @@ export default () => {
         Iniciar sesión con google</button>
       <div class="separator"><hr class="hr">O<hr class="hr"></div>
       <div class="cont-inputs-register">
-        <input class="input-register" type="text" placeholder="Correo electrónico">
-        <input class="input-register" type="text" placeholder="Nombre completo">
-        <input class="input-register" type="text" placeholder="Nombre de usuario">
-        <input class="input-register" type="password" placeholder="Contraseña">
+        <input id="email" class="input-register" type="text" placeholder="Correo electrónico">
+        <input id="name" class="input-register" type="text" placeholder="Nombre completo">
+        <input id="nickname" class="input-register" type="text" placeholder="Nombre de usuario">
+        <input id="password" class="input-register" type="password" placeholder="Contraseña">
       </div>
       <a href="#"><button type="button" class="btn-enter btn-general">Registrar</button></a>
       <div class="links-redirect">¿Ya eres miembro? <a class="links-redirect" href="#/login">Inicia sesión ahora</a></div>

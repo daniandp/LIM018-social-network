@@ -1,10 +1,15 @@
 /* eslint-disable import/no-unresolved */
 import { getAuth, signInWithPopup, GoogleAuthProvider } from 'https://www.gstatic.com/firebasejs/9.8.4/firebase-auth.js';
+import { getFirestore, collection, addDoc } from 'https://www.gstatic.com/firebasejs/9.8.4/firebase-firestore.js';
+import { app } from './conection.js';
 
+console.log(getFirestore(app));
+
+const db = getFirestore(app);
 const auth = getAuth();
 const provider = new GoogleAuthProvider();
 
-export const prueba = () => {
+export const authGoogle = () => {
   signInWithPopup(auth, provider)
     .then((result) => {
       // This gives you a Google Access Token. You can use it to access the Google API.
@@ -27,3 +32,21 @@ export const prueba = () => {
       // ...
     });
 };
+
+// export function logout(){
+//   auth.signOut();
+// }
+
+export async function registerUser(email, name, nickname, password) {
+  try {
+    const docRef = await addDoc(collection(db, 'users'), {
+      email,
+      name,
+      nickname,
+      password,
+    });
+    console.log(docRef.id);
+  } catch (e) {
+    console.error('Error adding document: ', e);
+  }
+}

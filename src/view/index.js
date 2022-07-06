@@ -4,7 +4,6 @@ import Register from './register.js';
 
 const components = {
   welcome: Welcome,
-  vLogin: Login,
   login: Login,
   register: Register,
 };
