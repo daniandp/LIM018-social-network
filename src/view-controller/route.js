@@ -1,5 +1,5 @@
 import { components } from '../view/index.js';
-import { authGoogle, registerUser } from '../firebase/auth.js';
+import { authGoogle, registerUserWithEmailAndPassword } from '../firebase/auth.js';
 
 const container = document.getElementById('container');
 const showWelcome = () => {
@@ -24,10 +24,10 @@ const showRegister = () => {
   container.innerHTML = components.register();
   const btnRegister = container.querySelector('.btn-enter');
   btnRegister.addEventListener('click', () => {
-    registerUser(
+    registerUserWithEmailAndPassword(
       container.querySelector('#email').value,
-      container.querySelector('#name').value,
-      container.querySelector('#nickname').value,
+      // container.querySelector('#name').value,
+      // container.querySelector('#nickname').value,
       container.querySelector('#password').value,
     );
   });

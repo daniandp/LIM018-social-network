@@ -1,13 +1,34 @@
 /* eslint-disable import/no-unresolved */
-import { getAuth, signInWithPopup, GoogleAuthProvider } from 'https://www.gstatic.com/firebasejs/9.8.4/firebase-auth.js';
-import { getFirestore, collection, addDoc } from 'https://www.gstatic.com/firebasejs/9.8.4/firebase-firestore.js';
+import { getAuth, signInWithPopup, GoogleAuthProvider, createUserWithEmailAndPassword } from 'https://www.gstatic.com/firebasejs/9.8.4/firebase-auth.js';
+import { getFirestore, collection, addDoc, getDocs } from 'https://www.gstatic.com/firebasejs/9.8.4/firebase-firestore.js';
 import { app } from './conection.js';
-
-console.log(getFirestore(app));
 
 const db = getFirestore(app);
 const auth = getAuth();
 const provider = new GoogleAuthProvider();
+
+export const registerUser = (email, name, nickname, uid) => {
+  addDoc(collection(db, 'users'), {
+    email,
+    name,
+    nickname,
+    uid,
+  })
+    .then((docRef) => {
+      // getDocs(collection(db, 'users'))
+      //   .then((datos) => {
+      //     datos.forEach((doc) => {
+      //       console.log(`${doc.id} => ${doc.data().email}`);
+      //     });
+      //   });
+      console.log(db);
+      console.log(docRef.id);
+      console.log(docRef);
+    })
+    .catch((error) => {
+      console.error('Error adding document: ', error);
+    });
+};
 
 export const authGoogle = () => {
   signInWithPopup(auth, provider)
@@ -19,6 +40,8 @@ export const authGoogle = () => {
       // The signed-in user info.
       const user = result.user;
       console.log(user);
+      console.log(user.uid);
+      registerUser(user.email, user.displayName, user.displayName, user.uid);
       // ...
     }).catch((error) => {
       // Handle Errors here.
@@ -37,16 +60,18 @@ export const authGoogle = () => {
 //   auth.signOut();
 // }
 
-export async function registerUser(email, name, nickname, password) {
-  try {
-    const docRef = await addDoc(collection(db, 'users'), {
-      email,
-      name,
-      nickname,
-      password,
+export const registerUserWithEmailAndPassword = (email, password) => {
+  createUserWithEmailAndPassword(auth, email, password)
+    .then((userCredential) => {
+      // Signed in
+      const user = userCredential.user;
+      console.log(user);
+      // ...
+    })
+    .catch((error) => {
+      // const errorCode = error.code;
+      const errorMessage = error.message;
+      console.log(errorMessage);
+      // ..
     });
-    console.log(docRef.id);
-  } catch (e) {
-    console.error('Error adding document: ', e);
-  }
-}
+};
