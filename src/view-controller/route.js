@@ -1,52 +1,15 @@
-import { components } from '../view/index.js';
-import { authGoogle, registerUserWithEmailAndPassword } from '../firebase/auth.js';
-
-const container = document.getElementById('container');
-const showWelcome = () => {
-  container.removeAttribute('class');
-  container.setAttribute('class', 'screen-welcome');
-  container.innerHTML = components.welcome();
-  return container;
-};
-
-const showLogin = () => {
-  container.removeAttribute('class');
-  container.setAttribute('class', 'screen-login');
-  container.innerHTML = components.login();
-  const btnGoogle = container.querySelector('#btn-google-login');
-  btnGoogle.addEventListener('click', authGoogle);
-  return container;
-};
-
-const showRegister = () => {
-  container.removeAttribute('class');
-  container.setAttribute('class', 'screen-register');
-  container.innerHTML = components.register();
-  const btnRegister = container.querySelector('.btn-enter');
-  btnRegister.addEventListener('click', () => {
-    registerUserWithEmailAndPassword(
-      container.querySelector('#email').value,
-      // container.querySelector('#name').value,
-      // container.querySelector('#nickname').value,
-      container.querySelector('#password').value,
-    );
-  });
-  return container;
-};
+/* eslint-disable-next-line */
+import * as myImports from "../main.js";
 
 const changeView = (route) => {
-  container.innerHTML = '';
+  myImports.container.innerHTML = '';
   switch (route) {
-    case '': { return showWelcome(); }
-    case '#/login': { return showLogin(); }
-    case '#/register': { return showRegister(); }
-    default: return 'hola';
+    case '': { return myImports.showWelcome(); }
+    case '#/login': { return myImports.showLogin(); }
+    case '#/register': { return myImports.showRegister(); }
+    default: myImports.container.innerHTML = 'Error 404 (╯°□°）╯︵ ┻━┻';
+      return myImports.container;
   }
   // console.log(route);
 };
-// console.log(showLogin);
-// const btnGoogle = showLogin().getElementById('btn-google-login');
-
-// btnGoogle.addEventListener('click', prueba());
-
 export { changeView };

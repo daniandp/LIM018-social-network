@@ -1,6 +1,9 @@
 /* eslint-disable import/no-unresolved */
-import { getAuth, signInWithPopup, GoogleAuthProvider, createUserWithEmailAndPassword } from 'https://www.gstatic.com/firebasejs/9.8.4/firebase-auth.js';
-import { getFirestore, collection, addDoc, getDocs } from 'https://www.gstatic.com/firebasejs/9.8.4/firebase-firestore.js';
+import {
+  getAuth, signInWithPopup, GoogleAuthProvider,
+  createUserWithEmailAndPassword, signInWithEmailAndPassword,
+} from 'https://www.gstatic.com/firebasejs/9.8.4/firebase-auth.js';
+import { getFirestore, setDoc, doc /* collection, addDoc, getDocs */ } from 'https://www.gstatic.com/firebasejs/9.8.4/firebase-firestore.js';
 import { app } from './conection.js';
 
 const db = getFirestore(app);
@@ -8,26 +11,18 @@ const auth = getAuth();
 const provider = new GoogleAuthProvider();
 
 export const registerUser = (email, name, nickname, uid) => {
-  addDoc(collection(db, 'users'), {
+  setDoc(doc(db, 'users', uid), {
     email,
     name,
     nickname,
     uid,
-  })
-    .then((docRef) => {
-      // getDocs(collection(db, 'users'))
-      //   .then((datos) => {
-      //     datos.forEach((doc) => {
-      //       console.log(`${doc.id} => ${doc.data().email}`);
-      //     });
-      //   });
-      console.log(db);
-      console.log(docRef.id);
-      console.log(docRef);
+  });
+  /*  .then((docRef) => {
+      console.log('usuario logueado', docRef);
     })
     .catch((error) => {
       console.error('Error adding document: ', error);
-    });
+    }); */
 };
 
 export const authGoogle = () => {
@@ -60,8 +55,25 @@ export const authGoogle = () => {
 //   auth.signOut();
 // }
 
-export const registerUserWithEmailAndPassword = (email, password) => {
+export const registerUserWithEmailAndPassword = (email, name, nickname, password) => {
   createUserWithEmailAndPassword(auth, email, password)
+    .then((userCredential) => {
+      // Signed in
+      const user = userCredential.user;
+      console.log(user);
+      registerUser(email, name, nickname, user.uid);
+      // ...
+    })
+    .catch((error) => {
+      // const errorCode = error.code;
+      const errorMessage = error.message;
+      console.log(errorMessage, error.code);
+      // ..
+    });
+};
+
+export const logInWithEmailAndPassword = (email, password) => {
+  signInWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
       // Signed in
       const user = userCredential.user;
@@ -69,9 +81,9 @@ export const registerUserWithEmailAndPassword = (email, password) => {
       // ...
     })
     .catch((error) => {
-      // const errorCode = error.code;
+      const errorCode = error.code;
+      console.log(errorCode);
       const errorMessage = error.message;
       console.log(errorMessage);
-      // ..
     });
 };
