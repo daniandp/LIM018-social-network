@@ -14,7 +14,7 @@ export default () => {
     <input class="input-login" id="user-password"  type="password" placeholder="Contraseña">
     <a class="links-redirect" href="#">¿Olvidaste tu contraseña?</a>
   </div>
-    <a href="#"><button type="button" class="btn-enter btn-general">Entrar</button></a>
+    <a href="#/home"><button type="button" class="btn-enter btn-general">Entrar</button></a>
   <div class="separator">
     <hr class="hr">O<hr class="hr">
   </div>

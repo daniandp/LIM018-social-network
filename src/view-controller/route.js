@@ -7,6 +7,7 @@ const changeView = (route) => {
     case '': { return myImports.showWelcome(); }
     case '#/login': { return myImports.showLogin(); }
     case '#/register': { return myImports.showRegister(); }
+    case '#/home': { return myImports.showHome(); }
     default: myImports.container.innerHTML = 'Error 404 (╯°□°）╯︵ ┻━┻';
       return myImports.container;
   }

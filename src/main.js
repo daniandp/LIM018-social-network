@@ -1,7 +1,10 @@
 // import { app } from './firebase/conection.js';
+/* eslint-disable-next-line */
 import { changeView } from './view-controller/route.js';
 import { components } from './view/index.js';
-import { authGoogle, registerUserWithEmailAndPassword, logInWithEmailAndPassword } from './firebase/auth.js';
+import {
+  authGoogle, registerUserWithEmailAndPassword, logInWithEmailAndPassword, logOut,
+} from './firebase/auth.js';
 
 /* myFunction(); */
 
@@ -33,10 +36,11 @@ export const showLogin = () => {
   const btnGoogle = container.querySelector('.btn-google');
   const btnEnter = container.querySelector('.btn-enter');
   btnEnter.addEventListener('click', () => {
-    logInWithEmailAndPassword(
+    const infoLogin = logInWithEmailAndPassword(
       container.querySelector('#user-email').value,
       container.querySelector('#user-password').value,
     );
+    console.log(infoLogin);
   });
   btnGoogle.addEventListener('click', authGoogle);
   return container;
@@ -58,4 +62,14 @@ export const showRegister = () => {
   });
   btnGoogle.addEventListener('click', authGoogle);
   return container;
+};
+
+export const showHome = () => {
+  container.removeAttribute('class');
+  container.setAttribute('class', 'screen-register');
+  container.innerHTML = components.home();
+  const btnLogOut = container.querySelector('.btn-logOut');
+  btnLogOut.addEventListener('click', () => {
+    logOut();
+  });
 };

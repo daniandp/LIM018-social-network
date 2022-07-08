@@ -2,6 +2,7 @@
 import {
   getAuth, signInWithPopup, GoogleAuthProvider,
   createUserWithEmailAndPassword, signInWithEmailAndPassword,
+  signOut, onAuthStateChanged,
 } from 'https://www.gstatic.com/firebasejs/9.8.4/firebase-auth.js';
 import { getFirestore, setDoc, doc /* collection, addDoc, getDocs */ } from 'https://www.gstatic.com/firebasejs/9.8.4/firebase-firestore.js';
 import { app } from './conection.js';
@@ -25,12 +26,30 @@ export const registerUser = (email, name, nickname, uid) => {
     }); */
 };
 
+export const currentUser = () => {
+  onAuthStateChanged(auth, (user) => {
+    if (user) {
+      // User is signed in, see docs for a list of available properties
+      // https://firebase.google.com/docs/reference/js/firebase.User
+      const currUser = user.email;
+      console.log('Usuario logueado', currUser);
+
+      // ...
+    } else {
+      // User is signed out
+      console.log('No hay usuario logueado');
+      // ...
+    }
+  });
+};
+
 export const authGoogle = () => {
   signInWithPopup(auth, provider)
     .then((result) => {
       // This gives you a Google Access Token. You can use it to access the Google API.
       const credential = GoogleAuthProvider.credentialFromResult(result);
       const token = credential.accessToken;
+      currentUser();
       console.log(token);
       // The signed-in user info.
       const user = result.user;
@@ -77,6 +96,7 @@ export const logInWithEmailAndPassword = (email, password) => {
     .then((userCredential) => {
       // Signed in
       const user = userCredential.user;
+      currentUser();
       console.log(user);
       // ...
     })
@@ -85,5 +105,16 @@ export const logInWithEmailAndPassword = (email, password) => {
       console.log(errorCode);
       const errorMessage = error.message;
       console.log(errorMessage);
+      return errorCode;
     });
+};
+
+export const logOut = () => {
+  signOut(auth).then(() => {
+    // Sign-out successful.
+    currentUser();
+  }).catch((error) => {
+    console.log(error);
+    // An error happened.
+  });
 };
