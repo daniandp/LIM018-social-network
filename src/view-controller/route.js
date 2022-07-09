@@ -1,7 +1,19 @@
 /* eslint-disable-next-line */
 import * as myImports from "../main.js";
+/* import { auth } from "../firebase/auth.js"; */
 
-const changeView = (route) => {
+const changeView = (route /* , e */) => {
+  /*    const user = auth.currentUser;
+  const publicRoutes = [
+    '#/login',
+  ]
+  if (!user && !publicRoutes.includes(route)) {
+    if (e) {
+      e.preventDefault();
+    }
+    changeView('#/login');
+    return false;
+  } */
   myImports.container.innerHTML = '';
   switch (route) {
     case '': { return myImports.showWelcome(); }

@@ -184,6 +184,46 @@ body {
   height: 300px;
 }
 
+/* -------------  Pantalla de Home ------------- */
+.home-page {
+  height: 100vh;
+  width: 100vw;
+  background-color: #FFFFFF;
+}
+
+header {
+  display: flex;
+  position: fixed;
+  background-color: #5C16C5;
+  height: 45px;
+  width: 100vw;
+}
+
+.menu {
+  display: flex;
+
+  list-style: none;
+}
+
+.img-profile,.game-over {
+  width: auto;
+  height: 35px;
+  background-color: green;
+}
+
+.title-home {
+  color: aqua;
+  font-family: 'Press Start 2P';
+  width: 20px;
+  font-size: 15px;
+  background-color: red;
+}
+
+
+.btn-logOut {
+  display: none;
+}
+
 
 @media (min-width: 820px) {
 /* -------------  Pantalla de bienvenida ------------- */
