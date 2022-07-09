@@ -8,7 +8,7 @@ import { getFirestore, setDoc, doc /* collection, addDoc, getDocs */ } from 'htt
 import { app } from './conection.js';
 
 const db = getFirestore(app);
-const auth = getAuth();
+export const auth = getAuth();
 const provider = new GoogleAuthProvider();
 
 export const registerUser = (email, name, nickname, uid) => {
