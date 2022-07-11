@@ -192,33 +192,41 @@ body {
 }
 
 header {
-  display: flex;
   position: fixed;
   background-color: #5C16C5;
-  height: 45px;
   width: 100vw;
 }
 
-.menu {
+.nav-menu {
   display: flex;
+  padding: 0 10px;
+}
 
+.menu-left {
+  list-style: none;
+  display: flex;
+  width: 50%;
+  align-items: center;
+}
+
+.menu-right {
+  width: 50%;
+  display: flex;
+  justify-content: flex-end;
   list-style: none;
 }
 
 .img-profile,.game-over {
   width: auto;
   height: 35px;
-  background-color: green;
 }
 
 .title-home {
-  color: aqua;
+  color: white;
   font-family: 'Press Start 2P';
-  width: 20px;
-  font-size: 15px;
-  background-color: red;
+  transform: translate(50%);
+  text-shadow: 0px 4px 7px #000000;
 }
-
 
 .btn-logOut {
   display: none;
