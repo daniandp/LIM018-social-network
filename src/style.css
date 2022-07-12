@@ -196,11 +196,13 @@ header {
   position: fixed;
   background-color: #5C16C5;
   width: 100vw;
+  height: 40px;
 }
 
 .nav-menu {
   display: flex;
   padding: 0 10px;
+  height: 100%;
 }
 
 .menu-left {
@@ -214,12 +216,18 @@ header {
   width: 50%;
   display: flex;
   justify-content: flex-end;
+  align-items: center;
   list-style: none;
 }
 
-.img-profile,.game-over {
+.img-profile {
   width: auto;
-  height: 35px;
+  height: 25px;
+}
+
+.game-over {
+  width: auto;
+  height: 20px;
 }
 
 .title-home {
@@ -232,6 +240,95 @@ header {
 .btn-logOut {
   display: none;
 }
+
+.container-main { 
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 50px;
+  row-gap: 5px;
+}
+
+.container-input-post, .container-publicated {
+  display: flex;
+  flex-direction: column;
+  background: rgba(238, 233, 233, 0.6);
+  border-radius: 10px;
+  height: auto;
+  width: 90%;
+  justify-content: space-between;
+  padding: 10px 10px ;
+}
+
+#create-post, .post-publicated {
+  width: 100%;
+  height: auto;
+  border: none;
+  border-radius: 5px;
+  justify-self: center;
+  padding: 5px;
+  overflow: hidden;
+  resize: none;
+  white-space: initial;
+}
+
+#create-post {
+  height: 80px;
+}
+
+.container-share-btn{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.share-img {
+  display: flex;
+  align-items: flex-end;
+
+}
+
+.bi-size {
+  font-size: 30px;
+}
+
+#btn-share-post {
+  width: 90px;
+  border: none;
+  border-radius: 8px;
+  background-color: #1D9BF0;
+  color: #FFFFFF;
+  font-weight: 700;
+  padding: 5px;
+}
+
+.info-post {
+  display: flex;
+  column-gap: 7px;
+}
+
+.photo-perfil-post > img {
+  width: auto;
+  height: 28px;
+}
+
+.container-like-comment {
+  display: flex;
+  justify-content: space-between;
+  width: 50%;
+}
+
+.bi-joystick,.bi-chat-dots  {
+  font-size: 25px;
+}
+
+.comment-img {
+  transform: translate(50%);
+}
+
+
+
 
 
 @media (min-width: 820px) {

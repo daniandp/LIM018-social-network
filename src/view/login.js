@@ -19,7 +19,7 @@ export default () => {
   <div class="separator">
     <hr class="hr">O<hr class="hr">
   </div>
-    <button type="button" class="btn-google btn-general"><img class="google-icon" src="./img/googleicon.png" alt="google icon"> Iniciar sesión con google</button>
+  <a href="#/home"><button type="button" class="btn-google btn-general"><img class="google-icon" src="./img/googleicon.png" alt="google icon"> Iniciar sesión con google</button></a>
   <div class="links-redirect">¿No eres miembro? <a class="links-redirect" href="#/register">Regístrate ahora</a></div>
   </form>
   </div>`;
