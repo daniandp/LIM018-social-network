@@ -59,6 +59,7 @@ body {
 }
 
 .btn-general {
+  pointer-events: none;
   font-weight: 700;
   font-size: 20px;
   width: 150px;
@@ -314,6 +315,7 @@ header {
 .btn-enter {
   background-color: #1D9BF0;
   color: #FFFFFF;
+  
 }
 
 .btn-google{

@@ -26,10 +26,8 @@ export default () => {
       </nav>
     </header>
     <section class="container-main">
-
+  <a href="#/login"><button type="button" class="btn-logOut btn-general">Salir</button></a> 
     </section>
   </section>`;
   return viewHome;
 };
-
-/* <a href="#/login"><button type="button" class="btn-logOut btn-general">Salir</button></a> */

@@ -34,13 +34,24 @@ export const showLogin = () => {
   container.setAttribute('class', 'screen-login');
   container.innerHTML = components.login();
   const btnGoogle = container.querySelector('.btn-google');
-  const btnEnter = container.querySelector('.btn-enter');
-  btnEnter.addEventListener('click', () => {
-    const infoLogin = logInWithEmailAndPassword(
+  const btnEnter = container.querySelector('#hola');
+  btnEnter.addEventListener('click', (e) => {
+    e.preventDefault();
+    // console.log(e);
+    console.log(e.target);
+    console.log(e.currentTarget);
+    logInWithEmailAndPassword(
       container.querySelector('#user-email').value,
       container.querySelector('#user-password').value,
+      container.querySelector('#message-error'),
+      changeView,
     );
-    console.log(infoLogin);
+    // e.preventDefault();
+  /*   if (container.querySelector('#message-error').textContent === '') {
+      console.log(container.querySelector('#message-error').textContent);
+      e.preventDefault();
+    } */
+    /*     console.log(container.querySelector('#message-error').textContent); */
   });
   btnGoogle.addEventListener('click', authGoogle);
   return container;
