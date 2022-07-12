@@ -28,7 +28,7 @@ export default () => {
     <section class="container-main">
       <div class="container-input-post">
         <div>
-          <input type="text" id="create-post" placeholder="¿Qué quieres compartir, gamer?">
+          <textarea id="create-post" placeholder="¿Qué quieres compartir, gamer?"></textarea>
         </div>
         <div class="container-share-btn">
           <div class="share-img" >
@@ -55,17 +55,15 @@ export default () => {
           </div>
           </div>
           <div class="input-readonly">
-            <input type="text" class="post-publicated" value="El usuario uno comparte su opinión o su comentario en esta sección" readonly>
+            <textarea rows="" class="post-publicated" readonly>El usuario uno comparte su opinión o su comentario en esta sección holaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</textarea>
           </div>
         </div>
         <div class="container-like-comment">
           <div class="mando-img">
-          <i class="bi bi-joystick"></i>
+            <i class="bi bi-joystick"></i>
           </div>
           <div class="comment-img">
-          <i class="bi bi-chat-dots"></i>
-          </div>
-          <div class="share-post">
+            <i class="bi bi-chat-dots"></i>
           </div>
         </div>
       </div>

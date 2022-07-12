@@ -254,7 +254,7 @@ header {
   flex-direction: column;
   background: rgba(238, 233, 233, 0.6);
   border-radius: 10px;
-  height: 150px;
+  height: auto;
   width: 90%;
   justify-content: space-between;
   padding: 10px 10px ;
@@ -262,11 +262,18 @@ header {
 
 #create-post, .post-publicated {
   width: 100%;
-  height: 80px;
+  height: auto;
   border: none;
   border-radius: 5px;
   justify-self: center;
   padding: 5px;
+  overflow: hidden;
+  resize: none;
+  white-space: initial;
+}
+
+#create-post {
+  height: 80px;
 }
 
 .container-share-btn{
@@ -304,6 +311,21 @@ header {
   width: auto;
   height: 28px;
 }
+
+.container-like-comment {
+  display: flex;
+  justify-content: space-between;
+  width: 50%;
+}
+
+.bi-joystick,.bi-chat-dots  {
+  font-size: 25px;
+}
+
+.comment-img {
+  transform: translate(50%);
+}
+
 
 
 
