@@ -59,7 +59,7 @@ body {
 }
 
 .btn-general {
-  pointer-events: none;
+  /* pointer-events: none; */
   font-weight: 700;
   font-size: 20px;
   width: 150px;
@@ -81,7 +81,7 @@ body {
 .screen-login {
   height: 100vh;
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
   align-content: center;
   justify-content: center;
 }
@@ -158,7 +158,7 @@ body {
 .screen-register {
   height: 100vh;
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
   align-content: center;
   justify-content: center;
 }
@@ -167,7 +167,6 @@ body {
   display: flex;
   flex-wrap: wrap;
   row-gap: 10px;
-  align-self: end;
   align-content: center;
   justify-content: center;
   height: 78.5%;
@@ -187,6 +186,8 @@ body {
 
 /* -------------  Pantalla de Home ------------- */
 .home-page {
+  display: flex;
+  flex-direction: column;
   height: 100vh;
   width: 100vw;
   background-color: #FFFFFF;
@@ -268,9 +269,7 @@ header {
   border-radius: 5px;
   justify-self: center;
   padding: 5px;
-  overflow: hidden;
   resize: none;
-  white-space: initial;
 }
 
 #create-post {

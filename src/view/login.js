@@ -1,3 +1,7 @@
+import {
+  authGoogle, logInWithEmailAndPassword,
+} from '../firebase/auth.js';
+
 export default () => {
   const viewLogin = `<div class="cont-title">
   <h1 class="title">TWITCHTTER</h1>  
@@ -24,5 +28,30 @@ export default () => {
   </form>
   </div>`;
 
-  return viewLogin;
+  const section = document.createElement('section');
+  section.setAttribute('class', 'screen-login');
+  section.innerHTML = viewLogin;
+
+  const btnGoogle = section.querySelector('.btn-google');
+  const btnEnter = section.querySelector('#hola');
+  btnEnter.addEventListener('click', (e) => {
+    e.preventDefault();
+    // console.log(e);
+    /* console.log(e.target);
+    console.log(e.currentTarget); */
+    logInWithEmailAndPassword(
+      section.querySelector('#user-email').value,
+      section.querySelector('#user-password').value,
+      section.querySelector('#message-error'),
+      /* changeView, */
+    );
+    // e.preventDefault();
+  /*   if (container.querySelector('#message-error').textContent === '') {
+      console.log(container.querySelector('#message-error').textContent);
+      e.preventDefault();
+    } */
+    /*     console.log(container.querySelector('#message-error').textContent); */
+  });
+  btnGoogle.addEventListener('click', authGoogle);
+  return section;
 };

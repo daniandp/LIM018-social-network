@@ -1,3 +1,7 @@
+import {
+  authGoogle, registerUserWithEmailAndPassword,
+} from '../firebase/auth.js';
+
 export default () => {
   const viewRegister = `<div class="cont-title">
   <h1 class="title">TWITCHTTER</h1>
@@ -22,6 +26,19 @@ export default () => {
       <div class="links-redirect">¿Ya eres miembro? <a class="links-redirect" href="#/login">Inicia sesión ahora</a></div>
     </form>
   </div>`;
-
-  return viewRegister;
+  const section = document.createElement('section');
+  section.setAttribute('class', 'screen-register');
+  section.innerHTML = viewRegister;
+  const btnGoogle = section.querySelector('.btn-google');
+  const btnRegister = section.querySelector('.btn-enter');
+  btnRegister.addEventListener('click', () => {
+    registerUserWithEmailAndPassword(
+      section.querySelector('#email').value,
+      section.querySelector('#name').value,
+      section.querySelector('#nickname').value,
+      section.querySelector('#password').value,
+    );
+  });
+  btnGoogle.addEventListener('click', authGoogle);
+  return section;
 };

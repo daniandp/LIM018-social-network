@@ -91,13 +91,13 @@ export const registerUserWithEmailAndPassword = (email, name, nickname, password
     });
 };
 
-export const logInWithEmailAndPassword = (email, password, elementDom, callback) => {
+export const logInWithEmailAndPassword = (email, password, elementDom/* , callback */) => {
   signInWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
       // Signed in
       const user = userCredential.user;
       currentUser();
-      callback('#/home');
+      /* callback('#/home'); */
       console.log(user);
 
       elementDom.innerText = '';
