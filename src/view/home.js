@@ -1,5 +1,5 @@
 export default () => {
-  const viewHome = `<section class="home-page">
+  const viewHome = `
     <header>
       <nav class="nav-menu">
         <ul class="menu-left">
@@ -67,9 +67,9 @@ export default () => {
           </div>
         </div>
       </div>
-    </section>
-  </section>`;
-  return viewHome;
+    </section>`;
+  const section = document.createElement('section');
+  section.setAttribute('class', 'home-page');
+  section.innerHTML = viewHome;
+  return section;
 };
-
-/* <a href="#/login"><button type="button" class="btn-logOut btn-general">Salir</button></a> */

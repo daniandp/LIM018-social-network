@@ -8,6 +8,8 @@ export default () => {
   <a href="#/login"><button class="btn-login btn-general" type="button" id="logIn">Iniciar sesión</button></a>
   <a href="#/register"><button class="btn-singup btn-general" type="button" id="singUp">Registrarse</button></a>
   </div>`;
-
-  return viewWelcome;
+  const section = document.createElement('section');
+  section.setAttribute('class', 'screen-welcome');
+  section.innerHTML = viewWelcome;
+  return section;
 };

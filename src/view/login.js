@@ -1,3 +1,7 @@
+import {
+  authGoogle, logInWithEmailAndPassword,
+} from '../firebase/auth.js';
+
 export default () => {
   const viewLogin = `<div class="cont-title">
   <h1 class="title">TWITCHTTER</h1>  
@@ -14,7 +18,8 @@ export default () => {
     <input class="input-login" id="user-password"  type="password" placeholder="Contraseña">
     <a class="links-redirect" href="#">¿Olvidaste tu contraseña?</a>
   </div>
-    <a href="#/home"><button type="button" class="btn-enter btn-general">Entrar</button></a>
+    <a href="#/home" id="hola"><button type="button" class="btn-enter btn-general">Entrar</button></a>
+    <p id="message-error"></p>
   <div class="separator">
     <hr class="hr">O<hr class="hr">
   </div>
@@ -23,5 +28,30 @@ export default () => {
   </form>
   </div>`;
 
-  return viewLogin;
+  const section = document.createElement('section');
+  section.setAttribute('class', 'screen-login');
+  section.innerHTML = viewLogin;
+
+  const btnGoogle = section.querySelector('.btn-google');
+  const btnEnter = section.querySelector('#hola');
+  btnEnter.addEventListener('click', (e) => {
+    e.preventDefault();
+    // console.log(e);
+    /* console.log(e.target);
+    console.log(e.currentTarget); */
+    logInWithEmailAndPassword(
+      section.querySelector('#user-email').value,
+      section.querySelector('#user-password').value,
+      section.querySelector('#message-error'),
+      /* changeView, */
+    );
+    // e.preventDefault();
+  /*   if (container.querySelector('#message-error').textContent === '') {
+      console.log(container.querySelector('#message-error').textContent);
+      e.preventDefault();
+    } */
+    /*     console.log(container.querySelector('#message-error').textContent); */
+  });
+  btnGoogle.addEventListener('click', authGoogle);
+  return section;
 };

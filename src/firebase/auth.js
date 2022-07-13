@@ -91,21 +91,24 @@ export const registerUserWithEmailAndPassword = (email, name, nickname, password
     });
 };
 
-export const logInWithEmailAndPassword = (email, password) => {
+export const logInWithEmailAndPassword = (email, password, elementDom/* , callback */) => {
   signInWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
       // Signed in
       const user = userCredential.user;
       currentUser();
+      /* callback('#/home'); */
       console.log(user);
+
+      elementDom.innerText = '';
       // ...
     })
     .catch((error) => {
       const errorCode = error.code;
       console.log(errorCode);
       const errorMessage = error.message;
+      elementDom.innerText = errorMessage;
       console.log(errorMessage);
-      return errorCode;
     });
 };
 

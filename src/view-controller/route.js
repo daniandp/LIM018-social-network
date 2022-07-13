@@ -1,7 +1,9 @@
 /* eslint-disable-next-line */
-import * as myImports from "../main.js";
+/* import * as myImports from "../main.js"; */
 /* import { auth } from "../firebase/auth.js"; */
+import { components } from '../view/index.js';
 
+const container = document.getElementById('container');
 const changeView = (route /* , e */) => {
   /*    const user = auth.currentUser;
   const publicRoutes = [
@@ -14,14 +16,14 @@ const changeView = (route /* , e */) => {
     changeView('#/login');
     return false;
   } */
-  myImports.container.innerHTML = '';
+  container.innerHTML = '';
   switch (route) {
-    case '': { return myImports.showWelcome(); }
-    case '#/login': { return myImports.showLogin(); }
-    case '#/register': { return myImports.showRegister(); }
-    case '#/home': { return myImports.showHome(); }
-    default: myImports.container.innerHTML = 'Error 404 (╯°□°）╯︵ ┻━┻';
-      return myImports.container;
+    case '': { return container.appendChild(components.welcome()); }
+    case '#/login': { return container.appendChild(components.login()); }
+    case '#/register': { return container.appendChild(components.register()); }
+    case '#/home': { return container.appendChild(components.home()); }
+    default: container.innerHTML = 'Error 404 (╯°□°）╯︵ ┻━┻';
+      return container;
   }
   // console.log(route);
 };
