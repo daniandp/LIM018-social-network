@@ -2,13 +2,14 @@
 import {
   getAuth, signInWithPopup, GoogleAuthProvider,
   createUserWithEmailAndPassword, signInWithEmailAndPassword,
-  signOut, onAuthStateChanged,
+  signOut, onAuthStateChanged, sendEmailVerification,
 } from 'https://www.gstatic.com/firebasejs/9.8.4/firebase-auth.js';
 import { getFirestore, setDoc, doc /* collection, addDoc, getDocs */ } from 'https://www.gstatic.com/firebasejs/9.8.4/firebase-firestore.js';
 import { app } from './conection.js';
 
 const db = getFirestore(app);
 export const auth = getAuth();
+export const stateUser = onAuthStateChanged;
 const provider = new GoogleAuthProvider();
 
 export const registerUser = (email, name, nickname, uid) => {
@@ -26,30 +27,13 @@ export const registerUser = (email, name, nickname, uid) => {
     }); */
 };
 
-export const currentUser = () => {
-  onAuthStateChanged(auth, (user) => {
-    if (user) {
-      // User is signed in, see docs for a list of available properties
-      // https://firebase.google.com/docs/reference/js/firebase.User
-      const currUser = user.email;
-      console.log('Usuario logueado', currUser);
-
-      // ...
-    } else {
-      // User is signed out
-      console.log('No hay usuario logueado');
-      // ...
-    }
-  });
-};
-
 export const authGoogle = () => {
   signInWithPopup(auth, provider)
     .then((result) => {
       // This gives you a Google Access Token. You can use it to access the Google API.
       const credential = GoogleAuthProvider.credentialFromResult(result);
       const token = credential.accessToken;
-      currentUser();
+      // currentUser();
       console.log(token);
       // The signed-in user info.
       const user = result.user;
@@ -70,10 +54,6 @@ export const authGoogle = () => {
     });
 };
 
-// export function logout(){
-//   auth.signOut();
-// }
-
 export const registerUserWithEmailAndPassword = (email, name, nickname, password) => {
   createUserWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
@@ -82,6 +62,12 @@ export const registerUserWithEmailAndPassword = (email, name, nickname, password
       console.log(user);
       registerUser(email, name, nickname, user.uid);
       // ...
+      sendEmailVerification(auth.currentUser)
+        .then(() => {
+        // Email verification sent!
+          console.log('correo enviado');
+        // ...
+        });
     })
     .catch((error) => {
       // const errorCode = error.code;
@@ -91,23 +77,23 @@ export const registerUserWithEmailAndPassword = (email, name, nickname, password
     });
 };
 
-export const logInWithEmailAndPassword = (email, password, elementDom/* , callback */) => {
+export const logInWithEmailAndPassword = (email, password, messageDom/* , callback */) => {
   signInWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
       // Signed in
       const user = userCredential.user;
-      currentUser();
+      // currentUser();
       /* callback('#/home'); */
       console.log(user);
-
-      elementDom.innerText = '';
+      window.location.hash = '#/home';
+      messageDom.innerText = '';
       // ...
     })
     .catch((error) => {
       const errorCode = error.code;
       console.log(errorCode);
       const errorMessage = error.message;
-      elementDom.innerText = errorMessage;
+      messageDom.innerText = errorMessage;
       console.log(errorMessage);
     });
 };
@@ -115,7 +101,7 @@ export const logInWithEmailAndPassword = (email, password, elementDom/* , callba
 export const logOut = () => {
   signOut(auth).then(() => {
     // Sign-out successful.
-    currentUser();
+    // currentUser();
   }).catch((error) => {
     console.log(error);
     // An error happened.

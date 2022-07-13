@@ -1,3 +1,7 @@
+import {
+  logOut,
+} from '../firebase/auth.js';
+
 export default () => {
   const viewHome = `
     <header>
@@ -71,5 +75,6 @@ export default () => {
   const section = document.createElement('section');
   section.setAttribute('class', 'home-page');
   section.innerHTML = viewHome;
+  section.querySelector('.game-over').addEventListener('click', logOut);
   return section;
 };
