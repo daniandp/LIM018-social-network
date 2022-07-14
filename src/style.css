@@ -129,6 +129,13 @@ body {
   height: 150px;
 } */
 
+#message-error {
+  height: 40px;
+  width: 100%;
+  font-size: 20px ;
+  background-color: red;
+}
+
 .separator {
   display: flex;
   align-items: center;
