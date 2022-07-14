@@ -15,7 +15,7 @@ stateUser(auth, (user) => {
     // User is signed in, see docs for a list of available properties
     // https://firebase.google.com/docs/reference/js/firebase.User
     const currUser = user.email;
-    window.location.hash = '#/home';
+    // window.location.hash = '#/home';
     console.log('Usuario logueado', currUser);
 
     // ...

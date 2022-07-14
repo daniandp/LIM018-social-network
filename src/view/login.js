@@ -18,7 +18,7 @@ export default () => {
     <input class="input-login" id="user-password"  type="password" placeholder="Contraseña">
     <a class="links-redirect" href="#">¿Olvidaste tu contraseña?</a>
   </div>
-    <a href="#/home" id="hola"><button type="button" class="btn-enter btn-general">Entrar</button></a>
+    <button type="button" class="btn-enter btn-general">Entrar</button>
     <p id="message-error"></p>
   <div class="separator">
     <hr class="hr">O<hr class="hr">
@@ -33,7 +33,7 @@ export default () => {
   section.innerHTML = viewLogin;
 
   const btnGoogle = section.querySelector('.btn-google');
-  const btnEnter = section.querySelector('#hola');
+  const btnEnter = section.querySelector('.btn-enter');
   btnEnter.addEventListener('click', (e) => {
     e.preventDefault();
     // console.log(e);

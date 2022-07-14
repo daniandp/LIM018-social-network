@@ -84,9 +84,15 @@ export const logInWithEmailAndPassword = (email, password, messageDom/* , callba
       const user = userCredential.user;
       // currentUser();
       /* callback('#/home'); */
-      console.log(user);
-      window.location.hash = '#/home';
-      messageDom.innerText = '';
+      if (user.emailVerified) {
+        console.log(user);
+        console.log(user.emailVerified);
+        messageDom.innerText = '';
+        window.location.hash = '#/home'; 
+      } else {
+        messageDom.innerText = '';
+        console.log('usuario no verificado');
+      }
       // ...
     })
     .catch((error) => {
