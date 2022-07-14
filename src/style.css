@@ -99,8 +99,9 @@ body {
 
 .form-login {
   display: flex;
-  flex-wrap: wrap;
-  row-gap: 30px;
+  flex-direction: column;
+  row-gap: 10px;
+  align-items: center;
   justify-content: center;
   height: 78.5%;
 }
@@ -110,6 +111,7 @@ body {
   flex-direction: column;
   justify-content: center;
   height: 250px;
+  row-gap: 10px;
 }
 
 .input-login, .input-register {
@@ -122,6 +124,10 @@ body {
   padding: 0 20px;
   font-weight: 700;
 }
+
+/* .btn-enter {
+  height: 150px;
+} */
 
 .separator {
   display: flex;
@@ -165,10 +171,10 @@ body {
 
 .form-register {
   display: flex;
-  flex-wrap: wrap;
-  row-gap: 10px;
-  align-content: center;
+  flex-direction: column;
+  row-gap: 17px;
   justify-content: center;
+  align-items: center;
   height: 78.5%;
   padding-top: 40px;
 }
@@ -180,8 +186,8 @@ body {
 .cont-inputs-register {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
   height: 300px;
+  row-gap: 20px;
 }
 
 /* -------------  Pantalla de Home ------------- */
