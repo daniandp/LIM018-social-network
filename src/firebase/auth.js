@@ -87,11 +87,12 @@ export const logInWithEmailAndPassword = (email, password, messageDom/* , callba
       if (user.emailVerified) {
         console.log(user);
         console.log(user.emailVerified);
+        // eslint-disable-next-line no-param-reassign
         messageDom.innerText = '';
-        window.location.hash = '#/home'; 
+        window.location.hash = '#/home';
       } else {
-        messageDom.innerText = '';
-        console.log('usuario no verificado');
+        // eslint-disable-next-line no-param-reassign
+        messageDom.innerText = 'El usuario no se encuentra verificado';
       }
       // ...
     })
@@ -99,6 +100,7 @@ export const logInWithEmailAndPassword = (email, password, messageDom/* , callba
       const errorCode = error.code;
       console.log(errorCode);
       const errorMessage = error.message;
+      // eslint-disable-next-line no-param-reassign
       messageDom.innerText = errorMessage;
       console.log(errorMessage);
     });

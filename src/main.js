@@ -14,15 +14,20 @@ stateUser(auth, (user) => {
   if (user) {
     // User is signed in, see docs for a list of available properties
     // https://firebase.google.com/docs/reference/js/firebase.User
-    const currUser = user.email;
+    const currUser = user.emailVerified;
+    if (currUser) {
+      window.location.hash = '#/home';
+      console.log('Usuario logueado y verificado', currUser);
+    } else {
+      console.log('Usuario logueado pero no verificado', currUser);
+    }
     // window.location.hash = '#/home';
-    console.log('Usuario logueado', currUser);
 
     // ...
   } else {
     // User is signed out
     window.location.hash = '';
-    console.log('No hay usuario logueado');
+    console.log('No hay usuario logueado ni verificado');
     // ...
   }
 });

@@ -21,7 +21,7 @@ const changeView = (route /* , e */) => {
   container.innerHTML = '';
   switch (route.replace('#', '')) {
     case '': {
-      if (user) {
+      if (user && user.emailVerified) {
         window.location.hash = '/home';
         break;
       }
@@ -29,7 +29,7 @@ const changeView = (route /* , e */) => {
       break;
     }
     case '#': {
-      if (user) {
+      if (user && user.emailVerified) {
         window.location.hash = '/home';
         break;
       }
@@ -38,7 +38,7 @@ const changeView = (route /* , e */) => {
     }
     case '/login': {
       console.log(user);
-      if (user) {
+      if (user && user.emailVerified) {
         window.location.hash = '/home';
         break;
       }
@@ -46,7 +46,7 @@ const changeView = (route /* , e */) => {
       break;
     }
     case '/register': {
-      if (user) {
+      if (user && user.emailVerified) {
         window.location.hash = '/home';
         break;
       }
@@ -54,7 +54,7 @@ const changeView = (route /* , e */) => {
       break;
     }
     case '/home': {
-      if (user) {
+      if (user && user.emailVerified) {
         container.appendChild(components.home());
         break;
       }
