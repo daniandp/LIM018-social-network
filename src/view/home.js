@@ -1,5 +1,5 @@
 import {
-  logOut,
+  logOut, createPost, auth,
 } from '../firebase/auth.js';
 
 export default () => {
@@ -76,5 +76,16 @@ export default () => {
   section.setAttribute('class', 'home-page');
   section.innerHTML = viewHome;
   section.querySelector('.game-over').addEventListener('click', logOut);
+  const btnSharePost = section.querySelector('#btn-share-post');
+  const date = new Date();
+  const datePost = String(date.getDate()).padStart(2, '0') + '/' + String(date.getMonth() + 1).padStart(2, '0') + '/' + date.getFullYear();
+  btnSharePost.addEventListener('click', () => {
+    createPost(
+      auth.currentUser.uid,
+      section.querySelector('#create-post').value,
+      datePost,
+      'público',
+    );
+  });
   return section;
 };

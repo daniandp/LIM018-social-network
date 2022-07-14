@@ -4,7 +4,7 @@ import {
   createUserWithEmailAndPassword, signInWithEmailAndPassword,
   signOut, onAuthStateChanged, sendEmailVerification,
 } from 'https://www.gstatic.com/firebasejs/9.8.4/firebase-auth.js';
-import { getFirestore, setDoc, doc /* collection, addDoc, getDocs */ } from 'https://www.gstatic.com/firebasejs/9.8.4/firebase-firestore.js';
+import { getFirestore, setDoc, doc, addDoc, collection /* getDocs */ } from 'https://www.gstatic.com/firebasejs/9.8.4/firebase-firestore.js';
 import { app } from './conection.js';
 
 const db = getFirestore(app);
@@ -25,6 +25,21 @@ export const registerUser = (email, name, nickname, uid) => {
     .catch((error) => {
       console.error('Error adding document: ', error);
     }); */
+};
+
+export const createPost = (uid, post, datePost, state) => {
+  addDoc(collection(db, 'post'), {
+    uid,
+    post,
+    datePost,
+    state,
+  })
+    .then((docRef) => {
+      console.log('post creado', docRef);
+    });
+    /* .catch((error) => {
+      console.error('Error adding document: ', error);
+    });  */
 };
 
 export const authGoogle = () => {
@@ -87,11 +102,12 @@ export const logInWithEmailAndPassword = (email, password, messageDom/* , callba
       if (user.emailVerified) {
         console.log(user);
         console.log(user.emailVerified);
+        // eslint-disable-next-line no-param-reassign
         messageDom.innerText = '';
-        window.location.hash = '#/home'; 
+        window.location.hash = '#/home';
       } else {
-        messageDom.innerText = '';
-        console.log('usuario no verificado');
+        // eslint-disable-next-line no-param-reassign
+        messageDom.innerText = 'El usuario no se encuentra verificado';
       }
       // ...
     })
@@ -99,6 +115,7 @@ export const logInWithEmailAndPassword = (email, password, messageDom/* , callba
       const errorCode = error.code;
       console.log(errorCode);
       const errorMessage = error.message;
+      // eslint-disable-next-line no-param-reassign
       messageDom.innerText = errorMessage;
       console.log(errorMessage);
     });
