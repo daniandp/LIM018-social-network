@@ -343,7 +343,7 @@ header {
 
 
 
-@media (min-width: 820px) {
+@media (min-width: 1024px) {
 /* -------------  Pantalla de bienvenida ------------- */
 .group-btn {
   flex-direction: row;
@@ -375,6 +375,8 @@ header {
 .main-slogan {
   width: 600px;
 }
+
+/* -------------  Login ------------- */
 
 .screen-login {
   height: 100vh;
@@ -435,6 +437,12 @@ header {
 .links-redirect {
   margin-top: 10px;
   font-weight: 700;
+}
+
+/* -------------  Register ------------- */
+
+.screen-register {
+flex-direction: row;
 }
 
 .form-register {
