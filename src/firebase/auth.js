@@ -4,7 +4,8 @@ import {
   createUserWithEmailAndPassword, signInWithEmailAndPassword,
   signOut, onAuthStateChanged, sendEmailVerification,
 } from 'https://www.gstatic.com/firebasejs/9.8.4/firebase-auth.js';
-import { getFirestore, setDoc, doc, addDoc, collection /* getDocs */ } from 'https://www.gstatic.com/firebasejs/9.8.4/firebase-firestore.js';
+import {
+  getFirestore, setDoc, doc, addDoc, collection, getDocs } from 'https://www.gstatic.com/firebasejs/9.8.4/firebase-firestore.js';
 import { app } from './conection.js';
 
 const db = getFirestore(app);
@@ -25,21 +26,6 @@ export const registerUser = (email, name, nickname, uid) => {
     .catch((error) => {
       console.error('Error adding document: ', error);
     }); */
-};
-
-export const createPost = (uid, post, datePost, state) => {
-  addDoc(collection(db, 'post'), {
-    uid,
-    post,
-    datePost,
-    state,
-  })
-    .then((docRef) => {
-      console.log('post creado', docRef);
-    });
-    /* .catch((error) => {
-      console.error('Error adding document: ', error);
-    });  */
 };
 
 export const authGoogle = () => {
@@ -120,6 +106,40 @@ export const logInWithEmailAndPassword = (email, password, messageDom/* , callba
       console.log(errorMessage);
     });
 };
+
+export const createPost = (uid, post, datePost, state) => {
+  addDoc(collection(db, 'post'), {
+    uid,
+    post,
+    datePost,
+    state,
+  })
+    .then((docRef) => {
+      console.log('post creado', docRef);
+    });
+  /* .catch((error) => {
+      console.error('Error adding document: ', error);
+    });  */
+};
+
+export const getPost = () => {
+  getDocs(collection(db, 'post'));
+};
+console.log('esto es la base de datos', db);
+console.log(getDocs(collection(db, 'post')));
+console.log(getPost());
+
+/* export const infoPost = async () => {
+  const showPost = await getPost();
+  console.log('esto es showpost', showPost);
+  showPost.forEach((doc) => {
+    // doc.data() is never undefined for query doc snapshots
+    console.log(doc.id, ' => ', doc.data());
+  });
+  /*    .then((docRef) => {
+      console.log('se está mostrando el post', docRef);
+    });
+};   */
 
 export const logOut = () => {
   signOut(auth).then(() => {

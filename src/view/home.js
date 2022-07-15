@@ -1,5 +1,5 @@
 import {
-  logOut, createPost, auth,
+  logOut, createPost, auth, /* infoPost, */
 } from '../firebase/auth.js';
 
 export default () => {
@@ -78,7 +78,7 @@ export default () => {
   section.querySelector('.game-over').addEventListener('click', logOut);
   const btnSharePost = section.querySelector('#btn-share-post');
   const date = new Date();
-  const datePost = String(date.getDate()).padStart(2, '0') + '/' + String(date.getMonth() + 1).padStart(2, '0') + '/' + date.getFullYear();
+  const datePost = `${String(date.getDate()).padStart(2, '0')}/${String(date.getMonth() + 1).padStart(2, '0')}/${date.getFullYear()}`;
   btnSharePost.addEventListener('click', () => {
     createPost(
       auth.currentUser.uid,
@@ -86,6 +86,7 @@ export default () => {
       datePost,
       'público',
     );
+   /*  infoPost(); */
   });
   return section;
 };

@@ -1,6 +1,6 @@
 // import { app } from './firebase/conection.js';
 /* eslint-disable-next-line */
-import { auth, stateUser, logOut } from './firebase/auth.js';
+import { auth, stateUser, logOut, getPost } from './firebase/auth.js';
 import { changeView } from './view-controller/route.js';
 
 window.addEventListener('load', () => {
