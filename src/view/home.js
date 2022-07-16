@@ -1,5 +1,5 @@
 import {
-  logOut, createPost, auth, /* infoPost, */
+  logOut, createPost, auth, getPost,
 } from '../firebase/auth.js';
 
 export default () => {
@@ -86,7 +86,8 @@ export default () => {
       datePost,
       'público',
     );
-   /*  infoPost(); */
+    /*  infoPost(); */
+    getPost();
   });
   return section;
 };
