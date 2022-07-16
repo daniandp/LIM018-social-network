@@ -83,7 +83,8 @@ body {
   display: flex;
   flex-direction: column;
   align-content: center;
-  justify-content: center;
+  justify-content: flex-start;
+  padding-top: 75px;
 }
 
 .hidden {
@@ -94,7 +95,6 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: 140px;
 }
 
 .form-login {
@@ -103,7 +103,8 @@ body {
   row-gap: 10px;
   align-items: center;
   justify-content: center;
-  height: 78.5%;
+  height: 100%;
+  margin-top: 50px;
 }
 
 .cont-inputs-login {
@@ -129,8 +130,8 @@ body {
   height: 150px;
 } */
 
-#message-error {
-  height: 40px;
+#message-error{
+  height: 45px;
   width: 100%;
   font-size: 20px ;
   background-color: red;
@@ -182,7 +183,7 @@ body {
   row-gap: 17px;
   justify-content: center;
   align-items: center;
-  height: 78.5%;
+  height: 100%;
   padding-top: 40px;
 }
 
@@ -341,9 +342,76 @@ header {
 
 
 
+@media (min-width: 768px) {
+  /* -------------  Pantalla de bienvenida ------------- */
+  .slogan-welcome{
+    padding: 0 150px;
+  }  
 
+  .logo {
+    height: 320px;
+    width: auto;
+  }
+  
+  /* -------------  Login ------------- */
+  .cont-form{
+    margin: auto;
+    height: 80%;
+    background-color: #FFFFFF;
+    border-radius: 20px;
+  }
+  
+  .form-login, .form-register {
+    padding: 10px;
+    margin: auto;
+  }
+  
+  .slogan-desktop, .separator, .links-redirect {
+    color:#000000;
+  }
+  
+  .btn-enter {
+    background-color: #1D9BF0;
+    color: #FFFFFF;
+    
+  }
+  
+  .btn-google{
+    background-color: #483B3B;
+    color: #FFFFFF;
+  }
+  
+  .links-redirect {
+    margin-top: 10px;
+    font-weight: 700;
+  }
+  
+  /* -------------  Register ------------- */
+  .screen-register{
+    padding-top: 60px;
+  }
 
-@media (min-width: 1024px) {
+  .form-register {
+  row-gap: 0;
+  justify-content: space-around;
+  }
+
+  .slogan-register {
+  color: #000000;
+  width: 350px;
+  }
+  
+  .cont-inputs-register {
+    height: 330px;
+  }
+  
+  .input-register {
+    margin: 0;
+  }
+  
+  }
+
+@media (min-width: 1260px) {
 /* -------------  Pantalla de bienvenida ------------- */
 .group-btn {
   flex-direction: row;
@@ -383,7 +451,6 @@ header {
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
-  
 }
 
 .cont-title{
@@ -417,6 +484,7 @@ header {
   align-items: center;
   height: 100%;
   padding: 10px;
+  margin: auto;
 }
 
 .slogan-desktop, .separator, .links-redirect {
@@ -467,3 +535,5 @@ width: 350px;
 }
 
 }
+
+

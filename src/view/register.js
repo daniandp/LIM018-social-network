@@ -23,12 +23,27 @@ export default () => {
         <input id="password" class="input-register" type="password" placeholder="Contraseña">
       </div>
       <a href="#"><button type="button" class="btn-enter btn-general">Registrar</button></a>
+      <p id="message-error"></p>
       <div class="links-redirect">¿Ya eres miembro? <a class="links-redirect" href="#/login">Inicia sesión ahora</a></div>
     </form>
   </div>`;
   const section = document.createElement('section');
   section.setAttribute('class', 'screen-register');
   section.innerHTML = viewRegister;
+  const inputMail = section.querySelector('#email');
+  const msgError = section.querySelector('#message-error');
+  const condition = /^((?!\.)[\w-_.]*[^.])(@\w+)(\.\w+(\.\w+)?[^.\W])$/gim;
+  inputMail.addEventListener('change', () => {
+    console.log(condition.test(inputMail.value));
+    if (condition.test(inputMail.value)) {
+      msgError.innerHTML = '';
+      console.log('esta entrando al if');
+    }
+    if (!condition.test(inputMail.value)) {
+      console.log('esta entrando al else');
+      msgError.innerHTML = 'Solo se permiten letras (a-z), números (0-9) y puntos(.)';
+    }
+  });
   const btnGoogle = section.querySelector('.btn-google');
   const btnRegister = section.querySelector('.btn-enter');
   btnRegister.addEventListener('click', () => {
