@@ -122,24 +122,16 @@ export const createPost = (uid, post, datePost, state) => {
     });  */
 };
 
+/* funcion para obtener informacion de los post */
 export const getPost = () => {
-  getDocs(collection(db, 'post'));
-};
-console.log('esto es la base de datos', db);
-console.log(getDocs(collection(db, 'post')));
-console.log(getPost());
-
-/* export const infoPost = async () => {
-  const showPost = await getPost();
-  console.log('esto es showpost', showPost);
-  showPost.forEach((doc) => {
-    // doc.data() is never undefined for query doc snapshots
-    console.log(doc.id, ' => ', doc.data());
-  });
-  /*    .then((docRef) => {
-      console.log('se está mostrando el post', docRef);
+  getDocs(collection(db, 'post'))
+    .then((querySnapshot) => {
+      console.log(querySnapshot);
+      querySnapshot.forEach((elementPost) => {
+        console.log(`${elementPost.id} => ${elementPost.data().datePost}`);
+      });
     });
-};   */
+};
 
 export const logOut = () => {
   signOut(auth).then(() => {
