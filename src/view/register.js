@@ -32,7 +32,7 @@ export default () => {
   section.innerHTML = viewRegister;
   const inputMail = section.querySelector('#email');
   const msgError = section.querySelector('#message-error');
-  const condition = /^((?!\.)[\w-_.]*[^.])(@\w+)(\.\w+(\.\w+)?[^.\W])$/gim;
+  const condition = /^((?!\.)[\w-_.]*[^.])(@\w+)(\.\w+(\.\w+)?[^.\W])$/;
   inputMail.addEventListener('change', () => {
     console.log(condition.test(inputMail.value));
     if (condition.test(inputMail.value)) {
