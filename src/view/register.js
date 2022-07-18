@@ -3,6 +3,7 @@ import {
 } from '../firebase/auth.js';
 
 export default () => {
+  // CREACIÓN DEL TEMPLATE
   const viewRegister = `<div class="cont-title">
   <h1 class="title">TWITCHTTER</h1>
   <div class="cont-logo">
@@ -22,37 +23,55 @@ export default () => {
         <input id="nickname" class="input-register" type="text" placeholder="Nombre de usuario">
         <input id="password" class="input-register" type="password" placeholder="Contraseña">
       </div>
-      <a href="#"><button type="button" class="btn-enter btn-general">Registrar</button></a>
+      <button type="button" class="btn-enter btn-general">Registrar</button>
       <p id="message-error"></p>
       <div class="links-redirect">¿Ya eres miembro? <a class="links-redirect" href="#/login">Inicia sesión ahora</a></div>
     </form>
   </div>`;
+
+  // CREANDO NODO SECTION
   const section = document.createElement('section');
   section.setAttribute('class', 'screen-register');
   section.innerHTML = viewRegister;
+
+  // DECLARACION DE CONSTANTES PARA MANEJO DEL DOM
   const inputMail = section.querySelector('#email');
+  const inputName = section.querySelector('#name');
+  const inputNickname = section.querySelector('#nickname');
+  const inputPassword = section.querySelector('#password');
   const msgError = section.querySelector('#message-error');
-  const condition = /^((?!\.)[\w-_.]*[^.])(@\w+)(\.\w+(\.\w+)?[^.\W])$/;
-  inputMail.addEventListener('change', () => {
-    console.log(condition.test(inputMail.value));
-    if (condition.test(inputMail.value)) {
-      msgError.innerHTML = '';
-      console.log('esta entrando al if');
-    }
-    if (!condition.test(inputMail.value)) {
-      console.log('esta entrando al else');
-      msgError.innerHTML = 'Solo se permiten letras (a-z), números (0-9) y puntos(.)';
-    }
-  });
   const btnGoogle = section.querySelector('.btn-google');
   const btnRegister = section.querySelector('.btn-enter');
+
+  // DECLARACION DE CONSTANTE PARA EL REGEX
+  const condition = /^((?!\.)[\w-_.]*[^.])(@\w+)(\.\w+(\.\w+)?[^.\W])$/gim;
+
+  // EVENTO CAMBIO DE INPUT EN EL FORMULARIO DE REGISTRO
+  inputMail.addEventListener('change', () => {
+    const stateCondition = condition.test(inputMail.value); // TESTEO DEL REGEX EN EL INPUT DEL MAIL
+    console.log(stateCondition);
+    if (!stateCondition) {
+      console.log('esta entrando al primer if');
+      msgError.innerHTML = 'Solo se permiten letras (a-z), números (0-9) y puntos(.)';
+    } else {
+      console.log('esta entrando al segundo if');
+      msgError.innerHTML = '';
+    }
+  });
+
+  // EVENTO CLICK DEL BOTON REGISTRAR
   btnRegister.addEventListener('click', () => {
-    registerUserWithEmailAndPassword(
-      section.querySelector('#email').value,
-      section.querySelector('#name').value,
-      section.querySelector('#nickname').value,
-      section.querySelector('#password').value,
-    );
+    if (inputMail.value !== '' && inputName.value !== '' && inputNickname.value !== '' && inputPassword.value !== '') {
+      msgError.innerHTML = '';
+      registerUserWithEmailAndPassword(
+        inputMail.value,
+        inputName.value,
+        inputNickname.value,
+        inputPassword.value,
+      );
+    } else {
+      msgError.innerHTML = 'Debes completar todos los campos para continuar';
+    }
   });
   btnGoogle.addEventListener('click', authGoogle);
   return section;

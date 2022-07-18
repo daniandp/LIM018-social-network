@@ -1,8 +1,9 @@
 import {
-  authGoogle, logInWithEmailAndPassword,
+  authGoogle, logInWithEmailAndPass,
 } from '../firebase/auth.js';
 
 export default () => {
+  // CREACIÓN DEL TEMPLATE
   const viewLogin = `<div class="cont-title">
   <h1 class="title">TWITCHTTER</h1>  
   <div class="cont-logo">
@@ -28,30 +29,61 @@ export default () => {
   </form>
   </div>`;
 
+  // CREANDO NODO SECTION
   const section = document.createElement('section');
   section.setAttribute('class', 'screen-login');
   section.innerHTML = viewLogin;
 
+  // DECLARACION DE CONSTANTES PARA MANEJO DEL DOM
+  const msgError = section.querySelector('#message-error');
+  const email = section.querySelector('#user-email');
+  const password = section.querySelector('#user-password');
   const btnGoogle = section.querySelector('.btn-google');
   const btnEnter = section.querySelector('.btn-enter');
+
+  // EVENTO CLICK DEL BOTON ENTRAR
   btnEnter.addEventListener('click', (e) => {
     e.preventDefault();
-    // console.log(e);
-    /* console.log(e.target);
-    console.log(e.currentTarget); */
-    logInWithEmailAndPassword(
-      section.querySelector('#user-email').value,
-      section.querySelector('#user-password').value,
-      section.querySelector('#message-error'),
-      /* changeView, */
-    );
-    // e.preventDefault();
-  /*   if (container.querySelector('#message-error').textContent === '') {
-      console.log(container.querySelector('#message-error').textContent);
-      e.preventDefault();
-    } */
-    /*     console.log(container.querySelector('#message-error').textContent); */
+    if (email.value !== '' && password.value !== '') {
+      msgError.innerHTML = '';
+      // PROMESA DEL LOGIN PARA VALIDACION DE CREDENCIALES
+      logInWithEmailAndPass(email.value, password.value).then((userCredential) => {
+        const user = userCredential.user;
+        if (user.emailVerified) {
+          msgError.innerText = '';
+          window.location.hash = '#/home';
+        } else {
+          msgError.innerText = 'El usuario no se encuentra verificado';
+        }
+      })
+        .catch((error) => {
+          const errorMessage = error.message;
+          // CONTROL DE ERRORES PARA MOSTRAR EN EL DOM
+          switch (errorMessage) {
+            case 'Firebase: Error (auth/user-not-found).': {
+              msgError.innerHTML = 'Usuario no encontrado';
+              break;
+            }
+            case 'Firebase: Error (auth/wrong-password).': {
+              msgError.innerHTML = 'Contraseña incorrecta';
+              break;
+            }
+            case 'Firebase: Error (auth/invalid-email).': {
+              msgError.innerHTML = 'Email Inválido';
+              break;
+            }
+            default: msgError.innerHTML = '';
+              break;
+          }
+          console.log(errorMessage);
+        });
+    } else {
+      msgError.innerHTML = 'Debes completar todos los campos para continuar';
+    }
   });
+
+  // INICIO DE SESION CON GOOGLE
   btnGoogle.addEventListener('click', authGoogle);
-  return section;
+
+  return section; // RETORNA EL NODO DE LA SECCION DE LOGUEO
 };

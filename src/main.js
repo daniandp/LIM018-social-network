@@ -1,34 +1,26 @@
-// import { app } from './firebase/conection.js';
 /* eslint-disable-next-line */
-import { auth, stateUser, logOut, getPost } from './firebase/auth.js';
+import { auth, stateUser, logOut } from './firebase/auth.js';
 import { changeView } from './view-controller/route.js';
 
+// CARGA INICIAL DE LAS RUTAS
 window.addEventListener('load', () => {
   changeView(window.location.hash);
 });
+
+// CAMBIO DE LAS RUTAS
 window.addEventListener('hashchange', () => {
   changeView(window.location.hash);
 });
 
+// OBSERVADOR DE ESTADO DEL USUARIO
 stateUser(auth, (user) => {
-  if (user) {
-    // User is signed in, see docs for a list of available properties
-    // https://firebase.google.com/docs/reference/js/firebase.User
-    const currUser = user.emailVerified;
-    if (currUser) {
-      window.location.hash = '#/home';
-      console.log('Usuario logueado y verificado', currUser);
-    } else {
-      logOut();
-      console.log('Usuario logueado pero no verificado', currUser);
-    }
-    // window.location.hash = '#/home';
-
-    // ...
+  if (user.emailVerified) {
+    // Si el usuario está verificado se redirige a HOME
+    window.location.hash = '#/home';
+    // console.log('Usuario logueado y verificado', user.emailVerified);
   } else {
-    // User is signed out
-    window.location.hash = '';
-    console.log('No hay usuario logueado ni verificado');
-    // ...
+    // El usuario se desloguea si no está verificado
+    logOut();
+    // console.log('No hay usuario logueado ni verificado');
   }
 });

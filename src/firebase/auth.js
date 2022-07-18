@@ -78,34 +78,7 @@ export const registerUserWithEmailAndPassword = (email, name, nickname, password
     });
 };
 
-export const logInWithEmailAndPassword = (email, password, messageDom/* , callback */) => {
-  signInWithEmailAndPassword(auth, email, password)
-    .then((userCredential) => {
-      // Signed in
-      const user = userCredential.user;
-      // currentUser();
-      /* callback('#/home'); */
-      if (user.emailVerified) {
-        console.log(user);
-        console.log(user.emailVerified);
-        // eslint-disable-next-line no-param-reassign
-        messageDom.innerText = '';
-        window.location.hash = '#/home';
-      } else {
-        // eslint-disable-next-line no-param-reassign
-        messageDom.innerText = 'El usuario no se encuentra verificado';
-      }
-      // ...
-    })
-    .catch((error) => {
-      const errorCode = error.code;
-      console.log(errorCode);
-      const errorMessage = error.message;
-      // eslint-disable-next-line no-param-reassign
-      messageDom.innerText = errorMessage;
-      console.log(errorMessage);
-    });
-};
+export const logInWithEmailAndPass = (email, pass) => signInWithEmailAndPassword(auth, email, pass);
 
 export const createPost = (uid, post, datePost, state) => {
   addDoc(collection(db, 'post'), {
