@@ -322,14 +322,25 @@ header {
   padding: 10px 10px ;
 }
 
+.cont-post {
+  margin-top: 15px; 
+  background-color: #FFFFFF;
+}
+
 #create-post, .post-publicated {
   width: 100%;
   height: auto;
   border: none;
   border-radius: 5px;
   justify-self: center;
-  padding: 5px;
+  padding: 15px;
   resize: none;
+  word-wrap: break-word;
+}
+
+.post-publicated {
+  display: flex;
+  flex-direction: column;
 }
 
 #create-post {
@@ -384,6 +395,16 @@ header {
 
 .comment-img {
   transform: translate(50%);
+}
+
+/* -------------  Pantalla de Error 404 ------------- */
+
+.error-style {
+display:flex;
+align-items: center;
+justify-content: center;
+font-family: 'Press Start 2P';
+color: #FFFFFF;
 }
 
 
