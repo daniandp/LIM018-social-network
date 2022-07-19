@@ -389,6 +389,10 @@ header {
 
 
 @media (min-width: 768px) {
+
+  #message-error{
+    width: 70%;
+  }
   /* -------------  Pantalla de bienvenida ------------- */
   .slogan-welcome{
     padding: 0 150px;
@@ -405,6 +409,7 @@ header {
     height: 80%;
     background-color: #FFFFFF;
     border-radius: 20px;
+    width: 65%;
   }
   
   .form-login, .form-register {
@@ -521,7 +526,7 @@ header {
   justify-content: center;
   align-content: center;
   margin: auto;
-  width: auto;
+  width: 25%;
   height: 80%;
 }
 

@@ -109,6 +109,7 @@ export default () => {
         });
     } else {
       msgError.innerHTML = 'Debes completar todos los campos para continuar';
+      msgError.classList.add('background-message-error');
     }
   });
 

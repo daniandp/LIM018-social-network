@@ -55,6 +55,7 @@ export default () => {
           window.location.hash = '#/home';
         } else {
           msgError.innerText = 'El usuario no se encuentra verificado';
+          msgError.classList.add('background-message-error');
         }
       })
         .catch((error) => {
@@ -81,6 +82,7 @@ export default () => {
         });
     } else {
       msgError.innerHTML = 'Debes completar todos los campos para continuar';
+      msgError.classList.add('background-message-error');
     }
   });
 
