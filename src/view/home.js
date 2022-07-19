@@ -3,6 +3,7 @@ import {
 } from '../firebase/auth.js';
 
 export default () => {
+  // CREACIÓN DEL TEMPLATE
   const viewHome = `
     <header>
       <nav class="nav-menu">
@@ -72,13 +73,22 @@ export default () => {
         </div>
       </div>
     </section>`;
+
+  // CREANDO NODO SECTION
   const section = document.createElement('section');
   section.setAttribute('class', 'home-page');
   section.innerHTML = viewHome;
-  section.querySelector('.game-over').addEventListener('click', logOut);
   const btnSharePost = section.querySelector('#btn-share-post');
+  const btnLogout = section.querySelector('.game-over');
+
+  // EVENTO CLICK DEL BOTON LOGOUT
+  btnLogout.addEventListener('click', logOut);
+
+  // METODO PARA OBTENER LA FECHA EN LA QUE SE REALIZA EL POSTEO
   const date = new Date();
   const datePost = `${String(date.getDate()).padStart(2, '0')}/${String(date.getMonth() + 1).padStart(2, '0')}/${date.getFullYear()}`;
+
+  // EVENTO CLICK DEL BOTON COMPARTIR EL POST
   btnSharePost.addEventListener('click', () => {
     createPost(
       auth.currentUser.uid,
@@ -86,8 +96,7 @@ export default () => {
       datePost,
       'público',
     );
-    /*  infoPost(); */
     getPost();
   });
-  return section;
+  return section; // RETORNA EL NODO DE LA SECCION DE HOME
 };

@@ -46,6 +46,7 @@ export default () => {
     e.preventDefault();
     if (email.value !== '' && password.value !== '') {
       msgError.innerHTML = '';
+      msgError.classList.remove('background-message-error');
       // PROMESA DEL LOGIN PARA VALIDACION DE CREDENCIALES
       logInWithEmailAndPass(email.value, password.value).then((userCredential) => {
         const user = userCredential.user;
@@ -58,6 +59,7 @@ export default () => {
       })
         .catch((error) => {
           const errorMessage = error.message;
+          msgError.classList.add('background-message-error');
           // CONTROL DE ERRORES PARA MOSTRAR EN EL DOM
           switch (errorMessage) {
             case 'Firebase: Error (auth/user-not-found).': {
@@ -82,7 +84,7 @@ export default () => {
     }
   });
 
-  // INICIO DE SESION CON GOOGLE
+  // EVENTO CLICK DEL BOTON DE INICIO SESION CON GOOGLE
   btnGoogle.addEventListener('click', authGoogle);
 
   return section; // RETORNA EL NODO DE LA SECCION DE LOGUEO

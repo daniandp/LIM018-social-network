@@ -1,5 +1,6 @@
 import {
-  authGoogle, registerUserWithEmailAndPassword,
+  authGoogle, registerUserAuth,
+  registerUserFirestore, sendEmailVerif,
 } from '../firebase/auth.js';
 
 export default () => {
@@ -27,6 +28,13 @@ export default () => {
       <p id="message-error"></p>
       <div class="links-redirect">¿Ya eres miembro? <a class="links-redirect" href="#/login">Inicia sesión ahora</a></div>
     </form>
+  </div>
+  <div id="modal-message" class="modal">
+    <div class="modal-cont">
+      <h2>Verifica tu correo</h2>
+      <p>Te hemos enviado un correo electrónico, verificalo e inicia sesión</p>
+      <button type="button" class="btn-redirect btn-general">Ir a Iniciar Sesión</button>
+    </div> 
   </div>`;
 
   // CREANDO NODO SECTION
@@ -42,6 +50,8 @@ export default () => {
   const msgError = section.querySelector('#message-error');
   const btnGoogle = section.querySelector('.btn-google');
   const btnRegister = section.querySelector('.btn-enter');
+  const modal = section.querySelector('#modal-message');
+  const btnModal = section.querySelector('.btn-redirect');
 
   // DECLARACION DE CONSTANTE PARA EL REGEX
   const condition = /^((?!\.)[\w-_.]*[^.])(@\w+)(\.\w+(\.\w+)?[^.\W])$/gim;
@@ -49,13 +59,12 @@ export default () => {
   // EVENTO CAMBIO DE INPUT EN EL FORMULARIO DE REGISTRO
   inputMail.addEventListener('change', () => {
     const stateCondition = condition.test(inputMail.value); // TESTEO DEL REGEX EN EL INPUT DEL MAIL
-    console.log(stateCondition);
     if (!stateCondition) {
-      console.log('esta entrando al primer if');
-      msgError.innerHTML = 'Solo se permiten letras (a-z), números (0-9) y puntos(.)';
+      msgError.innerHTML = 'Debes ingresar un email válido: ejemplo@dominio.com';
+      msgError.classList.add('background-message-error');
     } else {
-      console.log('esta entrando al segundo if');
       msgError.innerHTML = '';
+      msgError.classList.remove('background-message-error');
     }
   });
 
@@ -63,16 +72,52 @@ export default () => {
   btnRegister.addEventListener('click', () => {
     if (inputMail.value !== '' && inputName.value !== '' && inputNickname.value !== '' && inputPassword.value !== '') {
       msgError.innerHTML = '';
-      registerUserWithEmailAndPassword(
-        inputMail.value,
-        inputName.value,
-        inputNickname.value,
-        inputPassword.value,
-      );
+      msgError.classList.remove('background-message-error');
+      registerUserAuth(inputMail.value, inputPassword.value)
+        .then((userCredential) => {
+          // Signed in
+          const user = userCredential.user;
+          registerUserFirestore(inputMail.value, inputName.value, inputNickname.value, user.uid);
+          // ...
+          sendEmailVerif()
+            .then(() => {
+            // Email verification sent!
+            // ...
+            });
+          modal.classList.add('modal-visible');
+        })
+        .catch((error) => {
+          const errorMessage = error.message;
+          msgError.classList.add('background-message-error');
+          // CONTROL DE ERRORES PARA MOSTRAR EN EL DOM
+          switch (errorMessage) {
+            case 'Firebase: Error (auth/email-already-in-use).': {
+              msgError.innerHTML = 'El correo ya se encuentra registrado';
+              break;
+            }
+            case 'Firebase: Password should be at least 6 characters (auth/weak-password).': {
+              msgError.innerHTML = 'La contraseña debe tener al menos 6 caracteres';
+              break;
+            }
+            case 'Firebase: Error (auth/invalid-email).': {
+              msgError.innerHTML = 'Debes ingresar un email válido: ejemplo@dominio.com';
+              break;
+            }
+            default: msgError.innerHTML = '';
+              break;
+          }
+        });
     } else {
       msgError.innerHTML = 'Debes completar todos los campos para continuar';
     }
   });
+
+  // EVENTO CLICK DEL BOTON DE VENTANA MODAL
+  btnModal.addEventListener('click', () => {
+    window.location.href = '#/login';
+  });
+
+  // EVENTO CLICK DEL BOTON DE INICIO SESION CON GOOGLE
   btnGoogle.addEventListener('click', authGoogle);
-  return section;
+  return section; // RETORNA EL NODO DE LA SECCION DE REGISTRO
 };

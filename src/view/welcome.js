@@ -1,4 +1,5 @@
 export default () => {
+  // CREACIÓN DE TEMPLATE
   const viewWelcome = `<h1 class="title">TWITCHTTER</h1>
   <div class="cont-logo">
   <img class="logo" src="./img/mando.png" alt="logoTwitchtter">
@@ -8,8 +9,11 @@ export default () => {
   <a href="#/login"><button class="btn-login btn-general" type="button" id="logIn">Iniciar sesión</button></a>
   <a href="#/register"><button class="btn-singup btn-general" type="button" id="singUp">Registrarse</button></a>
   </div>`;
+
+  // CREANDO NODO SECTION
   const section = document.createElement('section');
   section.setAttribute('class', 'screen-welcome');
   section.innerHTML = viewWelcome;
-  return section;
+
+  return section; // RETORNA EL NODO DE LA SECCION DE BIENVENIDA
 };

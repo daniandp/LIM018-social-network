@@ -14,12 +14,12 @@ window.addEventListener('hashchange', () => {
 
 // OBSERVADOR DE ESTADO DEL USUARIO
 stateUser(auth, (user) => {
-  if (user.emailVerified) {
-    // Si el usuario está verificado se redirige a HOME
+  if (user !== null && user.emailVerified) {
+    // SI EL USUARIO ESTÁ VERIFICADO SE REDIRIGE A HOME
     window.location.hash = '#/home';
     // console.log('Usuario logueado y verificado', user.emailVerified);
   } else {
-    // El usuario se desloguea si no está verificado
+    // EL USUARIO SE DESLOGUEA SI NO ESTÁ VERIFICADO
     logOut();
     // console.log('No hay usuario logueado ni verificado');
   }

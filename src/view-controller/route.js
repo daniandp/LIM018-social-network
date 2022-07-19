@@ -1,23 +1,15 @@
-/* eslint-disable-next-line */
-/* import * as myImports from "../main.js"; */
 import { auth } from '../firebase/auth.js';
 import { components } from '../view/index.js';
 
+// CONTENEDOR GENERAL
 const container = document.getElementById('container');
-const changeView = (route /* , e */) => {
+
+// ENRUTADOR PARA CAMBIO DE VISTAS
+const changeView = (route) => {
   console.log(route);
+
   const user = auth.currentUser;
-  /*    const user = auth.currentUser;
-  const publicRoutes = [
-    '#/login',
-  ]
-  if (!user && !publicRoutes.includes(route)) {
-    if (e) {
-      e.preventDefault();
-    }
-    changeView('#/login');
-    return false;
-  } */
+
   container.innerHTML = '';
   switch (route.replace('#', '')) {
     case '': {
@@ -61,9 +53,8 @@ const changeView = (route /* , e */) => {
       window.location.hash = '';
       break;
     }
-    default: container.innerHTML = 'Error 404 (╯°□°）╯︵ ┻━┻';
+    default: container.innerHTML = 'Error 404 Página no encontrada <br><br> (╯°□°）╯︵ ┻━┻';
       break;
   }
-  // console.log(route);
 };
 export { changeView };

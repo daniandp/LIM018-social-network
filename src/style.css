@@ -11,6 +11,10 @@ body {
   background: #5C16C5;
 }
 
+p {
+  font-weight: 700;
+  text-align: center;
+}
 /* -------------  Pantalla de bienvenida ------------- */
 
 .screen-welcome {
@@ -126,17 +130,22 @@ body {
   font-weight: 700;
 }
 
-/* .btn-enter {
-  height: 150px;
-} */
-
 #message-error{
-  height: 45px;
-  width: 100%;
-  font-size: 20px ;
-  background-color: red;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 10px;
+  height: 60px;
+  width: 85%;
+  font-size: 17px ;
+  color: #FFFFFF;
+  padding: 10px 40px;
+  border-radius: 10px;
 }
 
+.background-message-error{
+  background-color: rgba(0, 0, 0, 0.5);
+}
 .separator {
   display: flex;
   align-items: center;
@@ -185,6 +194,43 @@ body {
   align-items: center;
   height: 100%;
   padding-top: 40px;
+}
+
+/* -------------  MODAL ------------- */
+
+.modal-cont{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 25px;
+  background-color:#fff;
+  width:350px;
+  padding: 30px 20px;
+  margin: 75% auto;
+  position: relative;
+  border-radius: 10px;
+}
+.modal{
+  background-color: rgba(0,0,0,.8);
+  position:fixed;
+  top:0;
+  right:0;
+  bottom:0;
+  left:0;
+  opacity:0;
+  pointer-events: none;
+  transition: all 0.3s;
+}
+.modal-visible{
+  opacity:1;
+  pointer-events:auto;
+}
+.btn-redirect {
+  background-color: #1D9BF0;
+  color: #fff;
+  width: auto;
+  padding: 0 30px;
+  filter: drop-shadow(2px 2px 3px rgba(0, 0, 0, 0.5));
 }
 
 .slogan-register {
@@ -410,7 +456,9 @@ header {
   }
   
   }
-
+  .modal-cont{
+    margin: 50% auto;
+  }
 @media (min-width: 1260px) {
 /* -------------  Pantalla de bienvenida ------------- */
 .group-btn {
@@ -473,7 +521,7 @@ header {
   justify-content: center;
   align-content: center;
   margin: auto;
-  width: 50%;
+  width: auto;
   height: 80%;
 }
 
@@ -532,6 +580,10 @@ width: 350px;
 
 .input-register {
   margin: 0;
+}
+
+.modal-cont{
+  margin: 25% auto;
 }
 
 }
