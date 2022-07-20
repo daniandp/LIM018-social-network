@@ -15,7 +15,7 @@ export default () => {
   <div class="cont-form">
     <form class="form-register">
       <h3 class="slogan slogan-register">Registrate y forma parte de la comunidad</h3>
-      <button class="btn-google btn-general"><img class="google-icon" src="./img/googleicon.png" alt="google icon">
+      <button type="button" class="btn-google btn-general"><img class="google-icon" src="./img/googleicon.png" alt="google icon">
         Iniciar sesión con google</button>
       <div class="separator"><hr class="hr">O<hr class="hr"></div>
       <div class="cont-inputs-register">

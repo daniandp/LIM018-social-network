@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Quicksand:wght@300;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Quicksand:wght@300;400;700&display=swap');
 
 * {
   box-sizing: border-box;
@@ -264,6 +264,7 @@ header {
   display: flex;
   padding: 0 10px;
   height: 100%;
+  border-bottom: rgba(0, 0, 0, 0.5) solid 1px; 
 }
 
 .menu-left {
@@ -286,9 +287,38 @@ header {
   height: 25px;
 }
 
-.game-over {
-  width: auto;
-  height: 20px;
+.nav-toggle {
+  color: #FFFFFF;
+  background: none;
+  border: none;
+  font-size: 25px;
+
+}
+
+.nav-options {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  list-style: none;
+  text-decoration: none;
+  position: fixed;
+  right: 0;
+  top: 40px;
+  width: 40%;
+  padding: 8px 15px;
+  background-color: #5c16c5;
+
+}
+
+.nav-options-item {
+  font-size: 15px;
+  line-height: 25px;
+}
+
+.nav-options-link {
+  text-decoration: none;
+  color: #000000;
+
 }
 
 .title-home {
@@ -322,6 +352,29 @@ header {
   padding: 10px 10px ;
 }
 
+.info-user {
+  display: flex;
+  justify-content: space-between;
+}
+
+.span-text {
+  font-size: 12px;
+  font-weight: 400;
+}
+
+.container-input-post > .cont-descriptions-post {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  margin-bottom: 7px;
+}
+
+.container-input-post > div > .span-text {
+  font-size: 15px;
+  margin-bottom: 10px;
+  font-weight: 700;
+}
+
 .cont-post {
   margin-top: 15px; 
   background-color: #FFFFFF;
@@ -329,7 +382,7 @@ header {
 }
 
 #create-post, .post-publicated {
-  width: 100%;
+  min-width: 100%;
   height: auto;
   border: none;
   border-radius: 5px;
@@ -337,6 +390,7 @@ header {
   padding: 15px;
   resize: none;
   word-wrap: break-word;
+  background-color: #FFFFFF;
 }
 
 .post-publicated {
@@ -345,7 +399,8 @@ header {
 }
 
 #create-post {
-  height: 80px;
+  min-height: 80px;
+  text-align: left;
 }
 
 .container-share-btn{
@@ -356,7 +411,8 @@ header {
 
 .share-img {
   display: flex;
-  align-items: flex-end;
+  align-items: center;
+  column-gap: 5px;
 
 }
 
@@ -371,7 +427,7 @@ header {
   background-color: #1D9BF0;
   color: #FFFFFF;
   font-weight: 700;
-  padding: 5px;
+  padding: 7px;
 }
 
 .info-post {
@@ -392,6 +448,13 @@ header {
 
 .bi-joystick,.bi-chat-dots  {
   font-size: 25px;
+}
+
+.mando-img, .comment-img {
+  display: flex;
+  align-items: center;
+  column-gap: 5px;
+  margin-top: 5px;
 }
 
 .comment-img {
