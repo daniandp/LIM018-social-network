@@ -325,6 +325,7 @@ header {
 .cont-post {
   margin-top: 15px; 
   background-color: #FFFFFF;
+  text-align: justify;
 }
 
 #create-post, .post-publicated {

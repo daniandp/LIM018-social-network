@@ -1,5 +1,9 @@
+/* eslint-disable import/no-unresolved */
 import {
-  logOut, createPost, auth, getPost,
+  collection, onSnapshot,
+} from 'https://www.gstatic.com/firebasejs/9.8.4/firebase-firestore.js';
+import {
+  logOut, createPost, auth, db,
 } from '../firebase/auth.js';
 
 export default () => {
@@ -96,7 +100,18 @@ export default () => {
       datePost,
       'público',
     );
-    getPost();
   });
+  // getPost();
+
+  /* funcion para obtener informacion de los post */
+  const getPost = () => {
+    const queryPost = (collection(db, 'post'));
+    onSnapshot(queryPost, (querySnapshot) => {
+      querySnapshot.forEach((post) => {
+        const divPost = document.createElement('div');
+        divPost.innerHTML = (post.data());
+      });
+    });
+  };
   return section; // RETORNA EL NODO DE LA SECCION DE HOME
 };

@@ -5,11 +5,11 @@ import {
   signOut, onAuthStateChanged, sendEmailVerification,
 } from 'https://www.gstatic.com/firebasejs/9.8.4/firebase-auth.js';
 import {
-  getFirestore, setDoc, doc, addDoc, collection, getDocs,
+  getFirestore, setDoc, doc, addDoc, collection, onSnapshot,
 } from 'https://www.gstatic.com/firebasejs/9.8.4/firebase-firestore.js';
 import { app } from './conection.js';
 
-const db = getFirestore(app);
+export const db = getFirestore(app);
 export const auth = getAuth();
 export const stateUser = onAuthStateChanged;
 const provider = new GoogleAuthProvider();
@@ -60,16 +60,13 @@ export const createPost = (uid, post, datePost, state) => {
     });  */
 };
 
-/* funcion para obtener informacion de los post */
-export const getPost = () => {
-  getDocs(collection(db, 'post'))
+/*  getDocs(collection(db, 'post'))
     .then((querySnapshot) => {
       console.log(querySnapshot);
       querySnapshot.forEach((elementPost) => {
         console.log(`${elementPost.id} => ${elementPost.data().datePost}`);
       });
-    });
-};
+    }); */
 
 export const logOut = () => {
   signOut(auth).then(() => {
