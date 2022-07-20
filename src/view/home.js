@@ -60,7 +60,7 @@ export default () => {
           </div>
           </div>
           <div class="input-readonly">
-            <textarea rows="" class="post-publicated" readonly>El usuario uno comparte su opinión o su comentario en esta sección holaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</textarea>
+            <span class="post-publicated cont-post" role="textbox" readonly> El usuario uno comparte su opinión o su comentario en esta sección holaa hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola holaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola</span>
           </div>
         </div>
         <div class="container-like-comment">
