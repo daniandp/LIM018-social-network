@@ -54,9 +54,7 @@ const changeView = (route) => {
       break;
     }
     default: {
-      container.innerHTML = `Error 404 Página no encontrada <br><br><br> 
-      (╯°□°）╯︵ ┻━┻`;
-      container.classList.add('error-style');
+      container.appendChild(components.error404());
       break;
     }
   }
