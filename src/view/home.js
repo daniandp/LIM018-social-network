@@ -95,6 +95,14 @@ export default () => {
   const btnSharePost = section.querySelector('#btn-share-post');
   const btnLogout = section.querySelector('#logOut');
 
+  // TRAEMOS AL BOTÓN DEL MENÚ DEL HEADER
+  const menuHeader = section.querySelector('.nav-toggle');
+  const navOptions = section.querySelector('.nav-options');
+
+  // EVENTO CLICK PARA DESPLEGAR EL MENÚ
+  menuHeader.addEventListener('click', () => {
+    navOptions.classList.toggle('nav-options_visible');
+  });
   // EVENTO CLICK DEL BOTON LOGOUT
   btnLogout.addEventListener('click', logOut);
 

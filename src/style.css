@@ -292,7 +292,6 @@ header {
   background: none;
   border: none;
   font-size: 25px;
-
 }
 
 .nav-options {
@@ -302,12 +301,16 @@ header {
   list-style: none;
   text-decoration: none;
   position: fixed;
-  right: 0;
   top: 40px;
-  width: 40%;
-  padding: 8px 15px;
+  width: 100%;
+  height: 100%;
   background-color: #5c16c5;
+  right: 100%;
+  transition: left  0.5s;
+}
 
+.nav-options_visible {
+  right: 0%;
 }
 
 .nav-options-item {
@@ -317,8 +320,11 @@ header {
 
 .nav-options-link {
   text-decoration: none;
-  color: #000000;
-
+  color: #FFFFFF;
+  display: block;
+  padding: 20px;
+  width: 167px;
+  text-align: center;
 }
 
 .title-home {
@@ -558,17 +564,23 @@ font-size: 20px;
   .input-register {
     margin: 0;
   }
-  
-  }
+
   .modal-cont{
     margin: 50% auto;
   }
 
-/* -------------  Pantalla de Error 404 ------------- */
+  /* -------------  Pantalla de Home ------------- */
+  .nav-options {
+    width: 25%;
+  }
+
+  /* -------------  Pantalla de Error 404 ------------- */
   .error-style > img {
     width: auto;
   }
 
+  }
+  
 @media (min-width: 1260px) {
 /* -------------  Pantalla de bienvenida ------------- */
 .group-btn {
@@ -695,6 +707,29 @@ width: 350px;
 .modal-cont{
   margin: 25% auto;
 }
+
+/* -------------  Pantalla de Home ------------- */
+.nav-options {
+padding: 0;
+width: 10%;
+height: 100%;
+}
+
+.nav-options-link {
+  display: block;
+  padding: 20px;
+  width: 190px;
+  text-align: center;
+}
+.nav-options-link:hover {
+  background-color: rgba(0, 0, 0, 0.5);
+  transition: 0.5s;
+ }
+
+ .nav-toggle {
+   cursor: pointer;
+ }
+
 
 }
 
