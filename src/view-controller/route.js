@@ -47,6 +47,7 @@ const changeView = (route) => {
     }
     case '/home': {
       if (user) {
+        container.appendChild(components.header());
         container.appendChild(components.home());
         break;
       }

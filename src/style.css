@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Quicksand:wght@300;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Quicksand:wght@300;400;700&display=swap');
 
 * {
   box-sizing: border-box;
@@ -8,7 +8,8 @@
 }
 
 body {
-  background: #5C16C5;
+  background: #4D2A7E;
+  background-image: url(img/fondo.png); 
 }
 
 p {
@@ -196,7 +197,7 @@ p {
   padding-top: 40px;
 }
 
-/* -------------  MODAL ------------- */
+/* -------------  Aquí empieza el MODAL ------------- */
 
 .modal-cont{
   display: flex;
@@ -233,6 +234,8 @@ p {
   filter: drop-shadow(2px 2px 3px rgba(0, 0, 0, 0.5));
 }
 
+/* -------------  Aquí termina el MODAL ------------- */
+
 .slogan-register {
   font-size: 20px;
 }
@@ -253,9 +256,14 @@ p {
   background-color: #FFFFFF;
 }
 
+.container-profile {
+  display: none;
+}
+
+/* -------------  Aquí empieza el HEADER ------------- */
 header {
   position: fixed;
-  background-color: #5C16C5;
+  background-color: #4D2A7E;
   width: 100vw;
   height: 40px;
 }
@@ -264,6 +272,7 @@ header {
   display: flex;
   padding: 0 10px;
   height: 100%;
+  border-bottom: rgba(0, 0, 0, 0.5) solid 1px; 
 }
 
 .menu-left {
@@ -286,9 +295,43 @@ header {
   height: 25px;
 }
 
-.game-over {
-  width: auto;
-  height: 20px;
+.nav-toggle {
+  color: #FFFFFF;
+  background: none;
+  border: none;
+  font-size: 25px;
+}
+
+.nav-options {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  list-style: none;
+  text-decoration: none;
+  position: fixed;
+  top: 40px;
+  width: 100%;
+  background-color: #4D2A7E;
+  right: 100%;
+  transition: left  0.5s;
+}
+
+.nav-options_visible {
+  right: 0%;
+}
+
+.nav-options-item {
+  font-size: 15px;
+  line-height: 25px;
+}
+
+.nav-options-link {
+  text-decoration: none;
+  color: #FFFFFF;
+  display: block;
+  padding: 20px;
+  width: 167px;
+  text-align: center;
 }
 
 .title-home {
@@ -301,6 +344,8 @@ header {
 .btn-logOut {
   display: none;
 }
+
+/* -------------  Aquí termina el HEADER ------------- */
 
 .container-main { 
   display: flex;
@@ -322,6 +367,29 @@ header {
   padding: 10px 10px ;
 }
 
+.info-user {
+  display: flex;
+  justify-content: space-between;
+}
+
+.span-text {
+  font-size: 12px;
+  font-weight: 400;
+}
+
+.container-input-post > .cont-descriptions-post {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  margin-bottom: 7px;
+}
+
+.container-input-post > div > .span-text {
+  font-size: 15px;
+  margin-bottom: 10px;
+  font-weight: 700;
+}
+
 .cont-post {
   margin-top: 15px; 
   background-color: #FFFFFF;
@@ -329,7 +397,7 @@ header {
 }
 
 #create-post, .post-publicated {
-  width: 100%;
+  min-width: 100%;
   height: auto;
   border: none;
   border-radius: 5px;
@@ -337,6 +405,7 @@ header {
   padding: 15px;
   resize: none;
   word-wrap: break-word;
+  background-color: #FFFFFF;
 }
 
 .post-publicated {
@@ -345,7 +414,8 @@ header {
 }
 
 #create-post {
-  height: 80px;
+  min-height: 80px;
+  text-align: left;
 }
 
 .container-share-btn{
@@ -356,7 +426,8 @@ header {
 
 .share-img {
   display: flex;
-  align-items: flex-end;
+  align-items: center;
+  column-gap: 5px;
 
 }
 
@@ -371,7 +442,7 @@ header {
   background-color: #1D9BF0;
   color: #FFFFFF;
   font-weight: 700;
-  padding: 5px;
+  padding: 7px;
 }
 
 .info-post {
@@ -387,16 +458,20 @@ header {
 .container-like-comment {
   display: flex;
   justify-content: space-between;
-  width: 50%;
+  width: 65%;
 }
 
 .bi-joystick,.bi-chat-dots  {
   font-size: 25px;
 }
 
-.comment-img {
-  transform: translate(50%);
+.mando-img, .comment-img {
+  display: flex;
+  align-items: center;
+  column-gap: 5px;
+  margin-top: 5px;
 }
+
 
 /* -------------  Pantalla de Error 404 ------------- */
 
@@ -495,17 +570,26 @@ font-size: 20px;
   .input-register {
     margin: 0;
   }
-  
-  }
+
   .modal-cont{
     margin: 50% auto;
   }
 
-/* -------------  Pantalla de Error 404 ------------- */
+  /* -------------  Pantalla de Home ------------- */
+  .nav-options {
+    width: 25%;
+  }
+
+  .container-like-comment {
+    width: 60%;
+  }
+  /* -------------  Pantalla de Error 404 ------------- */
   .error-style > img {
     width: auto;
   }
 
+  }
+  
 @media (min-width: 1260px) {
 /* -------------  Pantalla de bienvenida ------------- */
 .group-btn {
@@ -632,6 +716,119 @@ width: 350px;
 .modal-cont{
   margin: 25% auto;
 }
+
+/* -------------  Pantalla de Home ------------- */
+.nav-options {
+  padding: 0;
+  width: 20%;
+  height: 100%;
+}
+
+.nav-options-link {
+  display: block;
+  padding: 20px;
+  width: 190px;
+  text-align: center;
+}
+.nav-options-link:hover {
+  background-color: rgba(0, 0, 0, 0.5);
+  transition: 0.5s;
+ }
+
+ .nav-toggle {
+   cursor: pointer;
+ }
+
+ .container-like-comment {
+  width: 55%;
+}
+
+.home-page {
+  flex-direction: row;
+  padding: 70px 100px;
+  align-content: center;
+}
+
+.container-profile {
+  display:flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 40%;
+  row-gap: 20px;
+}
+
+.profile-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 50%;
+  height: 200px;
+  background: linear-gradient(0deg, rgba(238,233,233,1) 70%, rgba(77,42,126,1) 72%);
+  border-radius: 10px;
+}
+
+.container-main { 
+  justify-content: flex-start;
+  row-gap: 5px;
+  width: 40%;
+  margin-top: 0;
+}
+
+.container-input-post, .container-publicated {
+  width: 90%;
+}
+
+.img-card-profile {
+  display: flex;
+  background-color: #4D2A7E;
+  justify-content: center;
+  align-items: center;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  border: #EEE9E9 solid 2px;
+}
+
+.img-card-profile > img {
+  width: auto;
+  height: 33px;
+}
+
+.user-name > h5 {
+  font-family: 'Press Start 2P';
+  line-height: 40px;
+}
+
+.user-info {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  align-items: center;
+}
+
+.info-dev {
+  display: flex;
+  width: 50%;
+  height: 7%;
+  justify-content: space-around;
+  align-items: center;
+  background-color: #EEE9E9;
+  border-radius: 10px;
+  padding: 15px;
+}
+
+.menu-info-dev {
+  display: flex;
+  list-style: none;
+  column-gap: 10px; 
+}
+
+.menu-info-dev > li {
+  color: #4D2A7E;
+  font-size: 20px;
+}
+
 
 }
 
