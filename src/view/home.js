@@ -1,9 +1,8 @@
 /* eslint-disable import/no-unresolved */
+import { onSnapshot } from 'https://www.gstatic.com/firebasejs/9.8.4/firebase-firestore.js';
+
 import {
-  collection, onSnapshot,
-} from 'https://www.gstatic.com/firebasejs/9.8.4/firebase-firestore.js';
-import {
-  logOut, createPost, auth, db,
+  createPost, auth, getPost,
 } from '../firebase/auth.js';
 
 export default () => {
@@ -104,22 +103,25 @@ export default () => {
   btnSharePost.addEventListener('click', () => {
     createPost(
       auth.currentUser.uid,
-      section.querySelector('#create-post').value,
+      section.querySelector('#create-post').textContent,
       datePost,
       'público',
     );
   });
-  // getPost();
+  getPost()
+  .then((r) => {
+    console.log(typeof r)
+  });
+  console.log(getPost());
+  // getPost().then(
+  //   (response) => {
+  //     onSnapshot(response, (querySnapshot) => {
+  //       querySnapshot.forEach((doc) => {
+  //         console.log(doc.data());
+  //       });
+  //     });
+  //   },
+  // );
 
-  /* funcion para obtener informacion de los post */
-  const getPost = () => {
-    const queryPost = (collection(db, 'post'));
-    onSnapshot(queryPost, (querySnapshot) => {
-      querySnapshot.forEach((post) => {
-        const divPost = document.createElement('div');
-        divPost.innerHTML = (post.data());
-      });
-    });
-  };
   return section; // RETORNA EL NODO DE LA SECCION DE HOME
 };

@@ -55,19 +55,47 @@ export const createPost = (uid, post, datePost, state) => {
     .then((docRef) => {
       console.log('post creado', docRef);
     });
-  /* .catch((error) => {
-      console.error('Error adding document: ', error);
-    });  */
+};
+const querySnapshot = (query) => {
+  const arr = [];
+  query.forEach((docs) => {
+    // console.log(docs.data());
+    arr.push(docs.data());
+  });
+  //console.log(arr);
+  return arr;
+};
+/* funcion para obtener informacion de los post */
+export const getPost = async () => {
+  try {
+    // console.log('se trajo algo de coleccion post');
+    // console.log((collection(db, 'post')));
+    return await onSnapshot((collection(db, 'post')), querySnapshot);
+  } catch (e) {
+    // console.log('dentro de catch', e);
+    throw Error('(╯°□°）╯︵ ┻━┻');
+  }
 };
 
-/*  getDocs(collection(db, 'post'))
-    .then((querySnapshot) => {
-      console.log(querySnapshot);
-      querySnapshot.forEach((elementPost) => {
-        console.log(`${elementPost.id} => ${elementPost.data().datePost}`);
-      });
-    }); */
+// const q = query(collection(db, "cities"), where("state", "==", "CA"));
+// const unsubscribe = onSnapshot(q, (querySnapshot) => {
+//   const cities = [];
+//   querySnapshot.forEach((doc) => {
+//       cities.push(doc.data().name);
+//   });
+//   console.log("Current cities in CA: ", cities.join(", "));
+// });
 
+/* const getPost = () => {
+  const queryPost = (collection(db, 'post'));
+  onSnapshot(queryPost, (querySnapshot) => {
+    querySnapshot.forEach((post) => {
+      const divPost = document.createElement('div');
+      divPost.innerHTML = (post.data());
+    });
+  });
+};
+ */
 export const logOut = () => {
   signOut(auth).then(() => {
     // Sign-out successful.
