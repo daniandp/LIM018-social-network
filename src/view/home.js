@@ -9,36 +9,38 @@ import {
 export default () => {
   // CREACIÓN DEL TEMPLATE
   const viewHome = `
-    <header>
-      <nav class="nav-menu">
-        <ul class="menu-left">
+    <section class="container-profile">
+      <div class="profile-card">
+        <div class="img-card-profile">
+          <img src="img/perfilwhite.png" alt="imagen de perfil">
+        </div>
+        <div class="user-name">
+          <h5>USUARIO</h5>
+        </div>
+        <div class="user-info">
+          <div class="about-user">
+            <span class="about-me">Mis juegos favoritos son...</span>
+          </div>
+          <div class="more-info">
+            <span class"more-about-me">Interacción</span>
+          </div>
+        </div>
+      </div>
+      <div class="info-dev">
+        <span>Desarrolado por</span>
+        <ul class="menu-info-dev">
           <li>
-            <a href="#"><img class="img-profile" src="img/perfiltwitchtter.png" alt="perfil"></a>
+            <a href="https://github.com/OryChRamirez" title="Orayma Chacón"><i class="bi bi-github"></i></a>
           </li>
-          <li class="hidden" >
-            <a href=""><img class="img-top" src="img/top.png" alt="ir arriba"></a>
+          <li>
+            <a href="https://github.com/Bellasacc" title="Bella Aguirre"><i class="bi bi-github"></i></a>
           </li>
-          <li class="title-home">TWITCHTTER</li>
-          <li class="mentions hidden">
-            <a href="">MENCIONES</a>
+          <li>
+            <a href="https://github.com/daniandp" title="Daniela Andrade"><i class="bi bi-github"></i></a>
           </li>
         </ul>
-        <ul class="menu-right">
-        <li class="search-bar hidden">
-          <input type="search" id="searchBar" placeholder="Buscar en Twitchtter">
-        </li>
-        <li>
-          <button type="button" class="nav-toggle"><i class="bi bi-list"></i></button>
-          <ul class="nav-options">
-            <li class="nav-options-item"><a href="" class="nav-options-link">Ir a home</a></li>
-            <li class="nav-options-item"><a href="" class="nav-options-link">Ir a perfil</a></li>
-            <li class="nav-options-item" id="logOut"><a href="" class="nav-options-link">Cerrar sesión</a></li>
-          </ul>
-        </li>
-        <li class="version hidden">V.1.1</li>
-        </ul>
-      </nav>
-    </header>
+      </div>
+    </section>
     <section class="container-main">
       <div class="container-input-post">
         <div class="cont-descriptions-post">
@@ -93,18 +95,6 @@ export default () => {
   section.setAttribute('class', 'home-page');
   section.innerHTML = viewHome;
   const btnSharePost = section.querySelector('#btn-share-post');
-  const btnLogout = section.querySelector('#logOut');
-
-  // TRAEMOS AL BOTÓN DEL MENÚ DEL HEADER
-  const menuHeader = section.querySelector('.nav-toggle');
-  const navOptions = section.querySelector('.nav-options');
-
-  // EVENTO CLICK PARA DESPLEGAR EL MENÚ
-  menuHeader.addEventListener('click', () => {
-    navOptions.classList.toggle('nav-options_visible');
-  });
-  // EVENTO CLICK DEL BOTON LOGOUT
-  btnLogout.addEventListener('click', logOut);
 
   // METODO PARA OBTENER LA FECHA EN LA QUE SE REALIZA EL POSTEO
   const date = new Date();

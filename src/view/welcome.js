@@ -2,7 +2,7 @@ export default () => {
   // CREACIÓN DE TEMPLATE
   const viewWelcome = `<h1 class="title">TWITCHTTER</h1>
   <div class="cont-logo">
-  <img class="logo" src="./img/mando.png" alt="logoTwitchtter">
+  <img class="logo" src="./img/mandoneon.png" alt="logoTwitchtter">
   </div>
   <h2 class="slogan slogan-welcome">¡La red social creada por gamers para gamers!</h2>
   <div class="group-btn">

@@ -19,7 +19,7 @@ export default () => {
         Iniciar sesión con google</button>
       <div class="separator"><hr class="hr">O<hr class="hr"></div>
       <div class="cont-inputs-register">
-        <input id="email" class="input-register" type="text" placeholder="Correo electrónico">
+        <input id="email" class="input-register" type="email" placeholder="Correo electrónico">
         <input id="name" class="input-register" type="text" placeholder="Nombre completo">
         <input id="nickname" class="input-register" type="text" placeholder="Nombre de usuario">
         <input id="password" class="input-register" type="password" placeholder="Contraseña">

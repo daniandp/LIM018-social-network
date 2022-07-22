@@ -8,7 +8,8 @@
 }
 
 body {
-  background: #5C16C5;
+  background: #4D2A7E;
+  background-image: url(img/fondo.png); 
 }
 
 p {
@@ -196,7 +197,7 @@ p {
   padding-top: 40px;
 }
 
-/* -------------  MODAL ------------- */
+/* -------------  Aquí empieza el MODAL ------------- */
 
 .modal-cont{
   display: flex;
@@ -233,6 +234,8 @@ p {
   filter: drop-shadow(2px 2px 3px rgba(0, 0, 0, 0.5));
 }
 
+/* -------------  Aquí termina el MODAL ------------- */
+
 .slogan-register {
   font-size: 20px;
 }
@@ -253,9 +256,14 @@ p {
   background-color: #FFFFFF;
 }
 
+.container-profile {
+  display: none;
+}
+
+/* -------------  Aquí empieza el HEADER ------------- */
 header {
   position: fixed;
-  background-color: #5C16C5;
+  background-color: #4D2A7E;
   width: 100vw;
   height: 40px;
 }
@@ -297,14 +305,13 @@ header {
 .nav-options {
   display: flex;
   flex-direction: column;
-  align-items: flex-end;
+  align-items: center;
   list-style: none;
   text-decoration: none;
   position: fixed;
   top: 40px;
   width: 100%;
-  height: 100%;
-  background-color: #5c16c5;
+  background-color: #4D2A7E;
   right: 100%;
   transition: left  0.5s;
 }
@@ -337,6 +344,8 @@ header {
 .btn-logOut {
   display: none;
 }
+
+/* -------------  Aquí termina el HEADER ------------- */
 
 .container-main { 
   display: flex;
@@ -449,7 +458,7 @@ header {
 .container-like-comment {
   display: flex;
   justify-content: space-between;
-  width: 50%;
+  width: 65%;
 }
 
 .bi-joystick,.bi-chat-dots  {
@@ -463,9 +472,6 @@ header {
   margin-top: 5px;
 }
 
-.comment-img {
-  transform: translate(50%);
-}
 
 /* -------------  Pantalla de Error 404 ------------- */
 
@@ -574,6 +580,9 @@ font-size: 20px;
     width: 25%;
   }
 
+  .container-like-comment {
+    width: 60%;
+  }
   /* -------------  Pantalla de Error 404 ------------- */
   .error-style > img {
     width: auto;
@@ -710,9 +719,9 @@ width: 350px;
 
 /* -------------  Pantalla de Home ------------- */
 .nav-options {
-padding: 0;
-width: 10%;
-height: 100%;
+  padding: 0;
+  width: 20%;
+  height: 100%;
 }
 
 .nav-options-link {
@@ -729,6 +738,96 @@ height: 100%;
  .nav-toggle {
    cursor: pointer;
  }
+
+ .container-like-comment {
+  width: 55%;
+}
+
+.home-page {
+  flex-direction: row;
+  padding: 70px 100px;
+  align-content: center;
+}
+
+.container-profile {
+  display:flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 40%;
+  row-gap: 20px;
+}
+
+.profile-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 50%;
+  height: 200px;
+  background: linear-gradient(0deg, rgba(238,233,233,1) 70%, rgba(77,42,126,1) 72%);
+  border-radius: 10px;
+}
+
+.container-main { 
+  justify-content: flex-start;
+  row-gap: 5px;
+  width: 40%;
+  margin-top: 0;
+}
+
+.container-input-post, .container-publicated {
+  width: 90%;
+}
+
+.img-card-profile {
+  display: flex;
+  background-color: #4D2A7E;
+  justify-content: center;
+  align-items: center;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  border: #EEE9E9 solid 2px;
+}
+
+.img-card-profile > img {
+  width: auto;
+  height: 33px;
+}
+
+.user-name > h5 {
+  font-family: 'Press Start 2P';
+  line-height: 40px;
+}
+
+.user-info {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  align-items: center;
+}
+
+.info-dev {
+  display: flex;
+  width: 50%;
+  height: 7%;
+  justify-content: space-around;
+  align-items: center;
+  background-color: #EEE9E9;
+  border-radius: 10px;
+  padding: 15px;
+}
+
+.menu-info-dev {
+  display: flex;
+  list-style: none;
+  column-gap: 10px; 
+}
+
+.menu-info-dev > li {
+  color: #4D2A7E;
+  font-size: 20px;
+}
 
 
 }
