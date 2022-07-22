@@ -5,7 +5,7 @@ import {
   signOut, onAuthStateChanged, sendEmailVerification,
 } from 'https://www.gstatic.com/firebasejs/9.8.4/firebase-auth.js';
 import {
-  getFirestore, setDoc, doc, addDoc, collection, onSnapshot,
+  getFirestore, setDoc, doc, addDoc, getDocs, collection, onSnapshot, orderBy, query, where,
 } from 'https://www.gstatic.com/firebasejs/9.8.4/firebase-firestore.js';
 import { app } from './conection.js';
 
@@ -56,52 +56,22 @@ export const createPost = (uid, post, datePost, state) => {
       console.log('post creado', docRef);
     });
 };
-const querySnapshot = (query) => {
-  const arr = [];
-  query.forEach((docs) => {
-    // console.log(docs.data());
-    arr.push(docs.data());
-  });
-  //console.log(arr);
-  return arr;
-};
+
 /* funcion para obtener informacion de los post */
-export const getPost = async () => {
-  try {
-    // console.log('se trajo algo de coleccion post');
-    // console.log((collection(db, 'post')));
-    return await onSnapshot((collection(db, 'post')), querySnapshot);
-  } catch (e) {
-    // console.log('dentro de catch', e);
-    throw Error('(╯°□°）╯︵ ┻━┻');
-  }
+export const getPost = (querySnapshot) => {
+  const queryPost = query(collection(db, 'post'), orderBy('datePost', 'desc'));
+  onSnapshot(queryPost, querySnapshot);
 };
 
-// const q = query(collection(db, "cities"), where("state", "==", "CA"));
-// const unsubscribe = onSnapshot(q, (querySnapshot) => {
-//   const cities = [];
-//   querySnapshot.forEach((doc) => {
-//       cities.push(doc.data().name);
-//   });
-//   console.log("Current cities in CA: ", cities.join(", "));
-// });
-
-/* const getPost = () => {
-  const queryPost = (collection(db, 'post'));
-  onSnapshot(queryPost, (querySnapshot) => {
-    querySnapshot.forEach((post) => {
-      const divPost = document.createElement('div');
-      divPost.innerHTML = (post.data());
-    });
-  });
+export const getUser = (querySnapshot) => {
+  const queryUser = (collection(db, 'users'));
+  console.log(queryUser);
+  onSnapshot(queryUser, querySnapshot);
 };
- */
+
 export const logOut = () => {
   signOut(auth).then(() => {
-    // Sign-out successful.
-    // currentUser();
   }).catch((error) => {
     console.log(error);
-    // An error happened.
   });
 };

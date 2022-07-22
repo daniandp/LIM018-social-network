@@ -1,8 +1,6 @@
 /* eslint-disable import/no-unresolved */
-import { onSnapshot } from 'https://www.gstatic.com/firebasejs/9.8.4/firebase-firestore.js';
-
 import {
-  createPost, auth, getPost,
+  createPost, auth, getPost, getUser,
 } from '../firebase/auth.js';
 
 export default () => {
@@ -14,7 +12,7 @@ export default () => {
           <img src="img/perfilwhite.png" alt="imagen de perfil">
         </div>
         <div class="user-name">
-          <h5>USUARIO</h5>
+          <h5>${auth.currentUser.email}</h5>
         </div>
         <div class="user-info">
           <div class="about-user">
@@ -56,51 +54,24 @@ export default () => {
           </div>
         </div>
       </div>
-      <div class="container-publicated">
-        <div class="post-publicated">
-          <div class="info-user">
-            <div class="info-post">
-              <div class="photo-perfil-post">
-                <img src="img/perfilblack.png" alt="foto perfil de usuario">
-              </div>
-              <div class="nameuser-date">
-                <span>Usuario 1</span> <br>
-                <span>11/07/2022</span>
-              </div>
-            </div>
-            <div class="btn-edit-delete">
-              <i class="bi bi-three-dots"></i>
-            </div>
-          </div>
-          <div class="input-readonly">
-            <span class="post-publicated cont-post" role="textbox"> El usuario uno comparte su opinión o su comentario en esta sección holaa hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola holaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola</span>
-          </div>
-        </div>
-        <div class="container-like-comment">
-          <div class="mando-img">
-            <i class="bi bi-joystick"></i>
-            <span class="span-text"> Me gusta </span>
-          </div>
-          <div class="comment-img">
-            <i class="bi bi-chat-dots"></i>
-            <span class="span-text"> Comentar </span>
-          </div>
-        </div>
-      </div>
+      <h3 class="text-publications">PUBLICACIONES</h3>
     </section>`;
 
   // CREANDO NODO SECTION
   const section = document.createElement('section');
   section.setAttribute('class', 'home-page');
   section.innerHTML = viewHome;
-  const btnSharePost = section.querySelector('#btn-share-post');
 
-  // METODO PARA OBTENER LA FECHA EN LA QUE SE REALIZA EL POSTEO
-  const date = new Date();
-  const datePost = `${String(date.getDate()).padStart(2, '0')}/${String(date.getMonth() + 1).padStart(2, '0')}/${date.getFullYear()}`;
+  // DECLARACION DE CONSTANTES PARA MANEJO DEL DOM
+  const btnSharePost = section.querySelector('#btn-share-post');
+  const spanPost = section.querySelector('.container-main');
 
   // EVENTO CLICK DEL BOTON COMPARTIR EL POST
   btnSharePost.addEventListener('click', () => {
+    // METODO PARA OBTENER LA FECHA Y HORA EN LA QUE SE REALIZA EL POSTEO
+    const date = new Date();
+    const datePost = `${(date.getDate()).toString().padStart(2, '0')}/${(date.getMonth() + 1).toString().padStart(2, '0')}/${date.getFullYear()} ${date.getHours().toString().padStart(2, '0')}:${date.getMinutes().toString().padStart(2, '0')}:${date.getSeconds().toString().padStart(2, '0')}`;
+
     createPost(
       auth.currentUser.uid,
       section.querySelector('#create-post').textContent,
@@ -108,20 +79,61 @@ export default () => {
       'público',
     );
   });
-  getPost()
-  .then((r) => {
-    console.log(typeof r)
-  });
-  console.log(getPost());
-  // getPost().then(
-  //   (response) => {
-  //     onSnapshot(response, (querySnapshot) => {
-  //       querySnapshot.forEach((doc) => {
-  //         console.log(doc.data());
-  //       });
-  //     });
-  //   },
-  // );
+
+  const querySnapshot = (query) => {
+    query.forEach((docs) => {
+      const divPostPublicated = document.createElement('div');
+      divPostPublicated.setAttribute('class', 'container-publicated');
+      divPostPublicated.innerHTML = `
+      <div class="post-publicated">
+      <div class="info-user">
+        <div class="info-post">
+          <div class="photo-perfil-post">
+            <img src="img/perfilblack.png" alt="foto perfil de usuario">
+          </div>
+          <div class="nameuser-date">
+            <span>${auth.currentUser.email}</span> <br>
+            <span>${docs.data().datePost}</span>
+          </div>
+        </div>
+        <div class="btn-edit-delete">
+          <i class="bi bi-three-dots"></i>
+        </div>
+      </div>
+      <div class="input-readonly">
+        <span id=${docs.id} class="post-publicated cont-post" role="textbox">${docs.data().post}</span>
+      </div>
+    </div>
+    <div class="container-like-comment">
+      <div class="mando-img">
+        <i class="bi bi-joystick"></i>
+        <span class="span-text"> Me gusta </span>
+      </div>
+      <div class="comment-img">
+        <i class="bi bi-chat-dots"></i>
+        <span class="span-text"> Comentar </span>
+      </div>
+      </div>`;
+      spanPost.appendChild(divPostPublicated);
+      console.log(docs.data().post);
+      console.log(docs.data().datePost);
+
+      const queryUser = (queryUsers, uidUserPost) => {
+        const arr = [];
+        queryUsers.forEach((element) => {
+          if (element.id === uidUserPost) {
+            
+          }
+          arr.push(element.id);
+        });
+        console.log(arr);
+      };
+      getUser(queryUser);
+    });
+  };
+
+
+  getPost(querySnapshot);
 
   return section; // RETORNA EL NODO DE LA SECCION DE HOME
 };
