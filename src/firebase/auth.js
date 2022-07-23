@@ -86,6 +86,5 @@ export const getPost = (querySnapshot) => {
 
 export const getUser = (querySnapshot) => {
   const queryUser = (collection(db, 'users'));
-  console.log(queryUser);
   onSnapshot(queryUser, querySnapshot);
 };

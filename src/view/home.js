@@ -24,7 +24,7 @@ export default () => {
         </div>
       </div>
       <div class="info-dev">
-        <span>Desarrolado por</span>
+        <span>Desarrollado por</span>
         <ul class="menu-info-dev">
           <li>
             <a href="https://github.com/OryChRamirez" title="Orayma Chacón"><i class="bi bi-github"></i></a>
@@ -78,7 +78,6 @@ export default () => {
       datePost,
       'público',
     );
-    spanPost.innerHTML = '';
   });
 
   const querySnapshot = (query) => {
@@ -126,5 +125,6 @@ export default () => {
     });
   };
   getPost(querySnapshot);
+
   return section; // RETORNA EL NODO DE LA SECCION DE HOME
 };
