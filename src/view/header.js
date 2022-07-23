@@ -10,17 +10,15 @@ export default () => {
           <li>
             <a href="#"><img class="img-profile" src="img/perfilwhite.png" alt="perfil"></a>
           </li>
-          <li class="hidden" >
-            <a href=""><img class="img-top" src="img/top.png" alt="ir arriba"></a>
+          <li class="hidden go-top" >
+            <i class="bi bi-chevron-double-up" id="arrowTop"></i>
+            <span> Ir a arriba</span>
           </li>
           <li class="title-home">TWITCHTTER</li>
-          <li class="mentions hidden">
-            <a href="">MENCIONES</a>
-          </li>
         </ul>
         <ul class="menu-right">
         <li class="search-bar hidden">
-          <input type="search" id="searchBar" placeholder="Buscar en Twitchtter">
+          <input type="search" id="searchBar" placeholder=" Buscar en Twitchtter">
         </li>
         <li>
           <button type="button" class="nav-toggle"><i class="bi bi-list"></i></button>
@@ -30,7 +28,7 @@ export default () => {
             <li class="nav-options-item" id="logOut"><a href="" class="nav-options-link">Cerrar sesión</a></li>
           </ul>
         </li>
-        <li class="version hidden">V.1.1</li>
+        <li class="version-page hidden">V.1.1</li>
         </ul>
       </nav>
     </header>`;
@@ -41,9 +39,22 @@ export default () => {
   section.innerHTML = viewHeader;
   const btnLogout = section.querySelector('#logOut');
 
+  // TRAEMOS AL BOTÓN DE IR A ARRIBA DEL HEADER
+  const arrowTop = section.querySelector('#arrowTop');
+
   // TRAEMOS AL BOTÓN DEL MENÚ DEL HEADER
   const menuHeader = section.querySelector('.nav-toggle');
   const navOptions = section.querySelector('.nav-options');
+
+  // FUNCIÓN PARA IR A ARRIBA
+  const scrollUp = () => {
+    const scroll = document.documentElement.scrollTop;
+    if (scroll > 0) {
+      window.scrollTo(0, 1);
+    }
+  };
+  // EVENTO CLICK DE LA FLECHA IR A ARRIBA
+  arrowTop.addEventListener('click', scrollUp);
 
   // EVENTO CLICK PARA DESPLEGAR EL MENÚ
   menuHeader.addEventListener('click', () => {

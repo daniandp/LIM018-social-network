@@ -10,6 +10,7 @@
 body {
   background: #4D2A7E;
   background-image: url(img/fondo.png); 
+  background-position: center; 
 }
 
 p {
@@ -583,6 +584,11 @@ font-size: 20px;
   .container-like-comment {
     width: 60%;
   }
+
+  .menu-left {
+    justify-content: space-between;
+  }
+
   /* -------------  Pantalla de Error 404 ------------- */
   .error-style > img {
     width: auto;
@@ -718,6 +724,7 @@ width: 350px;
 }
 
 /* -------------  Pantalla de Home ------------- */
+/* ---  Aquí comienza el Header --- */
 .nav-options {
   padding: 0;
   width: 20%;
@@ -738,6 +745,45 @@ width: 350px;
  .nav-toggle {
    cursor: pointer;
  }
+
+ .menu-right {
+  column-gap: 80px;
+}
+
+.go-top{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  column-gap: 3px;
+}
+
+.bi-chevron-double-up {
+  font-size: 30px;
+  color: #FFFFFF;
+  cursor: pointer;
+}
+
+.go-top > span{
+  color: #FFFFFF;
+  font-size: 13px;
+}
+
+#searchBar {
+  border-radius: 8px;
+  width: 250px;
+  height: auto;
+  text-align: center;
+  border: #4D2A7E solid 1px;
+
+}
+
+.version-page {
+font-size: 12px;
+color: #FFFFFF;
+margin-right: 20px;
+}
+
+/* ---  Aquí Termina el Header --- */
 
  .container-like-comment {
   width: 55%;
