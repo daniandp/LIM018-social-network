@@ -55,6 +55,7 @@ export default () => {
         </div>
       </div>
       <h3 class="text-publications">PUBLICACIONES</h3>
+      <div class="container-post"></div>
     </section>`;
 
   // CREANDO NODO SECTION
@@ -64,76 +65,66 @@ export default () => {
 
   // DECLARACION DE CONSTANTES PARA MANEJO DEL DOM
   const btnSharePost = section.querySelector('#btn-share-post');
-  const spanPost = section.querySelector('.container-main');
+  const spanPost = section.querySelector('.container-post');
 
   // EVENTO CLICK DEL BOTON COMPARTIR EL POST
   btnSharePost.addEventListener('click', () => {
     // METODO PARA OBTENER LA FECHA Y HORA EN LA QUE SE REALIZA EL POSTEO
     const date = new Date();
     const datePost = `${(date.getDate()).toString().padStart(2, '0')}/${(date.getMonth() + 1).toString().padStart(2, '0')}/${date.getFullYear()} ${date.getHours().toString().padStart(2, '0')}:${date.getMinutes().toString().padStart(2, '0')}:${date.getSeconds().toString().padStart(2, '0')}`;
-
     createPost(
       auth.currentUser.uid,
       section.querySelector('#create-post').textContent,
       datePost,
       'público',
     );
+    spanPost.innerHTML = '';
   });
 
   const querySnapshot = (query) => {
     query.forEach((docs) => {
-      const divPostPublicated = document.createElement('div');
-      divPostPublicated.setAttribute('class', 'container-publicated');
-      divPostPublicated.innerHTML = `
-      <div class="post-publicated">
-      <div class="info-user">
-        <div class="info-post">
-          <div class="photo-perfil-post">
-            <img src="img/perfilblack.png" alt="foto perfil de usuario">
-          </div>
-          <div class="nameuser-date">
-            <span>${auth.currentUser.email}</span> <br>
-            <span>${docs.data().datePost}</span>
-          </div>
-        </div>
-        <div class="btn-edit-delete">
-          <i class="bi bi-three-dots"></i>
-        </div>
-      </div>
-      <div class="input-readonly">
-        <span id=${docs.id} class="post-publicated cont-post" role="textbox">${docs.data().post}</span>
-      </div>
-    </div>
-    <div class="container-like-comment">
-      <div class="mando-img">
-        <i class="bi bi-joystick"></i>
-        <span class="span-text"> Me gusta </span>
-      </div>
-      <div class="comment-img">
-        <i class="bi bi-chat-dots"></i>
-        <span class="span-text"> Comentar </span>
-      </div>
-      </div>`;
-      spanPost.appendChild(divPostPublicated);
-      console.log(docs.data().post);
-      console.log(docs.data().datePost);
-
-      const queryUser = (queryUsers, uidUserPost) => {
-        const arr = [];
+      const queryUser = (queryUsers) => {
         queryUsers.forEach((element) => {
-          if (element.id === uidUserPost) {
-            
+          if (docs.data().uid === element.id) {
+            const divPostPublicated = document.createElement('div');
+            divPostPublicated.setAttribute('class', 'container-publicated');
+            divPostPublicated.innerHTML = `
+            <div class="post-publicated">
+            <div class="info-user">
+              <div class="info-post">
+                <div class="photo-perfil-post">
+                  <img src="img/perfilblack.png" alt="foto perfil de usuario">
+                </div>
+                <div class="nameuser-date">
+                  <span>${(element.id === docs.data().uid) ? element.data().name : 'Usuario'}</span> <br>
+                  <span>${docs.data().datePost}</span>
+                </div>
+              </div>
+              <div class="btn-edit-delete">
+                <i class="bi bi-three-dots"></i>
+              </div>
+            </div>
+            <div class="input-readonly">
+              <span id=${docs.id} class="post-publicated cont-post" role="textbox">${docs.data().post}</span>
+            </div>
+          </div>
+          <div class="container-like-comment">
+            <div class="mando-img">
+              <i class="bi bi-joystick"></i>
+              <span class="span-text"> Me gusta </span>
+            </div>
+            <div class="comment-img">
+              <i class="bi bi-chat-dots"></i>
+              <span class="span-text"> Comentar </span>
+            </div>
+            </div>`;
+            spanPost.appendChild(divPostPublicated);
           }
-          arr.push(element.id);
         });
-        console.log(arr);
       };
       getUser(queryUser);
     });
   };
-
-
   getPost(querySnapshot);
-
   return section; // RETORNA EL NODO DE LA SECCION DE HOME
 };
