@@ -348,7 +348,7 @@ header {
 
 /* -------------  Aquí termina el HEADER ------------- */
 
-.container-main { 
+.container-main, .container-post { 
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -356,7 +356,9 @@ header {
   margin-top: 50px;
   row-gap: 5px;
 }
-
+.container-post {
+  margin-top: 0;
+}
 .container-input-post, .container-publicated {
   display: flex;
   flex-direction: column;
@@ -589,6 +591,9 @@ font-size: 20px;
     justify-content: space-between;
   }
 
+  .container-post {
+    width: 100%;
+  }
   /* -------------  Pantalla de Error 404 ------------- */
   .error-style > img {
     width: auto;
@@ -819,10 +824,6 @@ margin-right: 20px;
   row-gap: 5px;
   width: 40%;
   margin-top: 0;
-}
-
-.container-input-post, .container-publicated {
-  width: 90%;
 }
 
 .img-card-profile {
