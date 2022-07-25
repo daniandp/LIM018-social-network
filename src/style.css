@@ -357,6 +357,7 @@ header {
   row-gap: 5px;
 }
 .container-post {
+  width: 100%;
   margin-top: 0;
 }
 .container-input-post, .container-publicated {
@@ -436,6 +437,10 @@ header {
 
 .bi-size {
   font-size: 30px;
+}
+
+.check-private{
+  justify-self: fle;
 }
 
 #btn-share-post {
@@ -589,10 +594,6 @@ font-size: 20px;
 
   .menu-left {
     justify-content: space-between;
-  }
-
-  .container-post {
-    width: 100%;
   }
   /* -------------  Pantalla de Error 404 ------------- */
   .error-style > img {
