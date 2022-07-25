@@ -1,6 +1,6 @@
 /* eslint-disable import/no-unresolved */
 import {
-  createPost, auth, getPost, getUser,
+  createPost, auth, getPost, getUser, deletePost,
 } from '../firebase/auth.js';
 
 export default () => {
@@ -69,7 +69,7 @@ export default () => {
 
   // DECLARACION DE CONSTANTES PARA MANEJO DEL DOM
   const btnSharePost = section.querySelector('#btn-share-post');
-  const spanPost = section.querySelector('.container-post');
+  const containerPostPublicated = section.querySelector('.container-post');
 
   // EVENTO CLICK DEL BOTON COMPARTIR EL POST
   btnSharePost.addEventListener('click', () => {
@@ -82,10 +82,23 @@ export default () => {
       datePost,
       'público',
     );
-    spanPost.innerHTML = '';
+    section.querySelector('#create-post').textContent = '';
   });
 
+  const postDelete = (buttons) => {
+    console.log(buttons);
+  };
+
+  for (let i = 0; i < [0, 1, 2].length; i++) {
+    if (i === 0) {
+      console.log(i);
+      break;
+    }
+  }
+
+  // FUNCIÓN PARA MOSTRAR LOS POST
   const querySnapshot = (query) => {
+    containerPostPublicated.innerHTML = '';
     query.forEach((docs) => {
       const queryUser = (queryUsers) => {
         queryUsers.forEach((element) => {
@@ -121,14 +134,37 @@ export default () => {
               <i class="bi bi-chat-dots"></i>
               <span class="span-text"> Comentar </span>
             </div>
+            <div>
+              <button type="button" class="btn-edit">Editar</button> 
+            </div>
+            <div>
+              <button type="button" class="btn-delete">Eliminar</button>
+            </div>
             </div>`;
-            spanPost.appendChild(divPostPublicated);
+            containerPostPublicated.appendChild(divPostPublicated);
           }
         });
+
+        /*  console.log(containerPostPublicated.querySelectorAll('.container-publicated').length);
+        console.log(query);
+        console.log(Object.entries(query).length); */
+        postDelete(containerPostPublicated);
+        // if (containerPostPublicated.querySelectorAll('.container-publicated').length === 17)
       };
       getUser(queryUser);
     });
   };
   getPost(querySnapshot);
+
+  // DECLARACIÓN DE LOS BOTONES ELIMINAR Y EDITAR
+  containerPostPublicated.addEventListener('click', (e) => {
+    const btnDeletePost = containerPostPublicated.querySelectorAll('.btn-delete');
+    console.log(e.target);
+    console.log(btnDeletePost);
+  });
+  // const btnEditPost = containerPostPublicated.querySelectorAll('.btn-edit');
+
+  // FUNCIÓN PARA ELIMINAR LOS POST
+  // deletePost();
   return section; // RETORNA EL NODO DE LA SECCION DE HOME
 };

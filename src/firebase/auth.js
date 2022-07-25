@@ -5,7 +5,7 @@ import {
   signOut, onAuthStateChanged, sendEmailVerification,
 } from 'https://www.gstatic.com/firebasejs/9.8.4/firebase-auth.js';
 import {
-  getFirestore, setDoc, doc, addDoc, getDocs, collection, onSnapshot, orderBy, query, where,
+  getFirestore, setDoc, doc, addDoc, /* getDocs */ collection, onSnapshot, orderBy, query, /* where */ deleteDoc
 } from 'https://www.gstatic.com/firebasejs/9.8.4/firebase-firestore.js';
 import { app } from './conection.js';
 
@@ -84,8 +84,11 @@ export const getPost = (querySnapshot) => {
   onSnapshot(queryPost, querySnapshot);
 };
 
+// Función para obtener al usuario al que pertenece cada post
 export const getUser = (querySnapshot) => {
   const queryUser = (collection(db, 'users'));
-  console.log(queryUser);
   onSnapshot(queryUser, querySnapshot);
 };
+
+// Función para eliminar los post
+export const deletePost = (idPost) => deleteDoc(doc(db, 'post', idPost));
