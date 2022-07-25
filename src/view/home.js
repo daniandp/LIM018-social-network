@@ -49,6 +49,10 @@ export default () => {
             <i class="bi bi-image bi-size"></i>
             <span class="span-text"> Agregar imagen</span>
           </div>
+          <div>
+          <input id="check-private" type="checkbox">
+          Privado
+          </div>
           <div class="share-post">
             <button type="button" id="btn-share-post">Publicar</button>
           </div>
