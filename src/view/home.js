@@ -1,6 +1,6 @@
 /* eslint-disable import/no-unresolved */
 import {
-  createPost, auth, getPost, getUser, deletePost,
+  createPost, auth, getPost, getUser, deletePost, editPost,
 } from '../firebase/auth.js';
 
 export default () => {
@@ -128,18 +128,38 @@ export default () => {
           <button type="button" class="btn-edit">Editar</button> 
         </div>
         <div>
-          <button type="button" class="btn-delete">Eliminar</button>
+          <button type="button" class="btn-delete">Eliminar</button> 
+        </div>
+        <div>
+          <button type="button" class="btn-save">Guardar</button> 
         </div>
         </div>`;
 
         containerPostPublicated.appendChild(divPostPublicated);
+
         // TRAEMOS LOS BOTONES DE ELIMINAR Y EDITAR LOS POST
         const btnDelete = divPostPublicated.querySelector('.btn-delete');
+        const btnEdit = divPostPublicated.querySelector('.btn-edit');
+        const btnSave = divPostPublicated.querySelector('.btn-save');
+        const contentPost = document.getElementById(`${post.id}`);
 
         // EVENTO CLICK PARA ELIMINAR LOS POST
         btnDelete.addEventListener('click', () => {
           deletePost(post.id).then(() => {
             console.log('post eliminado ', post.id);
+          });
+        });
+        // EVENTOS DE CLICK PARA EDITAR LOS POST
+        btnEdit.addEventListener('click', () => {
+          contentPost.setAttribute('contentEditable', 'true');
+          contentPost.focus();
+        });
+        btnSave.addEventListener('click', () => {
+          editPost(post.id, {
+            post: contentPost.textContent,
+          }).then(() => {
+            contentPost.removeAttribute('contentEditable');
+            console.log('post editado');
           });
         });
       });

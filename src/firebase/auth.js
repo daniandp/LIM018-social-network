@@ -89,3 +89,6 @@ export const getUser = (id) => getDoc(doc(db, 'users', id));
 
 // Función para eliminar los posts
 export const deletePost = (idPost) => deleteDoc(doc(db, 'post', idPost));
+
+// Función para editar los posts
+export const editPost = (idPost, contentPost) => updateDoc(doc(db, 'post', idPost), contentPost);
