@@ -15,7 +15,7 @@ export const db = getFirestore(app);
 
 // Variable para obtener la autenciación de usuario
 export const auth = getAuth();
-console.log(auth);
+
 // Variable del observador para saber si hay usuario logueado o no
 export const stateUser = onAuthStateChanged;
 
@@ -73,10 +73,7 @@ export const createPost = (uid, post, datePost, state) => {
     post,
     datePost,
     state,
-  })
-    .then((docRef) => {
-      console.log('post creado', docRef);
-    });
+  });
 };
 
 // Funcion para obtener informacion de los posts creados
@@ -93,3 +90,9 @@ export const deletePost = (idPost) => deleteDoc(doc(db, 'post', idPost));
 
 // Función para editar los posts
 export const editPost = (idPost, contentPost) => updateDoc(doc(db, 'post', idPost), contentPost);
+
+export const addLike = (idUser, idPost, state) => addDoc(collection(db, 'likesPost'), {
+  idUser,
+  idPost,
+  state,
+});
