@@ -54,7 +54,7 @@ export default () => {
   const btnModal = section.querySelector('.btn-redirect');
 
   // DECLARACION DE CONSTANTE PARA EL REGEX
-  const condition = /^((?!\.)[\w-_.]*[^.])(@\w+)(\.\w+(\.\w+)?[^.\W])$/gim;
+  const condition = /^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/;
 
   // EVENTO CAMBIO DE INPUT EN EL FORMULARIO DE REGISTRO
   inputMail.addEventListener('change', () => {
@@ -75,8 +75,10 @@ export default () => {
       msgError.classList.remove('background-message-error');
       registerUserAuth(inputMail.value, inputPassword.value)
         .then((userCredential) => {
+          console.log(userCredential);
           // Signed in
           const user = userCredential.user;
+          console.log(userCredential);
           registerUserFirestore(inputMail.value, inputName.value, inputNickname.value, user.uid);
           // ...
           sendEmailVerif()

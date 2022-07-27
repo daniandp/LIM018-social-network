@@ -20,7 +20,7 @@ stateUser(auth, (user) => {
     // console.log('Usuario logueado y verificado', user.emailVerified);
   } else {
     // EL USUARIO SE DESLOGUEA SI NO ESTÁ VERIFICADO
-    logOut();
+    // logOut();
     // console.log('No hay usuario logueado ni verificado');
   }
 });

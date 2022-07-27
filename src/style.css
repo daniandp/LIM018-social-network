@@ -4,7 +4,7 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  font-family: 'Quicksand';
+  font-family: 'Quicksand', sans-serif;
 }
 
 body {
@@ -29,7 +29,7 @@ p {
 }
 
 .title {
-  font-family: 'Press Start 2P';
+  font-family: 'Press Start 2P',  cursive;
   font-weight: 400;
   font-size: 34px;
   line-height: 40px;
@@ -337,7 +337,7 @@ header {
 
 .title-home {
   color: white;
-  font-family: 'Press Start 2P';
+  font-family: 'Press Start 2P',  cursive;
   transform: translate(50%);
   text-shadow: 0px 4px 7px #000000;
 }
@@ -439,11 +439,8 @@ header {
   font-size: 30px;
 }
 
-.check-private{
-  justify-self: fle;
-}
-
 #btn-share-post {
+  cursor: pointer;
   width: 90px;
   border: none;
   border-radius: 8px;
@@ -467,10 +464,26 @@ header {
   display: flex;
   justify-content: space-between;
   width: 65%;
+  padding: 5px 10px;
 }
 
-.bi-joystick,.bi-chat-dots  {
+.bi {
+  cursor: pointer;
   font-size: 25px;
+}
+
+.active-like {
+  color: #fff;
+	text-shadow:
+		0 0 5px rgba(0,178,255,1),
+		0 0 10px rgba(0,178,255,1),
+		0 0 20px rgba(0,178,255,1),
+		0 0 40px rgba(38,104,127,1),
+		0 0 80px rgba(38,104,127,1),
+		0 0 90px rgba(38,104,127,1),
+		0 0 100px rgba(38,104,127,1),
+		0 0 140px rgba(38,104,127,1),
+		0 0 180px rgba(38,104,127,1);
 }
 
 .mando-img, .comment-img {
@@ -496,7 +509,7 @@ padding: 10px;
 }
 
 .error-style > h1 {
-font-family: 'Press Start 2P';
+font-family: 'Press Start 2P',  cursive;
 color: #000000;
 font-size: 20px;
 }
@@ -649,7 +662,6 @@ font-size: 20px;
   height: 80%;
   justify-self: center;
   justify-content: space-between;
-  margin-left: 50px;
   margin: auto;
   padding: auto;
 }
@@ -764,9 +776,7 @@ width: 350px;
 }
 
 .bi-chevron-double-up {
-  font-size: 30px;
   color: #FFFFFF;
-  cursor: pointer;
 }
 
 .go-top > span{
@@ -844,7 +854,7 @@ margin-right: 20px;
 }
 
 .user-name > h5 {
-  font-family: 'Press Start 2P';
+  font-family: 'Press Start 2P',  cursive;
   line-height: 40px;
 }
 

@@ -5,7 +5,8 @@ import {
   signOut, onAuthStateChanged, sendEmailVerification,
 } from 'https://www.gstatic.com/firebasejs/9.8.4/firebase-auth.js';
 import {
-  getFirestore, setDoc, doc, addDoc, getDoc, collection, onSnapshot, orderBy, query, deleteDoc, updateDoc
+  getFirestore, setDoc, doc, addDoc, getDoc, collection, onSnapshot,
+  orderBy, query, deleteDoc, updateDoc,
 } from 'https://www.gstatic.com/firebasejs/9.8.4/firebase-firestore.js';
 import { app } from './conection.js';
 
@@ -14,7 +15,7 @@ export const db = getFirestore(app);
 
 // Variable para obtener la autenciación de usuario
 export const auth = getAuth();
-
+console.log(auth);
 // Variable del observador para saber si hay usuario logueado o no
 export const stateUser = onAuthStateChanged;
 
