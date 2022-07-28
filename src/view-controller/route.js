@@ -6,8 +6,6 @@ const container = document.getElementById('container');
 
 // ENRUTADOR PARA CAMBIO DE VISTAS
 const changeView = (route) => {
-  console.log(route);
-
   const user = auth.currentUser;
 
   container.innerHTML = '';
@@ -29,7 +27,6 @@ const changeView = (route) => {
       break;
     }
     case '/login': {
-      console.log(user);
       if (user) {
         window.location.hash = '/home';
         break;

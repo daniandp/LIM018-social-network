@@ -5,7 +5,8 @@ import {
   signOut, onAuthStateChanged, sendEmailVerification,
 } from 'https://www.gstatic.com/firebasejs/9.8.4/firebase-auth.js';
 import {
-  getFirestore, setDoc, doc, addDoc, getDoc, collection, onSnapshot, orderBy, query, deleteDoc, updateDoc
+  getFirestore, setDoc, doc, addDoc, getDoc, collection, onSnapshot,
+  orderBy, query, deleteDoc, updateDoc,
 } from 'https://www.gstatic.com/firebasejs/9.8.4/firebase-firestore.js';
 import { app } from './conection.js';
 
@@ -66,16 +67,14 @@ export const logOut = () => {
 };
 
 // Función para crear posts
-export const createPost = (uid, post, datePost, state) => {
+export const createPost = (uid, post, datePost, state, likes) => {
   addDoc(collection(db, 'post'), {
     uid,
     post,
     datePost,
     state,
-  })
-    .then((docRef) => {
-      console.log('post creado', docRef);
-    });
+    likes,
+  });
 };
 
 // Funcion para obtener informacion de los posts creados
@@ -91,4 +90,4 @@ export const getUser = (id) => getDoc(doc(db, 'users', id));
 export const deletePost = (idPost) => deleteDoc(doc(db, 'post', idPost));
 
 // Función para editar los posts
-export const editPost = (idPost, contentPost) => updateDoc(doc(db, 'post', idPost), contentPost);
+export const editPost = (idPost, updatePost) => updateDoc(doc(db, 'post', idPost), updatePost);
