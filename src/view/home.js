@@ -27,7 +27,7 @@ export default () => {
       <div class="container-input-post">
         <div class="cont-descriptions-post">
           <span class="span-text"> Crea una publicación</span>
-          <span role="textbox" contenteditable id="create-post" placeholder="¿Qué quieres compartir, gamer?"></span>
+          <span role="textbox" contenteditable id="create-post">¿Qué quieres compartir, gamer?</span>
         </div>
         <div class="container-share-btn">
           <div class="share-img" >

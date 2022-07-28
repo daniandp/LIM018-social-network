@@ -883,10 +883,12 @@ margin-right: 20px;
 }
 
 .menu-info-dev > li {
-  color: #4D2A7E;
   font-size: 20px;
 }
 
+.bi-github {
+  color: #4D2A7E;
+}
 
 }
 

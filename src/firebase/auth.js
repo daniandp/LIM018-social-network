@@ -67,12 +67,13 @@ export const logOut = () => {
 };
 
 // Función para crear posts
-export const createPost = (uid, post, datePost, state) => {
+export const createPost = (uid, post, datePost, state, likes) => {
   addDoc(collection(db, 'post'), {
     uid,
     post,
     datePost,
     state,
+    likes,
   });
 };
 
@@ -89,10 +90,4 @@ export const getUser = (id) => getDoc(doc(db, 'users', id));
 export const deletePost = (idPost) => deleteDoc(doc(db, 'post', idPost));
 
 // Función para editar los posts
-export const editPost = (idPost, contentPost) => updateDoc(doc(db, 'post', idPost), contentPost);
-
-export const addLike = (idUser, idPost, state) => addDoc(collection(db, 'likesPost'), {
-  idUser,
-  idPost,
-  state,
-});
+export const editPost = (idPost, updatePost) => updateDoc(doc(db, 'post', idPost), updatePost);

@@ -1,5 +1,5 @@
 import {
-  createPost, auth, getPost, getUser, deletePost, editPost, addLike,
+  createPost, auth, getPost, getUser, deletePost, editPost,
 } from '../firebase/auth.js';
 
 export default (section) => {
@@ -8,18 +8,28 @@ export default (section) => {
   const containerPostPublicated = section.querySelector('.container-post');
   const inputPost = section.querySelector('#create-post');
 
+  inputPost.addEventListener('click', () => {
+    if (inputPost.textContent === '¿Qué quieres compartir, gamer?' || inputPost.textContent === 'Debes escribir algo en tu publicación') {
+      inputPost.textContent = '';
+    }
+  });
   // EVENTO CLICK DEL BOTON COMPARTIR EL POST
   btnSharePost.addEventListener('click', () => {
     // METODO PARA OBTENER LA FECHA Y HORA EN LA QUE SE REALIZA EL POSTEO
-    const date = new Date();
-    const datePost = `${(date.getDate()).toString().padStart(2, '0')}/${(date.getMonth() + 1).toString().padStart(2, '0')}/${date.getFullYear()} ${date.getHours().toString().padStart(2, '0')}:${date.getMinutes().toString().padStart(2, '0')}:${date.getSeconds().toString().padStart(2, '0')}`;
-    createPost(
-      auth.currentUser.uid,
-      inputPost.textContent,
-      datePost,
-      'público',
-    );
-    inputPost.textContent = '';
+    if (inputPost.textContent !== '' && inputPost.textContent !== '¿Qué quieres compartir, gamer?' && inputPost.textContent !== 'Debes escribir algo en tu publicación') {
+      const date = new Date();
+      const datePost = `${(date.getDate()).toString().padStart(2, '0')}/${(date.getMonth() + 1).toString().padStart(2, '0')}/${date.getFullYear()} ${date.getHours().toString().padStart(2, '0')}:${date.getMinutes().toString().padStart(2, '0')}:${date.getSeconds().toString().padStart(2, '0')}`;
+      createPost(
+        auth.currentUser.uid,
+        inputPost.textContent,
+        datePost,
+        'público',
+        [],
+      );
+      inputPost.textContent = '¿Qué quieres compartir, gamer?';
+    } else {
+      inputPost.textContent = 'Debes escribir algo en tu publicación';
+    }
   });
 
   // FUNCIÓN PARA MOSTRAR LOS POST
@@ -55,7 +65,7 @@ export default (section) => {
      <div class='container-like-comment'>
        <div class='mando-img'>
          <i class='bi bi-joystick'></i>
-         <span class='span-counter'></span>
+         <span class='span-counter'>${post.data().likes.length}</span>
          <span class='span-text'> Me gusta </span>
        </div>
        <div class='comment-img'>
@@ -81,18 +91,17 @@ export default (section) => {
         const btnSave = divPostPublicated.querySelector('.btn-save');
         const contentPost = document.getElementById(`${post.id}`);
         const btnLike = divPostPublicated.querySelector('.bi-joystick');
-        let count = 0;
+        const arrayLikes = post.data().likes;
+        if (arrayLikes.includes(auth.currentUser.uid)) {
+          btnLike.classList.add('active-like');
+        }
+
         btnLike.addEventListener('click', () => {
-          console.log('like');
-          count += 1;
-          btnLike.classList.toggle('active-like');
-          console.log(btnLike.classList[2]);
-          divPostPublicated.querySelector('.span-counter').textContent = count;
-          if (btnLike.classList[2] !== undefined) {
-            addLike(auth.currentUser.uid, post.id, true)
-              .then(() => {
-                console.log('likeo');
-              });
+          if (arrayLikes.includes(auth.currentUser.uid)) {
+            const filterUser = arrayLikes.filter((uidUser) => uidUser !== auth.currentUser.uid);
+            editPost(post.id, { likes: filterUser });
+          } else {
+            editPost(post.id, { likes: [...arrayLikes, auth.currentUser.uid] });
           }
         });
         // EVENTO CLICK PARA ELIMINAR LOS POST
