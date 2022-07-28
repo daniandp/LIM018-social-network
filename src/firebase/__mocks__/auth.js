@@ -6,7 +6,7 @@ export const signInWithPopup = () => {
   });
 };
 
-export const registerUserAuth = (email, pass) => {
+export const registerUserAuth = () => {
   Promise.resolve({
     user: {
       email: 'yunoshe1@gmail.com',
@@ -14,3 +14,9 @@ export const registerUserAuth = (email, pass) => {
     },
   });
 };
+
+export const logInWithEmailAndPass = () => Promise.resolve({
+  user: {
+    emailVerified: true,
+  },
+});
