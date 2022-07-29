@@ -78,7 +78,6 @@ export default () => {
             default: msgError.innerHTML = '';
               break;
           }
-          console.log(errorMessage);
         });
     } else {
       msgError.innerHTML = 'Debes completar todos los campos para continuar';

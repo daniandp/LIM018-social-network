@@ -15,8 +15,8 @@ export const registerUserAuth = () => {
   });
 };
 
-export const logInWithEmailAndPass = () => Promise.resolve({
+export const logInWithEmailAndPass = (emailVerified) => Promise.resolve({
   user: {
-    emailVerified: true,
+    emailVerified,
   },
 });
