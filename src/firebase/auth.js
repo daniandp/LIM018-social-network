@@ -29,12 +29,13 @@ export const registerUserAuth = (email, pass) => createUserWithEmailAndPassword(
 export const sendEmailVerif = () => sendEmailVerification(auth.currentUser);
 
 // Función para crear colección de usuarios en Firestore, con el ID de Firebase
-export const registerUserFirestore = (email, name, nickname, uid) => {
+export const registerUserFirestore = (email, name, nickname, uid, imgProfile) => {
   setDoc(doc(db, 'users', uid), {
     email,
     name,
     nickname,
     uid,
+    imgProfile,
   });
 };
 
@@ -48,7 +49,13 @@ export const authGoogle = () => {
       const user = result.user;
       console.log(user);
       console.log(user.uid);
-      registerUserFirestore(user.email, user.displayName, user.displayName, user.uid);
+      registerUserFirestore(
+        user.email,
+        user.displayName,
+        user.displayName,
+        user.uid,
+        user.photoURL,
+      );
     }).catch((error) => {
       const errorMessage = error.message;
       console.log(errorMessage);

@@ -51,10 +51,15 @@ export default () => {
       logInWithEmailAndPass(email.value, password.value).then((userCredential) => {
         const user = userCredential.user;
         if (user.emailVerified) {
+          console.log(email.value, password.value);
+          console.log('ESTA ENTRANDO AL IF');
           msgError.innerText = '';
           window.location.hash = '#/home';
+          console.log(window.location.hash);
         } else {
+          console.log('ESTA ENTRANDO A ELSE');
           msgError.innerText = 'El usuario no se encuentra verificado';
+          console.log(msgError.innerText);
           msgError.classList.add('background-message-error');
         }
       })

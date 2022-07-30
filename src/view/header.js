@@ -60,6 +60,7 @@ export default () => {
   menuHeader.addEventListener('click', () => {
     navOptions.classList.toggle('nav-options_visible');
   });
+
   // EVENTO CLICK DEL BOTON LOGOUT
   btnLogout.addEventListener('click', logOut);
 

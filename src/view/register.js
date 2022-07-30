@@ -79,7 +79,13 @@ export default () => {
           // Signed in
           const user = userCredential.user;
           console.log(userCredential);
-          registerUserFirestore(inputMail.value, inputName.value, inputNickname.value, user.uid);
+          registerUserFirestore(
+            inputMail.value,
+            inputName.value,
+            inputNickname.value,
+            user.uid,
+            user.photoURL,
+          );
           // ...
           sendEmailVerif()
             .then(() => {

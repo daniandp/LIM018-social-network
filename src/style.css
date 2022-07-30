@@ -96,6 +96,9 @@ p {
 .hidden {
   display: none;
 }
+.hidden-btn {
+  display: none;
+}
 
 .cont-title{
   display: flex;
@@ -371,6 +374,30 @@ header {
   padding: 10px 10px ;
 }
 
+.cont-btns-edit-delete{
+  display: none;
+  flex-direction: column;
+  font-size: smaller;
+  list-style: none;
+  background: rgba(238, 233, 233);
+  padding: 10px 20px;
+  border-radius: 10px ;
+  position: fixed;
+  margin-left: -50px;
+  gap: 5px;
+  pointer-events: all;
+}
+
+.menu-three-dots{
+  cursor: pointer;
+  background-color: transparent;
+  border: none;
+  width: 90px;
+}
+.three-dots_visible{
+  display: flex;
+}
+
 .info-user {
   display: flex;
   justify-content: space-between;
@@ -398,6 +425,11 @@ header {
   margin-top: 15px; 
   background-color: #FFFFFF;
   text-align: justify;
+}
+
+.cont-btn-save{
+  display: flex;
+  justify-content: flex-end;
 }
 
 #create-post, .post-publicated {
@@ -457,7 +489,8 @@ header {
 
 .photo-perfil-post > img {
   width: auto;
-  height: 28px;
+  height: 33px;
+  border-radius: 33px;
 }
 
 .container-like-comment {
@@ -846,11 +879,12 @@ margin-right: 20px;
   height: 60px;
   border-radius: 50%;
   border: #EEE9E9 solid 2px;
+  overflow: hidden;
 }
 
 .img-card-profile > img {
   width: auto;
-  height: 33px;
+  height: 65px;
 }
 
 .user-name > h5 {

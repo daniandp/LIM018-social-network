@@ -40,48 +40,48 @@ export default (section) => {
       getUser(post.data().uid).then((user) => {
         const userData = user.data();
         const userName = userData.name;
+        const userImgProfile = user.data().imgProfile !== null ? user.data().imgProfile : 'img/perfilblack.png';
         const divPostPublicated = document.createElement('div');
         divPostPublicated.setAttribute('class', 'container-publicated');
         divPostPublicated.innerHTML = `
-       <div class='post-publicated'>
-       <div class='info-user'>
-         <div class='info-post'>
-           <div class='photo-perfil-post'>
-             <img src='img/perfilblack.png' alt='foto perfil de usuario'>
-           </div>
-           <div class='nameuser-date'>
-             <span>${userName}</span> <br>
-             <span>${post.data().datePost}</span>
-           </div>
-         </div>
-         <div class='btn-edit-delete'>
-           <i class='bi bi-three-dots'></i>
-         </div>
-       </div>
-       <div class='input-readonly'>
-         <span id=${post.id} class='post-publicated cont-post' role='textbox'>${post.data().post}</span>
-       </div>
-     </div>
-     <div class='container-like-comment'>
-       <div class='mando-img'>
-         <i class='bi bi-joystick'></i>
-         <span class='span-counter'>${post.data().likes.length}</span>
-         <span class='span-text'> Me gusta </span>
-       </div>
-       <div class='comment-img'>
-         <i class='bi bi-chat-dots'></i>
-         <span class='span-text'> Comentar </span>
-       </div>
-       <div>
-         <button type='button' class='btn-edit'>Editar</button> 
-       </div>
-       <div>
-         <button type='button' class='btn-delete'>Eliminar</button> 
-       </div>
-       <div>
-         <button type='button' class='btn-save'>Guardar</button> 
-       </div>
-       </div>`;
+        <div class="post-publicated">
+          <div class="info-user">
+            <div class="info-post">
+              <div class="photo-perfil-post">
+                <img src=${userImgProfile} alt="foto perfil de usuario">
+              </div>
+              <div class="nameuser-date">
+                <span>${userName}</span> <br>
+                <span>${post.data().datePost}</span>
+            </div>
+            </div>
+            <div>
+              <i class="bi bi-three-dots"></i> 
+              <ul class="cont-btns-edit-delete">
+                <li><button type="button" class="btn-edit menu-three-dots">Editar</button></li>
+                <li><button type="button" class="btn-delete menu-three-dots">Eliminar</button></li>
+              </ul>
+            </div>
+          </div>
+          <div class="input-readonly">
+            <span id=${post.id} class="post-publicated cont-post" role="textbox">${post.data().post}</span>
+            <div class="cont-btn-save">
+            <button type="button" class="btn-save hidden-btn">Guardar</button>
+          </div>
+          </div>
+        </div>
+        <div class="container-like-comment">
+          <div class="mando-img">
+            <i class="bi bi-joystick"></i>
+            <span class="span-counter">${post.data().likes.length}</span>
+            <span class="span-text"> Me gusta </span>
+          </div>
+          <div class="comment-img">
+            <i class="bi bi-chat-dots"></i>
+            <span class="span-text"> Comentar </span>
+          </div>
+
+        </div>`;
 
         containerPostPublicated.appendChild(divPostPublicated);
 
@@ -92,6 +92,14 @@ export default (section) => {
         const contentPost = document.getElementById(`${post.id}`);
         const btnLike = divPostPublicated.querySelector('.bi-joystick');
         const arrayLikes = post.data().likes;
+
+        // EVENTO CLICK PARA DESPLEGAR EL MENU DE EDITAR Y ELIMINAR POST
+        const threeDots = divPostPublicated.querySelector('.bi-three-dots');
+        const contbtnsEditAndDelite = divPostPublicated.querySelector('.cont-btns-edit-delete');
+
+        threeDots.addEventListener('click', () => {
+          contbtnsEditAndDelite.classList.toggle('three-dots_visible');
+        });
         if (arrayLikes.includes(auth.currentUser.uid)) {
           btnLike.classList.add('active-like');
         }
@@ -117,6 +125,8 @@ export default (section) => {
         });
         // EVENTOS DE CLICK PARA EDITAR LOS POST
         btnEdit.addEventListener('click', () => {
+          contbtnsEditAndDelite.classList.toggle('three-dots_visible');
+          btnSave.classList.toggle('hidden-btn');
           contentPost.setAttribute('contentEditable', 'true');
           contentPost.focus();
         });
@@ -132,6 +142,7 @@ export default (section) => {
           } else {
             console.log('Edición cancelada');
           }
+          btnSave.classList.toggle('hidden-btn');
         });
       });
     });

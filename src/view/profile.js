@@ -5,9 +5,11 @@ export default (divProfile) => {
   getUser(auth.currentUser.uid)
     .then((user) => {
       let userName = user.data().name;
+      console.log(user.data().imgProfile);
+      const userImgProfile = user.data().imgProfile !== null ? user.data().imgProfile : 'img/perfilwhite.png';
       userName = userName.split(' ', 2).join(' ');
       const viewProfile = `<div class="img-card-profile">
-          <img src="img/perfilwhite.png" alt="imagen de perfil">
+          <img src=${userImgProfile} alt="imagen de perfil" referrerpolicy="no-referrer">
         </div>
         <div class="user-name">
           <h5>${userName}</h5>
