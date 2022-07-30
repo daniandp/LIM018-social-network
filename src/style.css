@@ -383,7 +383,7 @@ header {
   padding: 10px 20px;
   border-radius: 10px ;
   position: fixed;
-  margin-left: -50px;
+  margin-left: -90px;
   gap: 5px;
   pointer-events: all;
 }
