@@ -5,9 +5,9 @@ import {
 export default () => {
   // CREACIÓN DEL TEMPLATE
   const viewLogin = `<div class="cont-title">
-  <h1 class="title">TWITCHTTER</h1>  
+  <h1 class="title focus-in-contract">TWITCHTTER</h1>  
   <div class="cont-logo">
-  <img src="./img/mandoneon.png" class="logo hidden" alt="logoTwitchtter">
+  <img src="./img/mandoneon.png" class="logo hidden vibrate-3" alt="logoTwitchtter">
   </div>
   <h2 class="slogan hidden main-slogan">¡La red social creada por gamers para gamers!</h2>
   </div>
@@ -70,7 +70,7 @@ export default () => {
             }
             case 'Firebase: Error (auth/wrong-password).': {
               msgError.innerHTML = 'Contraseña incorrecta';
-              console.log('ENTRA AR CASO 2');
+              console.log('ENTRA AL CASO 2');
               break;
             }
             case 'Firebase: Error (auth/invalid-email).': {

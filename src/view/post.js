@@ -33,133 +33,137 @@ export default (section) => {
 
   // FUNCIÓN PARA MOSTRAR LOS POST
   const querySnapshot = (queryPost) => {
-    containerPostPublicated.innerHTML = '';
+    const muchasPromesas = [];
     queryPost.forEach((post) => {
-      const dateNumber = post.data().datePost;
-      const date = new Date(Number(dateNumber));
-      console.log(dateNumber);
-      const datePostFormat = `${(date.getDate()).toString().padStart(2, '0')}/${(date.getMonth() + 1).toString().padStart(2, '0')}/${date.getFullYear()} ${date.getHours().toString().padStart(2, '0')}:${date.getMinutes().toString().padStart(2, '0')}:${date.getSeconds().toString().padStart(2, '0')}`;
       // OBTENEMOS LA INFORMACIÓN DEL USUARIO DUEÑO DEL POST
-      console.log(datePostFormat);
-      let userName = '';
-      let userImgProfile = '';
+      // const userName = '';
+      // const userImgProfile = '';
+      const unaPromesa = getUser(post.data().uid)
+        .then((user) => ({ post, user }));
+      muchasPromesas.push(unaPromesa);
+    });
 
-      getUser(post.data().uid).then((user) => {
-        const userData = user.data();
-        userName = userData.name;
-        userImgProfile = user.data().imgProfile !== null ? user.data().imgProfile : 'img/perfilblack.png';
-        const divPostPublicated = document.createElement('div');
-        divPostPublicated.setAttribute('class', 'container-publicated');
-        divPostPublicated.innerHTML = `
-        <div class="post-publicated">
-          <div class="info-user">
-            <div class="info-post">
-              <div class="photo-perfil-post">
-                <img src=${userImgProfile} alt="foto perfil de usuario">
-              </div>
-              <div class="nameuser-date">
-                <span>${userName}</span> <br>
-                <span>${datePostFormat}</span>
+    Promise.all(muchasPromesas)
+      .then((muchosResultados) => {
+        containerPostPublicated.innerHTML = '';
+        muchosResultados.forEach(({ post, user }) => {
+          const dateNumber = post.data().datePost;
+          const date = new Date(Number(dateNumber));
+          const datePostFormat = `${(date.getDate()).toString().padStart(2, '0')}/${(date.getMonth() + 1).toString().padStart(2, '0')}/${date.getFullYear()} ${date.getHours().toString().padStart(2, '0')}:${date.getMinutes().toString().padStart(2, '0')}:${date.getSeconds().toString().padStart(2, '0')}`;
+          const userData = user.data();
+          const userName = userData.name;
+          const userImgProfile = user.data().imgProfile !== null ? user.data().imgProfile : 'img/perfilblack.png';
+          const divPostPublicated = document.createElement('div');
+          divPostPublicated.setAttribute('class', 'container-publicated');
+          divPostPublicated.innerHTML = `
+      <div class="post-publicated">
+        <div class="info-user">
+          <div class="info-post">
+            <div class="photo-perfil-post">
+              <img src=${userImgProfile} alt="foto perfil de usuario">
             </div>
-            </div>
-            <div>
-              <i class="bi bi-three-dots hidden-btn"></i> 
-              <ul class="cont-btns-edit-delete ">
-                <li><button type="button" class="btn-edit menu-three-dots">Editar</button></li>
-                <li><button type="button" class="btn-delete menu-three-dots">Eliminar</button></li>
-              </ul>
-            </div>
+            <div class="nameuser-date">
+              <span>${userName}</span> <br>
+              <span>${datePostFormat}</span>
           </div>
-          <div class="input-readonly">
-            <span id=${post.id} class="post-publicated cont-post" role="textbox">${post.data().post}</span>
-            <div class="cont-btn-save">
-            <button type="button" class="btn-save hidden-btn">Guardar</button>
           </div>
+          <div>
+            <i class="bi bi-three-dots hidden-btn"></i> 
+            <ul class="cont-btns-edit-delete">
+              <li><button type="button" class="btn-edit menu-three-dots">Editar</button></li>
+              <li><button type="button" class="btn-delete menu-three-dots">Eliminar</button></li>
+            </ul>
           </div>
         </div>
-        <div class="container-like-comment">
-          <div class="mando-img">
-            <i class="bi bi-joystick"></i>
-            <span class="span-counter">${post.data().likes.length}</span>
-            <span class="span-text"> Me gusta </span>
-          </div>
-          <div class="comment-img">
-            <i class="bi bi-chat-dots"></i>
-            <span class="span-text"> Comentar </span>
-          </div>
-        </div>`;
+        <div class="input-readonly">
+          <span id=${post.id} class="post-publicated cont-post" role="textbox">${post.data().post}</span>
+          <div class="cont-btn-save">
+          <button type="button" class="btn-save hidden-btn">Guardar</button>
+        </div>
+        </div>
+      </div>
+      <div class="container-like-comment">
+        <div class="mando-img">
+          <i class="bi bi-joystick"></i>
+          <span class="span-counter">${post.data().likes.length}</span>
+          <span class="span-text"> Me gusta </span>
+        </div>
+        <div class="comment-img">
+          <i class="bi bi-chat-dots"></i>
+          <span class="span-text"> Comentar </span>
+        </div>
+      </div>`;
 
-        containerPostPublicated.appendChild(divPostPublicated);
+          containerPostPublicated.appendChild(divPostPublicated);
+          // TRAEMOS LOS BOTONES DE ELIMINAR Y EDITAR LOS POST
+          const btnDelete = divPostPublicated.querySelector('.btn-delete');
+          const btnEdit = divPostPublicated.querySelector('.btn-edit');
+          const btnSave = divPostPublicated.querySelector('.btn-save');
+          const contentPost = document.getElementById(`${post.id}`);
+          const btnLike = divPostPublicated.querySelector('.bi-joystick');
+          const arrayLikes = post.data().likes;
 
-        // TRAEMOS LOS BOTONES DE ELIMINAR Y EDITAR LOS POST
-        const btnDelete = divPostPublicated.querySelector('.btn-delete');
-        const btnEdit = divPostPublicated.querySelector('.btn-edit');
-        const btnSave = divPostPublicated.querySelector('.btn-save');
-        const contentPost = document.getElementById(`${post.id}`);
-        const btnLike = divPostPublicated.querySelector('.bi-joystick');
-        const arrayLikes = post.data().likes;
+          // EVENTO CLICK PARA DESPLEGAR EL MENU DE EDITAR Y ELIMINAR POST
+          const threeDots = divPostPublicated.querySelector('.bi-three-dots');
+          const contbtnsEditAndDelete = divPostPublicated.querySelector('.cont-btns-edit-delete');
 
-        // EVENTO CLICK PARA DESPLEGAR EL MENU DE EDITAR Y ELIMINAR POST
-        const threeDots = divPostPublicated.querySelector('.bi-three-dots');
-        const contbtnsEditAndDelete = divPostPublicated.querySelector('.cont-btns-edit-delete');
+          if (userData.uid === auth.currentUser.uid) {
+            threeDots.classList.remove('hidden-btn');
+          }
+          threeDots.addEventListener('click', () => {
+            contbtnsEditAndDelete.classList.toggle('three-dots_visible');
+          });
 
-        // if (userData.uid === auth.currentUser.uid) {
-        //   threeDots.classList.remove('hidden-btn');
-        // }
-        threeDots.addEventListener('click', () => {
-          contbtnsEditAndDelete.classList.toggle('three-dots_visible');
-        });
+          window.addEventListener('scroll', () => {
+            contbtnsEditAndDelete.classList.remove('three-dots_visible');
+          });
 
-        window.addEventListener('scroll', () => {
-          contbtnsEditAndDelete.classList.remove('three-dots_visible');
-        });
-
-        if (arrayLikes.includes(auth.currentUser.uid)) {
-          btnLike.classList.add('active-like');
-        }
-
-        btnLike.addEventListener('click', () => {
           if (arrayLikes.includes(auth.currentUser.uid)) {
-            const filterUser = arrayLikes.filter((uidUser) => uidUser !== auth.currentUser.uid);
-            editPost(post.id, { likes: filterUser });
-          } else {
-            editPost(post.id, { likes: [...arrayLikes, auth.currentUser.uid] });
+            btnLike.classList.add('active-like');
           }
-        });
-        // EVENTO CLICK PARA ELIMINAR LOS POST
-        btnDelete.addEventListener('click', () => {
-          const opcion = window.confirm('¿Estás seguro que deseas eliminar el post?');
-          if (opcion === true) {
-            deletePost(post.id).then(() => {
-              console.log('post eliminado ', post.id);
-            });
-          } else {
-            console.log('Eliminación cancelada');
-          }
-        });
-        // EVENTOS DE CLICK PARA EDITAR LOS POST
-        btnEdit.addEventListener('click', () => {
-          contbtnsEditAndDelete.classList.toggle('three-dots_visible');
-          btnSave.classList.toggle('hidden-btn');
-          contentPost.setAttribute('contentEditable', 'true');
-          contentPost.focus();
-        });
-        btnSave.addEventListener('click', () => {
-          const opcion = window.confirm('¿Estás seguro que deseas guardar los cambios?');
-          if (opcion === true) {
-            editPost(post.id, {
-              post: contentPost.textContent,
-            }).then(() => {
-              contentPost.removeAttribute('contentEditable');
-              console.log('post editado');
-            });
-          } else {
-            console.log('Edición cancelada');
-          }
-          btnSave.classList.toggle('hidden-btn');
+
+          btnLike.addEventListener('click', () => {
+            if (arrayLikes.includes(auth.currentUser.uid)) {
+              const filterUser = arrayLikes.filter((uidUser) => uidUser !== auth.currentUser.uid);
+              editPost(post.id, { likes: filterUser });
+            } else {
+              editPost(post.id, { likes: [...arrayLikes, auth.currentUser.uid] });
+            }
+          });
+          // EVENTO CLICK PARA ELIMINAR LOS POST
+          btnDelete.addEventListener('click', () => {
+            const opcion = window.confirm('¿Estás seguro que deseas eliminar el post?');
+            if (opcion === true) {
+              deletePost(post.id).then(() => {
+                console.log('post eliminado ', post.id);
+              });
+            } else {
+              console.log('Eliminación cancelada');
+            }
+          });
+          // EVENTOS DE CLICK PARA EDITAR LOS POST
+          btnEdit.addEventListener('click', () => {
+            contbtnsEditAndDelete.classList.toggle('three-dots_visible');
+            btnSave.classList.toggle('hidden-btn');
+            contentPost.setAttribute('contentEditable', 'true');
+            contentPost.focus();
+          });
+          btnSave.addEventListener('click', () => {
+            const opcion = window.confirm('¿Estás seguro que deseas guardar los cambios?');
+            if (opcion === true) {
+              editPost(post.id, {
+                post: contentPost.textContent,
+              }).then(() => {
+                contentPost.removeAttribute('contentEditable');
+                console.log('post editado');
+              });
+            } else {
+              console.log('Edición cancelada');
+            }
+            btnSave.classList.toggle('hidden-btn');
+          });
         });
       });
-    });
   };
   getPost(querySnapshot);
 };

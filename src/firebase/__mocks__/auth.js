@@ -16,13 +16,16 @@ export const registerUserAuth = () => {
 };
 
 export const logInWithEmailAndPass = jest.fn().mockImplementation((email, password) => {
-  const promise = new Promise((resolve /* , reject */) => {
+  const promise = new Promise((resolve, reject) => {
     let test = false;
     if (email === 'email2@verify.com' && password === '123abc') {
-      // reject({
-      //   message: 'Firebase: Error (auth/wrong-password).',
-      // });
+      reject(new Error('Firebase: Error (auth/wrong-password).'));
     }
+
+    if (email === 'email2@verify.com' && password === '123abc') {
+      reject(new Error('Firebase: Error (auth/user-not-found).'));
+    }
+
     if (email === 'email@verify.com' && password === '123456') {
       test = true;
     }

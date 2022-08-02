@@ -47,11 +47,20 @@ describe('LOGIN', () => {
     }, 0);
   });
 
-  // it('si la contraseña es incorrecta', (done) => {
-  //   inputEmail.value = 'email2@verify.com';
-  //   inputPass.value = '123abc';
-  //   btnLogin.click();
-  //   expect(msgError.innerHTML).toBe('Contraseña incorrecta');
-  //   done();
-  // });
+  // eslint-disable-next-line jest/no-focused-tests
+  it('si la contraseña es incorrecta', (done) => {
+    inputEmail.value = 'email2@verify.com';
+    inputPass.value = '123abc';
+    btnLogin.click();
+    setTimeout(() => {
+      expect(msgError.innerHTML).toBe('Contraseña incorrecta');
+      done();
+    }, 0);
+
+    // const asyncExpects = () => new Promise((resolve) => {
+    //  resolve(expect(msgError.innerHTML).toBe('Contraseña incorrecta'));
+    // });
+
+    // asyncExpects().then(() => done());
+  });
 });

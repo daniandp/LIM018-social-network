@@ -38,10 +38,174 @@ p {
   text-shadow: 0px 4px 7px #000000;
 }
 
+.focus-in-contract {
+	-webkit-animation: focus-in-contract 0.7s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+	        animation: focus-in-contract 0.7s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+}
+
+ @-webkit-keyframes focus-in-contract {
+  0% {
+    letter-spacing: 1em;
+    -webkit-filter: blur(12px);
+            filter: blur(12px);
+    opacity: 0;
+  }
+  100% {
+    -webkit-filter: blur(0px);
+            filter: blur(0px);
+    opacity: 1;
+  }
+}
+@keyframes focus-in-contract {
+  0% {
+    letter-spacing: 1em;
+    -webkit-filter: blur(12px);
+            filter: blur(12px);
+    opacity: 0;
+  }
+  100% {
+    -webkit-filter: blur(0px);
+            filter: blur(0px);
+    opacity: 1;
+  }
+}
+
 .cont-logo {
   display: flex;
   justify-content: center;
   height: auto;
+}
+/* -----------VIBRACIÓN MANDO LOGIN / REGISTER -----------------*/
+.vibrate-3 {
+	-webkit-animation: vibrate-3 0.5s linear 1.5 both;
+	        animation: vibrate-3 0.5s linear 1.5 both;
+}
+
+ @-webkit-keyframes vibrate-3 {
+  0% {
+    -webkit-transform: translate(0);
+            transform: translate(0);
+  }
+  10% {
+    -webkit-transform: translate(-2px, -2px);
+            transform: translate(-2px, -2px);
+  }
+  20% {
+    -webkit-transform: translate(2px, -2px);
+            transform: translate(2px, -2px);
+  }
+  30% {
+    -webkit-transform: translate(-2px, 2px);
+            transform: translate(-2px, 2px);
+  }
+  40% {
+    -webkit-transform: translate(2px, 2px);
+            transform: translate(2px, 2px);
+  }
+  50% {
+    -webkit-transform: translate(-2px, -2px);
+            transform: translate(-2px, -2px);
+  }
+  60% {
+    -webkit-transform: translate(2px, -2px);
+            transform: translate(2px, -2px);
+  }
+  70% {
+    -webkit-transform: translate(-2px, 2px);
+            transform: translate(-2px, 2px);
+  }
+  80% {
+    -webkit-transform: translate(-2px, -2px);
+            transform: translate(-2px, -2px);
+  }
+  90% {
+    -webkit-transform: translate(2px, -2px);
+            transform: translate(2px, -2px);
+  }
+  100% {
+    -webkit-transform: translate(0);
+            transform: translate(0);
+  }
+}
+@keyframes vibrate-3 {
+  0% {
+    -webkit-transform: translate(0);
+            transform: translate(0);
+  }
+  10% {
+    -webkit-transform: translate(-2px, -2px);
+            transform: translate(-2px, -2px);
+  }
+  20% {
+    -webkit-transform: translate(2px, -2px);
+            transform: translate(2px, -2px);
+  }
+  30% {
+    -webkit-transform: translate(-2px, 2px);
+            transform: translate(-2px, 2px);
+  }
+  40% {
+    -webkit-transform: translate(2px, 2px);
+            transform: translate(2px, 2px);
+  }
+  50% {
+    -webkit-transform: translate(-2px, -2px);
+            transform: translate(-2px, -2px);
+  }
+  60% {
+    -webkit-transform: translate(2px, -2px);
+            transform: translate(2px, -2px);
+  }
+  70% {
+    -webkit-transform: translate(-2px, 2px);
+            transform: translate(-2px, 2px);
+  }
+  80% {
+    -webkit-transform: translate(-2px, -2px);
+            transform: translate(-2px, -2px);
+  }
+  90% {
+    -webkit-transform: translate(2px, -2px);
+            transform: translate(2px, -2px);
+  }
+  100% {
+    -webkit-transform: translate(0);
+            transform: translate(0);
+  }
+}
+/* -----------ROTACIÓN MANDO WELCOME------------- */
+.rotate-scale-up-diag-1 {
+	-webkit-animation: rotate-scale-up-diag-1 0.7s linear both;
+	        animation: rotate-scale-up-diag-1 0.7s linear both;
+}
+
+ @-webkit-keyframes rotate-scale-up-diag-1 {
+  0% {
+    -webkit-transform: scale(1) rotate3d(1, 1, 0, 0deg);
+            transform: scale(1) rotate3d(1, 1, 0, 0deg);
+  }
+  50% {
+    -webkit-transform: scale(2) rotate3d(1, 1, 0, -180deg);
+            transform: scale(2) rotate3d(1, 1, 0, -180deg);
+  }
+  100% {
+    -webkit-transform: scale(1) rotate3d(1, 1, 0, -360deg);
+            transform: scale(1) rotate3d(1, 1, 0, -360deg);
+  }
+}
+@keyframes rotate-scale-up-diag-1 {
+  0% {
+    -webkit-transform: scale(1) rotate3d(1, 1, 0, 0deg);
+            transform: scale(1) rotate3d(1, 1, 0, 0deg);
+  }
+  50% {
+    -webkit-transform: scale(2) rotate3d(1, 1, 0, -180deg);
+            transform: scale(2) rotate3d(1, 1, 0, -180deg);
+  }
+  100% {
+    -webkit-transform: scale(1) rotate3d(1, 1, 0, -360deg);
+            transform: scale(1) rotate3d(1, 1, 0, -360deg);
+  }
 }
 
 .logo {
