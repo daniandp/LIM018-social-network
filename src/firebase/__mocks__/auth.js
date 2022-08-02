@@ -15,42 +15,22 @@ export const registerUserAuth = () => {
   });
 };
 
-export const logInWithEmailAndPass = (email, password) => {
-  if (email === 'email@verify.com' && password === '123456') {
-    return Promise.resolve(
-      {
-        user: {
-          emailVerified: true,
-        },
+export const logInWithEmailAndPass = jest.fn().mockImplementation((email, password) => {
+  const promise = new Promise((resolve /* , reject */) => {
+    let test = false;
+    if (email === 'email2@verify.com' && password === '123abc') {
+      // reject({
+      //   message: 'Firebase: Error (auth/wrong-password).',
+      // });
+    }
+    if (email === 'email@verify.com' && password === '123456') {
+      test = true;
+    }
+    resolve({
+      user: {
+        emailVerified: test,
       },
-    );
-  // eslint-disable-next-line no-else-return
-  } else {
-    return Promise.resolve(
-      {
-        user: {
-          emailVerified: false,
-        },
-      },
-    );
-  }
-  // Promise.resolve({
-  //   if(emailVerified){
-  //       //     user: {
-  // //       emailVerified: false,
-  // //     },
-  //   }
-  // });
-  // if (user === true) {
-  //   return Promise.resolve({
-  //     user: {
-  //       emailVerified: false,
-  //     },
-  //   });
-  // }
-  // return Promise.resolve({
-  //   user: {
-  //     emailVerified: true,
-  //   },
-  // });
-};
+    });
+  });
+  return promise;
+});

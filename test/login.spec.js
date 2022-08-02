@@ -3,15 +3,20 @@
  */
 
 import login from '../src/view/login.js';
-// import { logInWithEmailAndPass } from '../src/firebase/auth.js';
 
 jest.mock('../src/firebase/auth');
 describe('LOGIN', () => {
-  document.body.appendChild(login());
-  const inputEmail = document.getElementById('user-email');
-  const inputPass = document.getElementById('user-password');
-  const btnLogin = document.querySelector('.btn-enter');
-  const msgError = document.getElementById('message-error');
+  let inputEmail;
+  let inputPass;
+  let btnLogin;
+  let msgError;
+  beforeEach(() => {
+    document.body.appendChild(login());
+    inputEmail = document.getElementById('user-email');
+    inputPass = document.getElementById('user-password');
+    btnLogin = document.querySelector('.btn-enter');
+    msgError = document.getElementById('message-error');
+  });
 
   it('click del boton login para retorno de error CAMPOS VACIOS', () => {
     expect(btnLogin instanceof HTMLElement).toBe(true);
@@ -26,15 +31,27 @@ describe('LOGIN', () => {
     inputPass.value = '123456';
     btnLogin.click();
     expect(msgError.innerHTML).toBe('');
-    expect(window.location.hash).toBe('#/home');
-    done();
+    setTimeout(() => {
+      expect(window.location.hash).toBe('#/home');
+      done();
+    }, 0);
   });
 
   it('click del boton login para retorno de EMAIL NO VERIFICADO', (done) => {
     inputEmail.value = 'ejemplo@gmail.com';
     inputPass.value = '123abc';
     btnLogin.click();
-    expect(msgError.innerText).toBe('El usuario no se encuentra verificado');
-    done();
+    setTimeout(() => {
+      expect(msgError.innerText).toBe('El usuario no se encuentra verificado');
+      done();
+    }, 0);
   });
+
+  // it('si la contraseña es incorrecta', (done) => {
+  //   inputEmail.value = 'email2@verify.com';
+  //   inputPass.value = '123abc';
+  //   btnLogin.click();
+  //   expect(msgError.innerHTML).toBe('Contraseña incorrecta');
+  //   done();
+  // });
 });

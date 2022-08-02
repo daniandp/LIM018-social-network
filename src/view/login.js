@@ -51,19 +51,15 @@ export default () => {
       logInWithEmailAndPass(email.value, password.value).then((userCredential) => {
         const user = userCredential.user;
         if (user.emailVerified) {
-          console.log(email.value, password.value);
-          console.log('ESTA ENTRANDO AL IF');
           msgError.innerText = '';
           window.location.hash = '#/home';
-          console.log(window.location.hash);
         } else {
-          console.log('ESTA ENTRANDO A ELSE');
           msgError.innerText = 'El usuario no se encuentra verificado';
-          console.log(msgError.innerText);
           msgError.classList.add('background-message-error');
         }
       })
         .catch((error) => {
+          console.log('ENTRA AL CATCH');
           const errorMessage = error.message;
           msgError.classList.add('background-message-error');
           // CONTROL DE ERRORES PARA MOSTRAR EN EL DOM
@@ -74,6 +70,7 @@ export default () => {
             }
             case 'Firebase: Error (auth/wrong-password).': {
               msgError.innerHTML = 'Contraseña incorrecta';
+              console.log('ENTRA AR CASO 2');
               break;
             }
             case 'Firebase: Error (auth/invalid-email).': {
