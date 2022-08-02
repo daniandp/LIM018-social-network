@@ -382,7 +382,7 @@ header {
   background: rgba(238, 233, 233);
   padding: 10px 20px;
   border-radius: 10px ;
-  position: fixed;
+  position: absolute;
   margin-left: -90px;
   gap: 5px;
   pointer-events: all;
@@ -471,7 +471,7 @@ header {
   font-size: 30px;
 }
 
-#btn-share-post {
+#btn-share-post, .btn-save {
   cursor: pointer;
   width: 90px;
   border: none;
@@ -883,8 +883,8 @@ margin-right: 20px;
 }
 
 .img-card-profile > img {
-  width: auto;
-  height: 65px;
+  width: 100%;
+  height: auto;
 }
 
 .user-name > h5 {

@@ -32,7 +32,7 @@ describe('LOGIN', () => {
 
   it('click del boton login para retorno de EMAIL NO VERIFICADO', (done) => {
     inputEmail.value = 'ejemplo@gmail.com';
-    inputPass.value = '123456';
+    inputPass.value = '123abc';
     btnLogin.click();
     expect(msgError.innerText).toBe('El usuario no se encuentra verificado');
     done();

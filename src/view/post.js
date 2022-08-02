@@ -17,12 +17,11 @@ export default (section) => {
   btnSharePost.addEventListener('click', () => {
     // METODO PARA OBTENER LA FECHA Y HORA EN LA QUE SE REALIZA EL POSTEO
     if (inputPost.textContent !== '' && inputPost.textContent !== '¿Qué quieres compartir, gamer?' && inputPost.textContent !== 'Debes escribir algo en tu publicación') {
-      const date = new Date();
-      const datePost = `${(date.getDate()).toString().padStart(2, '0')}/${(date.getMonth() + 1).toString().padStart(2, '0')}/${date.getFullYear()} ${date.getHours().toString().padStart(2, '0')}:${date.getMinutes().toString().padStart(2, '0')}:${date.getSeconds().toString().padStart(2, '0')}`;
+      const datePostMs = new Date().getTime();
       createPost(
         auth.currentUser.uid,
         inputPost.textContent,
-        datePost,
+        datePostMs.toString(),
         'público',
         [],
       );
@@ -36,11 +35,19 @@ export default (section) => {
   const querySnapshot = (queryPost) => {
     containerPostPublicated.innerHTML = '';
     queryPost.forEach((post) => {
+      const dateNumber = post.data().datePost;
+      const date = new Date(Number(dateNumber));
+      console.log(dateNumber);
+      const datePostFormat = `${(date.getDate()).toString().padStart(2, '0')}/${(date.getMonth() + 1).toString().padStart(2, '0')}/${date.getFullYear()} ${date.getHours().toString().padStart(2, '0')}:${date.getMinutes().toString().padStart(2, '0')}:${date.getSeconds().toString().padStart(2, '0')}`;
       // OBTENEMOS LA INFORMACIÓN DEL USUARIO DUEÑO DEL POST
+      console.log(datePostFormat);
+      let userName = '';
+      let userImgProfile = '';
+
       getUser(post.data().uid).then((user) => {
         const userData = user.data();
-        const userName = userData.name;
-        const userImgProfile = user.data().imgProfile !== null ? user.data().imgProfile : 'img/perfilblack.png';
+        userName = userData.name;
+        userImgProfile = user.data().imgProfile !== null ? user.data().imgProfile : 'img/perfilblack.png';
         const divPostPublicated = document.createElement('div');
         divPostPublicated.setAttribute('class', 'container-publicated');
         divPostPublicated.innerHTML = `
@@ -52,12 +59,12 @@ export default (section) => {
               </div>
               <div class="nameuser-date">
                 <span>${userName}</span> <br>
-                <span>${post.data().datePost}</span>
+                <span>${datePostFormat}</span>
             </div>
             </div>
             <div>
-              <i class="bi bi-three-dots"></i> 
-              <ul class="cont-btns-edit-delete">
+              <i class="bi bi-three-dots hidden-btn"></i> 
+              <ul class="cont-btns-edit-delete ">
                 <li><button type="button" class="btn-edit menu-three-dots">Editar</button></li>
                 <li><button type="button" class="btn-delete menu-three-dots">Eliminar</button></li>
               </ul>
@@ -80,7 +87,6 @@ export default (section) => {
             <i class="bi bi-chat-dots"></i>
             <span class="span-text"> Comentar </span>
           </div>
-
         </div>`;
 
         containerPostPublicated.appendChild(divPostPublicated);
@@ -95,11 +101,19 @@ export default (section) => {
 
         // EVENTO CLICK PARA DESPLEGAR EL MENU DE EDITAR Y ELIMINAR POST
         const threeDots = divPostPublicated.querySelector('.bi-three-dots');
-        const contbtnsEditAndDelite = divPostPublicated.querySelector('.cont-btns-edit-delete');
+        const contbtnsEditAndDelete = divPostPublicated.querySelector('.cont-btns-edit-delete');
 
+        // if (userData.uid === auth.currentUser.uid) {
+        //   threeDots.classList.remove('hidden-btn');
+        // }
         threeDots.addEventListener('click', () => {
-          contbtnsEditAndDelite.classList.toggle('three-dots_visible');
+          contbtnsEditAndDelete.classList.toggle('three-dots_visible');
         });
+
+        window.addEventListener('scroll', () => {
+          contbtnsEditAndDelete.classList.remove('three-dots_visible');
+        });
+
         if (arrayLikes.includes(auth.currentUser.uid)) {
           btnLike.classList.add('active-like');
         }
@@ -125,7 +139,7 @@ export default (section) => {
         });
         // EVENTOS DE CLICK PARA EDITAR LOS POST
         btnEdit.addEventListener('click', () => {
-          contbtnsEditAndDelite.classList.toggle('three-dots_visible');
+          contbtnsEditAndDelete.classList.toggle('three-dots_visible');
           btnSave.classList.toggle('hidden-btn');
           contentPost.setAttribute('contentEditable', 'true');
           contentPost.focus();

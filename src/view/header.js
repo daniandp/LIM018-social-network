@@ -55,7 +55,6 @@ export default () => {
   };
   // EVENTO CLICK DE LA FLECHA IR A ARRIBA
   arrowTop.addEventListener('click', scrollUp);
-
   // EVENTO CLICK PARA DESPLEGAR EL MENÚ
   menuHeader.addEventListener('click', () => {
     navOptions.classList.toggle('nav-options_visible');
