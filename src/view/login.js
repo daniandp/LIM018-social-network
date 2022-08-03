@@ -59,7 +59,6 @@ export default () => {
         }
       })
         .catch((error) => {
-          console.log('ENTRA AL CATCH');
           const errorMessage = error.message;
           msgError.classList.add('background-message-error');
           // CONTROL DE ERRORES PARA MOSTRAR EN EL DOM
@@ -70,14 +69,10 @@ export default () => {
             }
             case 'Firebase: Error (auth/wrong-password).': {
               msgError.innerHTML = 'Contraseña incorrecta';
-              console.log('ENTRA AL CASO 2');
               break;
             }
-            case 'Firebase: Error (auth/invalid-email).': {
-              msgError.innerHTML = 'Email Inválido';
-              break;
-            }
-            default: msgError.innerHTML = '';
+            // Este es para el error Firebase: Error (auth/invalid-email). Email inválido.
+            default: msgError.innerHTML = 'Email inválido';
               break;
           }
         });

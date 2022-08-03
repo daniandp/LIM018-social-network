@@ -22,8 +22,12 @@ export const logInWithEmailAndPass = jest.fn().mockImplementation((email, passwo
       reject(new Error('Firebase: Error (auth/wrong-password).'));
     }
 
-    if (email === 'email2@verify.com' && password === '123abc') {
+    if (email === 'notfound@verify.com' && password === '123abc') {
       reject(new Error('Firebase: Error (auth/user-not-found).'));
+    }
+
+    if (email === 'notfound@verifycom' && password === '123abc') {
+      reject(new Error('Firebase: Error (auth/invalid-email).'));
     }
 
     if (email === 'email@verify.com' && password === '123456') {

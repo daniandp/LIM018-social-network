@@ -59,4 +59,24 @@ describe('LOGIN', () => {
 
     // asyncExpects().then(() => done());
   });
+
+  it('si el usuario no está en la base de datos', (done) => {
+    inputEmail.value = 'notfound@verify.com';
+    inputPass.value = '123abc';
+    btnLogin.click();
+    setTimeout(() => {
+      expect(msgError.innerHTML).toBe('Usuario no encontrado');
+      done();
+    }, 0);
+  });
+
+  it('si el email no tiene un formato válido', (done) => {
+    inputEmail.value = 'notfound@verifycom';
+    inputPass.value = '123abc';
+    btnLogin.click();
+    setTimeout(() => {
+      expect(msgError.innerHTML).toBe('Email inválido');
+      done();
+    }, 0);
+  });
 });
