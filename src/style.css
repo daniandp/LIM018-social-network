@@ -396,13 +396,38 @@ p {
 }
 .btn-redirect {
   background-color: #1D9BF0;
-  color: #fff;
+  color: #FFFFFF;
   width: auto;
   padding: 0 30px;
   filter: drop-shadow(2px 2px 3px rgba(0, 0, 0, 0.5));
 }
 
 /* -------------  Aquí termina el MODAL ------------- */
+
+/* -------------  Aquí empieza el MODAL de Mensaje de Alerta ------------- */
+.msg-hidden {
+  opacity: 0;
+}
+
+.msg-visible {
+  display: flex;
+  position: fixed;
+  justify-content: center;
+  background-color:#4D2A7E;
+  color: #FFFFFF;
+  font-weight: 700;
+  width: 370px;
+  padding: 20px 10px;
+  bottom: 100px;
+  left: 23px; 
+  border-radius: 10px;
+  opacity: 1;
+  transition: opacity 3s;
+}
+
+/* -------------  Aquí termina el MODAL de Mensaje de Alerta ------------- */
+
+
 
 .slogan-register {
   font-size: 20px;
@@ -935,7 +960,7 @@ width: 350px;
 }
 
 .modal-cont{
-  margin: 25% auto;
+  margin: 15% auto;
 }
 
 /* -------------  Pantalla de Home ------------- */

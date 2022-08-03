@@ -1,7 +1,3 @@
-/**
- * @jest-environment jsdom
- */
-
 import login from '../src/view/login.js';
 
 jest.mock('../src/firebase/auth');
