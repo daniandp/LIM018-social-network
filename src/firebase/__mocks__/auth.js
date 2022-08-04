@@ -6,14 +6,8 @@ export const signInWithPopup = () => {
   });
 };
 
-export const registerUserAuth = () => {
-  Promise.resolve({
-    user: {
-      email: 'yunoshe1@gmail.com',
-      pass: '123',
-    },
-  });
-};
+export const registerUserAuth = jest.fn();
+export const sendEmailVerif = jest.fn();
 
 /* export const registerUserFirestore = jest.fn().mockImplementation
 ((email, name, nickname, uid, imgProfile) => {

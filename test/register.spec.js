@@ -1,12 +1,13 @@
-/* import register from '../src/view/register.js';
- */
-/* jest.mock('../src/firebase/auth');
+import register, { validateEmail } from '../src/view/register.js';
+import { registerUserAuth, sendEmailVerif } from '../src/firebase/auth.js';
+
+jest.mock('../src/firebase/auth');
 describe('REGISTER', () => {
   let inputEmail;
   let inputPass;
   let inputName;
   let inputNickName;
-  let btnLogin;
+  let btnRegister;
   let msgError;
 
   beforeEach(() => {
@@ -15,21 +16,29 @@ describe('REGISTER', () => {
     inputPass = document.getElementById('password');
     inputName = document.getElementById('name');
     inputNickName = document.getElementById('nickname');
-    btnLogin = document.querySelector('.btn-enter');
+    btnRegister = document.querySelector('.btn-enter');
     msgError = document.getElementById('message-error');
-  }); */
+  });
 
-/* it('Evento change del input para validar que se cumpla el RegEx', () => {
-  const mockFn = jest.fn();
-  expect(inputEmail instanceof HTMLElement).toBe(true);
-  // inputEmail.value = 'email@verify.com';
-  inputEmail.find('input').simulate('change', { target: { value: 'email@verify.com' } });
-  expect(mockFn.mock.calls[0][0]).toBe('email@verify.com');
-  // expect(msgError.innerHTML).toBe(true);
-  console.log(inputPass, inputName, inputNickName, btnLogin, msgError);
-}); */
+  it('click del boton login para retorno de error CAMPOS VACIOS', () => {
+    expect(btnRegister instanceof HTMLElement).toBe(true);
 
-it('', () => {
+    // PRIMER CLICK SIRVE PARA VER EL ERROR AL ESTAR LOS CAMPOS VACIOS
+    btnRegister.click();
+    expect(msgError.innerHTML).toBe('Debes completar todos los campos para continuar');
+  });
+
+  describe('validateEmail', () => {
+    it('validateEmail deberia ser una función', () => {
+      expect(typeof validateEmail).toBe('function');
+    });
+    it('Para email@gmail.com no debe dar mensaje de error', () => {
+      validateEmail('email@gmail.com', msgError);
+      expect(msgError.innerHTML).toBe('');
+    });
+    it('Para email@gmail debe mostrar mensaje de error', () => {
+      validateEmail('email@gmail', msgError);
+      expect(msgError.innerHTML).toBe('Debes ingresar un email válido: ejemplo@dominio.com');
+    });
+  });
 });
-/* });
- */
