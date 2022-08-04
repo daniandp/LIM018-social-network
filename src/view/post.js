@@ -33,20 +33,18 @@ export default (section) => {
 
   // FUNCIÓN PARA MOSTRAR LOS POST
   const querySnapshot = (queryPost) => {
-    const muchasPromesas = [];
+    const arrPostsandUsers = []; // array que va a almacenar las promesas
     queryPost.forEach((post) => {
-      // OBTENEMOS LA INFORMACIÓN DEL USUARIO DUEÑO DEL POST
-      // const userName = '';
-      // const userImgProfile = '';
-      const unaPromesa = getUser(post.data().uid)
+      // RELACIONANDO POSTS Y USUARIOS
+      const objPostandUser = getUser(post.data().uid)
         .then((user) => ({ post, user }));
-      muchasPromesas.push(unaPromesa);
+      arrPostsandUsers.push(objPostandUser);
     });
-
-    Promise.all(muchasPromesas)
-      .then((muchosResultados) => {
+    // RESOLVIENDO TODAS LAS PROMESAS PARA PINTAR LOS POSTS DE FORMA ORDENADA
+    Promise.all(arrPostsandUsers)
+      .then((postsByUsers) => {
         containerPostPublicated.innerHTML = '';
-        muchosResultados.forEach(({ post, user }) => {
+        postsByUsers.forEach(({ post, user }) => {
           const dateNumber = post.data().datePost;
           const date = new Date(Number(dateNumber));
           const datePostFormat = `${(date.getDate()).toString().padStart(2, '0')}/${(date.getMonth() + 1).toString().padStart(2, '0')}/${date.getFullYear()} ${date.getHours().toString().padStart(2, '0')}:${date.getMinutes().toString().padStart(2, '0')}:${date.getSeconds().toString().padStart(2, '0')}`;
@@ -56,52 +54,52 @@ export default (section) => {
           const divPostPublicated = document.createElement('div');
           divPostPublicated.setAttribute('class', 'container-publicated');
           divPostPublicated.innerHTML = `
-      <div class="post-publicated">
-        <div class="info-user">
-          <div class="info-post">
-            <div class="photo-perfil-post">
-              <img src=${userImgProfile} alt="foto perfil de usuario">
+          <div class="post-publicated">
+            <div class="info-user">
+              <div class="info-post">
+                <div class="photo-perfil-post">
+                  <img src=${userImgProfile} alt="foto perfil de usuario">
+                </div>
+                <div class="nameuser-date">
+                  <span>${userName}</span> <br>
+                  <span>${datePostFormat}</span>
+              </div>
+              </div>
+              <div>
+                <i class="bi bi-three-dots hidden-btn"></i> 
+                <ul class="cont-btns-edit-delete">
+                  <li><button type="button" class="btn-edit menu-three-dots">Editar</button></li>
+                  <li><button type="button" class="btn-delete menu-three-dots">Eliminar</button></li>
+                </ul>
+              </div>
             </div>
-            <div class="nameuser-date">
-              <span>${userName}</span> <br>
-              <span>${datePostFormat}</span>
+            <div class="input-readonly">
+              <span id=${post.id} class="post-publicated cont-post" role="textbox">${post.data().post}</span>
+              <div class="cont-btn-save">
+              <button type="button" class="btn-save hidden-btn">Guardar</button>
+            </div>
+            </div>
           </div>
-          </div>
-          <div>
-            <i class="bi bi-three-dots hidden-btn"></i> 
-            <ul class="cont-btns-edit-delete">
-              <li><button type="button" class="btn-edit menu-three-dots">Editar</button></li>
-              <li><button type="button" class="btn-delete menu-three-dots">Eliminar</button></li>
-            </ul>
-          </div>
-        </div>
-        <div class="input-readonly">
-          <span id=${post.id} class="post-publicated cont-post" role="textbox">${post.data().post}</span>
-          <div class="cont-btn-save">
-          <button type="button" class="btn-save hidden-btn">Guardar</button>
-        </div>
-        </div>
-      </div>
-      <div class="container-like-comment">
-        <div class="mando-img">
-          <i class="bi bi-joystick"></i>
-          <span class="span-counter">${post.data().likes.length}</span>
-          <span class="span-text"> Me gusta </span>
-        </div>
-        <div class="comment-img">
-          <i class="bi bi-chat-dots"></i>
-          <span class="span-text"> Comentar </span>
-        </div>
-        <div id="modal-message-confirm" class="modal">
-          <div class="modal-cont">
-            <h2>Twitchtter</h2>
-            <p id="modal-question"></p>
-            <button type="button" id="btn-confirm" class="btn-confirm-delete btn-general">Aceptar</button>
-            <button type="button" id="btn-cancel" class="btn-cancel-delete btn-general">Cancelar</button>
-          </div>
-        </div>
-        <div id="modal-small" class="msg-hidden"></div> 
-      </div>`;
+          <div class="container-like-comment">
+            <div class="mando-img">
+              <i class="bi bi-joystick"></i>
+              <span class="span-counter">${post.data().likes.length}</span>
+              <span class="span-text"> Me gusta </span>
+            </div>
+            <div class="comment-img">
+              <i class="bi bi-chat-dots"></i>
+              <span class="span-text"> Comentar </span>
+            </div>
+            <div id="modal-message-confirm" class="modal">
+              <div class="modal-cont">
+                <h2>Twitchtter</h2>
+                <p id="modal-question"></p>
+                <button type="button" id="btn-confirm" class="btn-confirm-delete btn-general">Aceptar</button>
+                <button type="button" id="btn-cancel" class="btn-cancel-delete btn-general">Cancelar</button>
+              </div>
+            </div>
+            <div id="modal-small" class="msg-hidden"></div> 
+          </div>`;
 
           containerPostPublicated.appendChild(divPostPublicated);
           // TRAEMOS LOS BOTONES DE ELIMINAR Y EDITAR LOS POST
