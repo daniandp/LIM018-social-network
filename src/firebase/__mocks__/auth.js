@@ -15,29 +15,9 @@ export const registerUserAuth = () => {
   });
 };
 
-export const logInWithEmailAndPass = jest.fn().mockImplementation((email, password) => {
-  const promise = new Promise((resolve, reject) => {
-    let test = false;
-    if (email === 'email2@verify.com' && password === '123abc') {
-      reject(new Error('Firebase: Error (auth/wrong-password).'));
-    }
+/* export const registerUserFirestore = jest.fn().mockImplementation
+((email, name, nickname, uid, imgProfile) => {
+  return promise
+}); */
 
-    if (email === 'notfound@verify.com' && password === '123abc') {
-      reject(new Error('Firebase: Error (auth/user-not-found).'));
-    }
-
-    if (email === 'notfound@verifycom' && password === '123abc') {
-      reject(new Error('Firebase: Error (auth/invalid-email).'));
-    }
-
-    if (email === 'email@verify.com' && password === '123456') {
-      test = true;
-    }
-    resolve({
-      user: {
-        emailVerified: test,
-      },
-    });
-  });
-  return promise;
-});
+export const logInWithEmailAndPass = jest.fn();

@@ -1,4 +1,5 @@
 import login from '../src/view/login.js';
+import { logInWithEmailAndPass } from '../src/firebase/auth.js';
 
 jest.mock('../src/firebase/auth');
 describe('LOGIN', () => {
@@ -22,15 +23,44 @@ describe('LOGIN', () => {
     expect(msgError.innerHTML).toBe('Debes completar todos los campos para continuar');
   });
 
-  it('click del boton login para retorno de EMAIL VERIFICADO', (done) => {
+  // eslint-disable-next-line jest/no-focused-tests
+  it.only('click del boton login para retorno de EMAIL VERIFICADO', (done) => {
+    const cualquiera = () => {
+      expect(window.location.hash).toBe('#/home');
+      window.removeEventListener('hashchange', cualquiera);
+      done();
+    };
+    window.addEventListener('hashchange', cualquiera);
+    logInWithEmailAndPass.mockImplementationOnce((email, password) => {
+      expect(email).toBe('email@verify.com');
+      expect(password).toBe('123456');
+      // const promise = new Promise((resolve /* reject */) => {
+      /* let test = false; */
+
+      /*  if (email === 'notfound@verify.com' && password === '123abc') {
+        reject(new Error('Firebase: Error (auth/user-not-found).'));
+      }
+
+      if (email === 'notfound@verifycom' && password === '123abc') {
+        reject(new Error('Firebase: Error (auth/invalid-email).'));
+      }
+
+      if (email === 'email@verify.com' && password === '123456') {
+        test = true;
+      } */
+
+      return Promise.resolve({
+        user: {
+          emailVerified: test,
+        },
+      });
+      //  });
+      // return promise;
+    });
+
     inputEmail.value = 'email@verify.com';
     inputPass.value = '123456';
     btnLogin.click();
-    expect(msgError.innerHTML).toBe('');
-    setTimeout(() => {
-      expect(window.location.hash).toBe('#/home');
-      done();
-    }, 0);
   });
 
   it('click del boton login para retorno de EMAIL NO VERIFICADO', (done) => {

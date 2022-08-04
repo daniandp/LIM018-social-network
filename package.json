@@ -15,7 +15,8 @@
     "stylelint": "stylelint --aei src/**/*.css",
     "pretest": "npm run htmlhint && npm run eslint && npm run stylelint",
     "test": "jest --coverage --env=jsdom",
-    "start": "serve -s src/"
+    "start": "serve -s src/",
+    "deploy": "gh-pages -d src"
   },
   "devDependencies": {
     "@babel/core": "^7.11.4",
@@ -37,6 +38,7 @@
   },
   "dependencies": {
     "deploy": "^1.0.3",
-    "firebase": "^9.8.4"
+    "firebase": "^9.8.4",
+    "gh-pages": "^4.0.0"
   }
 }
