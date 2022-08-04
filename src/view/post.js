@@ -92,6 +92,15 @@ export default (section) => {
           <i class="bi bi-chat-dots"></i>
           <span class="span-text"> Comentar </span>
         </div>
+        <div id="modal-message-confirm" class="modal">
+          <div class="modal-cont">
+            <h2>Twitchtter</h2>
+            <p id="modal-question"></p>
+            <button type="button" id="btn-confirm" class="btn-confirm-delete btn-general">Aceptar</button>
+            <button type="button" id="btn-cancel" class="btn-cancel-delete btn-general">Cancelar</button>
+          </div>
+        </div>
+        <div id="modal-small" class="msg-hidden"></div> 
       </div>`;
 
           containerPostPublicated.appendChild(divPostPublicated);
@@ -102,6 +111,11 @@ export default (section) => {
           const contentPost = document.getElementById(`${post.id}`);
           const btnLike = divPostPublicated.querySelector('.bi-joystick');
           const arrayLikes = post.data().likes;
+          const modal = section.querySelector('#modal-message-confirm');
+          const btnModalConfirm = document.getElementById('btn-confirm');
+          const btnModalCancel = document.getElementById('btn-cancel');
+          const modalQuestion = document.getElementById('modal-question');
+          const modalSmall = document.getElementById('modal-small');
 
           // EVENTO CLICK PARA DESPLEGAR EL MENU DE EDITAR Y ELIMINAR POST
           const threeDots = divPostPublicated.querySelector('.bi-three-dots');
@@ -132,15 +146,27 @@ export default (section) => {
           });
           // EVENTO CLICK PARA ELIMINAR LOS POST
           btnDelete.addEventListener('click', () => {
-            const opcion = window.confirm('¿Estás seguro que deseas eliminar el post?');
-            if (opcion === true) {
-              deletePost(post.id).then(() => {
-                console.log('post eliminado ', post.id);
-              });
-            } else {
-              console.log('Eliminación cancelada');
-            }
+            modalQuestion.innerHTML = '¿Estás seguro que quieres eliminar el post?';
+            modal.classList.add('modal-visible');
+            // NO ESTÁ COMPLETO
+            btnModalConfirm.addEventListener('click', () => {
+              deletePost(post.id);
+              modalSmall.classList.add('msg-visible');
+              modalSmall.className = 'msg-visible';
+              modalSmall.innerHTML = 'Post eliminado';
+            });
+
+            setTimeout(() => {
+              modalSmall.classList.add('msg-hidden');
+            }, 5000);
+
+            btnModalCancel.addEventListener('click', () => {
+              modal.classList.remove('modal-visible');
+              modalSmall.classList.add('msg-visible');
+              modalSmall.innerHTML = 'Eliminación cancelada';
+            });
           });
+
           // EVENTOS DE CLICK PARA EDITAR LOS POST
           btnEdit.addEventListener('click', () => {
             contbtnsEditAndDelete.classList.toggle('three-dots_visible');
@@ -149,18 +175,30 @@ export default (section) => {
             contentPost.focus();
           });
           btnSave.addEventListener('click', () => {
-            const opcion = window.confirm('¿Estás seguro que deseas guardar los cambios?');
-            if (opcion === true) {
+            modalQuestion.innerHTML = '¿Estás seguro que deseas guardar los cambios?';
+            modal.classList.add('modal-visible');
+
+            btnModalConfirm.addEventListener('click', () => {
               editPost(post.id, {
                 post: contentPost.textContent,
               }).then(() => {
                 contentPost.removeAttribute('contentEditable');
-                console.log('post editado');
+                btnSave.classList.toggle('hidden-btn');
+                modal.classList.remove('modal-visible');
+                modalSmall.classList.remove('msg-hidden');
+                modalSmall.classList.add('msg-visible');
+                modalSmall.innerHTML = 'Post editado';
               });
-            } else {
-              console.log('Edición cancelada');
-            }
-            btnSave.classList.toggle('hidden-btn');
+            });
+
+            btnModalCancel.addEventListener('click', () => {
+              contentPost.removeAttribute('contentEditable');
+              modal.classList.remove('modal-visible');
+              btnSave.classList.toggle('hidden-btn');
+              contentPost.textContent = post.data().post;
+              modalSmall.classList.add('msg-visible');
+              modalSmall.innerHTML = 'Edición cancelada';
+            });
           });
         });
       });

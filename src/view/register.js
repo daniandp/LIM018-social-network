@@ -58,6 +58,7 @@ export default () => {
 
   // EVENTO CAMBIO DE INPUT EN EL FORMULARIO DE REGISTRO
   inputMail.addEventListener('change', () => {
+    console.log('ENTRA AL CHANGE');
     const stateCondition = condition.test(inputMail.value); // TESTEO DEL REGEX EN EL INPUT DEL MAIL
     if (!stateCondition) {
       msgError.innerHTML = 'Debes ingresar un email válido: ejemplo@dominio.com';
