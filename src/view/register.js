@@ -1,7 +1,21 @@
+/* eslint-disable max-len */
 import {
   authGoogle, registerUserAuth,
   registerUserFirestore, sendEmailVerif,
 } from '../firebase/auth.js';
+
+export const validateEmail = (inputMail, error) => {
+  const msgError = error;
+  const condition = /^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/;
+  const stateCondition = condition.test(inputMail);
+  if (!stateCondition) {
+    msgError.innerHTML = 'Debes ingresar un email válido: ejemplo@dominio.com';
+    msgError.classList.add('background-message-error');
+  } else {
+    msgError.innerHTML = '';
+    msgError.classList.remove('background-message-error');
+  }
+};
 
 export default () => {
   // CREACIÓN DEL TEMPLATE
@@ -53,21 +67,8 @@ export default () => {
   const modal = section.querySelector('#modal-message');
   const btnModal = section.querySelector('.btn-redirect');
 
-  // DECLARACION DE CONSTANTE PARA EL REGEX
-  const condition = /^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/;
-
   // EVENTO CAMBIO DE INPUT EN EL FORMULARIO DE REGISTRO
-  inputMail.addEventListener('change', () => {
-    console.log('ENTRA AL CHANGE');
-    const stateCondition = condition.test(inputMail.value); // TESTEO DEL REGEX EN EL INPUT DEL MAIL
-    if (!stateCondition) {
-      msgError.innerHTML = 'Debes ingresar un email válido: ejemplo@dominio.com';
-      msgError.classList.add('background-message-error');
-    } else {
-      msgError.innerHTML = '';
-      msgError.classList.remove('background-message-error');
-    }
-  });
+  inputMail.addEventListener('change', () => validateEmail(inputMail.value, msgError));
 
   // EVENTO CLICK DEL BOTON REGISTRAR
   btnRegister.addEventListener('click', () => {
@@ -76,10 +77,10 @@ export default () => {
       msgError.classList.remove('background-message-error');
       registerUserAuth(inputMail.value, inputPassword.value)
         .then((userCredential) => {
-          console.log(userCredential);
+          // console.log(userCredential);
           // Signed in
           const user = userCredential.user;
-          console.log(userCredential);
+          // console.log(user);
           registerUserFirestore(
             inputMail.value,
             inputName.value,
@@ -88,11 +89,7 @@ export default () => {
             user.photoURL,
           );
           // ...
-          sendEmailVerif()
-            .then(() => {
-            // Email verification sent!
-            // ...
-            });
+          sendEmailVerif();
           modal.classList.add('modal-visible');
         })
         .catch((error) => {
@@ -112,7 +109,7 @@ export default () => {
               msgError.innerHTML = 'Debes ingresar un email válido: ejemplo@dominio.com';
               break;
             }
-            default: msgError.innerHTML = '';
+            default: msgError.innerHTML = 'Error no verificado';
               break;
           }
         });
@@ -124,7 +121,7 @@ export default () => {
 
   // EVENTO CLICK DEL BOTON DE VENTANA MODAL
   btnModal.addEventListener('click', () => {
-    window.location.href = '#/login';
+    window.location.hash = '#/login';
   });
 
   // EVENTO CLICK DEL BOTON DE INICIO SESION CON GOOGLE

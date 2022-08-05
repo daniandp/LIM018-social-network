@@ -23,90 +23,72 @@ describe('LOGIN', () => {
     expect(msgError.innerHTML).toBe('Debes completar todos los campos para continuar');
   });
 
-  // eslint-disable-next-line jest/no-focused-tests
-  it.only('click del boton login para retorno de EMAIL VERIFICADO', (done) => {
-    const cualquiera = () => {
+  it('click del boton login para retorno de EMAIL VERIFICADO', (done) => {
+    const changeRoute = () => {
       expect(window.location.hash).toBe('#/home');
-      window.removeEventListener('hashchange', cualquiera);
+      window.removeEventListener('hashchange', changeRoute);
       done();
     };
-    window.addEventListener('hashchange', cualquiera);
+    window.addEventListener('hashchange', changeRoute);
     logInWithEmailAndPass.mockImplementationOnce((email, password) => {
       expect(email).toBe('email@verify.com');
       expect(password).toBe('123456');
-      // const promise = new Promise((resolve /* reject */) => {
-      /* let test = false; */
-
-      /*  if (email === 'notfound@verify.com' && password === '123abc') {
-        reject(new Error('Firebase: Error (auth/user-not-found).'));
-      }
-
-      if (email === 'notfound@verifycom' && password === '123abc') {
-        reject(new Error('Firebase: Error (auth/invalid-email).'));
-      }
-
-      if (email === 'email@verify.com' && password === '123456') {
-        test = true;
-      } */
-
       return Promise.resolve({
         user: {
-          emailVerified: test,
+          emailVerified: true,
         },
       });
-      //  });
-      // return promise;
     });
 
     inputEmail.value = 'email@verify.com';
     inputPass.value = '123456';
     btnLogin.click();
   });
-
-  it('click del boton login para retorno de EMAIL NO VERIFICADO', (done) => {
+  it('click del boton login para retorno de EMAIL NO VERIFICADO', () => {
+    logInWithEmailAndPass.mockImplementationOnce((email, password) => {
+      expect(email).toBe('ejemplo@gmail.com');
+      expect(password).toBe('123abc');
+      return Promise.resolve({
+        user: {
+          emailVerified: false,
+        },
+      });
+    });
     inputEmail.value = 'ejemplo@gmail.com';
     inputPass.value = '123abc';
     btnLogin.click();
-    setTimeout(() => {
-      expect(msgError.innerText).toBe('El usuario no se encuentra verificado');
-      done();
-    }, 0);
   });
 
-  // eslint-disable-next-line jest/no-focused-tests
-  it('si la contraseña es incorrecta', (done) => {
+  it('si la contraseña es incorrecta', () => {
+    logInWithEmailAndPass.mockImplementationOnce((email, password) => {
+      expect(email).toBe('email2@verify.com');
+      expect(password).toBe('123abc');
+      return Promise.reject(new Error('Firebase: Error (auth/wrong-password).'));
+    });
     inputEmail.value = 'email2@verify.com';
     inputPass.value = '123abc';
     btnLogin.click();
-    setTimeout(() => {
-      expect(msgError.innerHTML).toBe('Contraseña incorrecta');
-      done();
-    }, 0);
-
-    // const asyncExpects = () => new Promise((resolve) => {
-    //  resolve(expect(msgError.innerHTML).toBe('Contraseña incorrecta'));
-    // });
-
-    // asyncExpects().then(() => done());
   });
 
-  it('si el usuario no está en la base de datos', (done) => {
+  it('si el usuario no está en la base de datos', () => {
+    logInWithEmailAndPass.mockImplementationOnce((email, password) => {
+      expect(email).toBe('notfound@verify.com');
+      expect(password).toBe('123abc');
+      return Promise.reject(new Error('Firebase: Error (auth/user-not-found).'));
+    });
     inputEmail.value = 'notfound@verify.com';
     inputPass.value = '123abc';
     btnLogin.click();
-    setTimeout(() => {
-      expect(msgError.innerHTML).toBe('Usuario no encontrado');
-      done();
-    }, 0);
   });
 
-  it('si el email no tiene un formato válido', (done) => {
+  it('si el email no tiene un formato válido', () => {
+    logInWithEmailAndPass.mockImplementationOnce((email, password) => {
+      expect(email).toBe('notfound@verifycom');
+      expect(password).toBe('123abc');
+      return Promise.reject(new Error('Firebase: Error (auth/invalid-email).'));
+    });
     inputEmail.value = 'notfound@verifycom';
     inputPass.value = '123abc';
     btnLogin.click();
-    setTimeout(() => {
-      expect(msgError.innerHTML).toBe('Email inválido');
-      done();
-    }, 0);
   });
 });
