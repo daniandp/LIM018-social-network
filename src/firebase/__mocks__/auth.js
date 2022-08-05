@@ -11,3 +11,4 @@ export const sendEmailVerif = jest.fn();
 export const registerUserFirestore = jest.fn();
 export const logInWithEmailAndPass = jest.fn();
 export const getUser = jest.fn();
+export const logOut = jest.fn();
