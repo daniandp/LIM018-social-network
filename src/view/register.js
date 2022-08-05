@@ -74,14 +74,13 @@ export default () => {
   btnRegister.addEventListener('click', () => {
     if (inputMail.value !== '' && inputName.value !== '' && inputNickname.value !== '' && inputPassword.value !== '') {
       msgError.innerHTML = '';
-      console.log('aqui');
       msgError.classList.remove('background-message-error');
       registerUserAuth(inputMail.value, inputPassword.value)
         .then((userCredential) => {
-          console.log(userCredential);
+          // console.log(userCredential);
           // Signed in
           const user = userCredential.user;
-          console.log(user);
+          // console.log(user);
           registerUserFirestore(
             inputMail.value,
             inputName.value,
@@ -110,7 +109,7 @@ export default () => {
               msgError.innerHTML = 'Debes ingresar un email válido: ejemplo@dominio.com';
               break;
             }
-            default: msgError.innerHTML = '';
+            default: msgError.innerHTML = 'Error no verificado';
               break;
           }
         });
@@ -122,7 +121,7 @@ export default () => {
 
   // EVENTO CLICK DEL BOTON DE VENTANA MODAL
   btnModal.addEventListener('click', () => {
-    window.location.href = '#/login';
+    window.location.hash = '#/login';
   });
 
   // EVENTO CLICK DEL BOTON DE INICIO SESION CON GOOGLE
