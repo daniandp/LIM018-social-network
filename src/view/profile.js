@@ -1,11 +1,13 @@
 import { auth, getUser } from '../firebase/auth.js';
 
+export const userImage = (imgProfile) => (imgProfile !== null ? imgProfile : 'img/perfilwhite.png');
+
 export default (divProfile) => {
   const infoUser = divProfile;
   getUser(auth.currentUser.uid)
     .then((user) => {
       let userName = user.data().name;
-      const userImgProfile = user.data().imgProfile !== null ? user.data().imgProfile : 'img/perfilwhite.png';
+      const userImgProfile = userImage(user.data().imgProfile);
       userName = userName.split(' ', 2).join(' ');
       const viewProfile = `
         <div class="img-card-profile">

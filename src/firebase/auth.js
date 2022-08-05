@@ -86,7 +86,6 @@ export const createPost = (uid, post, datePost, state, likes) => {
 
 // Funcion para obtener informacion de los posts creados
 export const getPost = (querySnapshot) => {
-  console.log('asdasdsadasdasdasda');
   const queryPost = query(collection(db, 'post'), orderBy('datePost', 'desc'));
   onSnapshot(queryPost, querySnapshot);
 };
