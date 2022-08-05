@@ -4,6 +4,7 @@ import post from '../src/view/post.js';
 import profile from '../src/view/profile.js';
 
 jest.mock('../src/firebase/auth');
+
 describe('HOME', () => {
   /*  let inputEmail;
   let inputPass;
@@ -18,8 +19,8 @@ describe('HOME', () => {
     msgError = document.getElementById('message-error'); */
     viewHome = home();
     divProfile = viewHome.querySelector('.profile-card');
-    profile(divProfile);
-    post(viewHome);
+    // profile(divProfile);
+    // post(viewHome);
     document.body.appendChild(viewHome);
   });
 
@@ -29,7 +30,8 @@ describe('HOME', () => {
     });
 
     it('Obtiene el nombre y la foto de perfil del usuario', () => {
-      getUser().then();
+      //profile();
+
     });
   });
 });
