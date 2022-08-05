@@ -33,13 +33,14 @@ describe('LOGIN', () => {
     logInWithEmailAndPass.mockImplementationOnce((email, password) => {
       expect(email).toBe('email@verify.com');
       expect(password).toBe('123456');
+      expect(logInWithEmailAndPass).toHaveBeenCalledWith('email@verify.com', '123456');
+      done();
       return Promise.resolve({
         user: {
           emailVerified: true,
         },
       });
     });
-
     inputEmail.value = 'email@verify.com';
     inputPass.value = '123456';
     btnLogin.click();
