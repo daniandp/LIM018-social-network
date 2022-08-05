@@ -18,7 +18,7 @@ export default (divProfile) => {
             <span class="about-me">Mis juegos favoritos son...</span>
           </div>
           <div class="more-info">
-            <span class"more-about-me">Interacción</span>
+            <span class="more-about-me">Interacción</span>
           </div>
       </div>`;
 
