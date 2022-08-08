@@ -3,8 +3,8 @@ import { registerUserAuth } from '../src/firebase/auth';
 
 jest.mock('../src/firebase/auth');
 
-describe('registerUserAuth', () => {
-  it('debería ser una función', () => {
+describe('REGISTER-USER-AUTH', () => {
+  it('Debería ser una función', () => {
     expect(typeof registerUserAuth).toBe('function');
   });
 });

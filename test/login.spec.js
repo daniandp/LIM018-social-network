@@ -15,7 +15,7 @@ describe('LOGIN', () => {
     msgError = document.getElementById('message-error');
   });
 
-  it('click del boton login para retorno de error CAMPOS VACIOS', () => {
+  it('Click del boton login para retorno de error CAMPOS VACIOS', () => {
     expect(btnLogin instanceof HTMLElement).toBe(true);
 
     // PRIMER CLICK SIRVE PARA VER EL ERROR AL ESTAR LOS CAMPOS VACIOS
@@ -23,7 +23,7 @@ describe('LOGIN', () => {
     expect(msgError.innerHTML).toBe('Debes completar todos los campos para continuar');
   });
 
-  it('click del boton login para retorno de EMAIL VERIFICADO', (done) => {
+  it('Click del boton login para retorno de EMAIL VERIFICADO', (done) => {
     const changeRoute = () => {
       expect(window.location.hash).toBe('#/home');
       window.removeEventListener('hashchange', changeRoute);
@@ -45,7 +45,7 @@ describe('LOGIN', () => {
     inputPass.value = '123456';
     btnLogin.click();
   });
-  it('click del boton login para retorno de EMAIL NO VERIFICADO', () => {
+  it('Click del boton login para retorno de EMAIL NO VERIFICADO', () => {
     logInWithEmailAndPass.mockImplementationOnce((email, password) => {
       expect(email).toBe('ejemplo@gmail.com');
       expect(password).toBe('123abc');
@@ -60,7 +60,7 @@ describe('LOGIN', () => {
     btnLogin.click();
   });
 
-  it('si la contraseña es incorrecta', () => {
+  it('Si la contraseña es incorrecta', () => {
     logInWithEmailAndPass.mockImplementationOnce((email, password) => {
       expect(email).toBe('email2@verify.com');
       expect(password).toBe('123abc');
@@ -71,7 +71,7 @@ describe('LOGIN', () => {
     btnLogin.click();
   });
 
-  it('si el usuario no está en la base de datos', () => {
+  it('Si el usuario no está en la base de datos', () => {
     logInWithEmailAndPass.mockImplementationOnce((email, password) => {
       expect(email).toBe('notfound@verify.com');
       expect(password).toBe('123abc');
@@ -82,7 +82,7 @@ describe('LOGIN', () => {
     btnLogin.click();
   });
 
-  it('si el email no tiene un formato válido', () => {
+  it('Si el email no tiene un formato válido', () => {
     logInWithEmailAndPass.mockImplementationOnce((email, password) => {
       expect(email).toBe('notfound@verifycom');
       expect(password).toBe('123abc');

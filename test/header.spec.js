@@ -4,10 +4,19 @@ jest.mock('../src/firebase/auth');
 
 describe('HEADER', () => {
   document.body.appendChild(header());
-  it('el scroll vuelva a 0 al ejecutar la función', () => {
-    let scroll = document.documentElement.scrollTop;
-    scroll = 10;
+  global.scrollTo = jest.fn();
+  it('El scroll vuelva a 0 al ejecutar la función', () => {
     scrollUp();
-    expect(scroll).toBe(0);
+    expect(global.scrollTo).toHaveBeenCalled();
+  });
+
+  it('Verifica si el menú hamburguesa tiene la clase o no', () => {
+    const menuHeader = document.querySelector('.nav-toggle');
+    const navOptions = document.querySelector('.nav-options');
+    expect(menuHeader instanceof HTMLElement).toBe(true);
+    expect(navOptions instanceof HTMLElement).toBe(true);
+    expect(navOptions.classList.contains('nav-options_visible')).toBeFalsy();
+    menuHeader.click();
+    expect(navOptions.classList.contains('nav-options_visible')).toBeTruthy();
   });
 });

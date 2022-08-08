@@ -123,11 +123,12 @@ export default (section) => {
             threeDots.classList.remove('hidden-btn');
           }
           threeDots.addEventListener('click', () => {
-            contbtnsEditAndDelete.classList.toggle('three-dots_visible');
+            console.log('aloooooooo?');
+            contbtnsEditAndDelete.classList.toggle('three-dots-visible');
           });
 
           window.addEventListener('scroll', () => {
-            contbtnsEditAndDelete.classList.remove('three-dots_visible');
+            contbtnsEditAndDelete.classList.remove('three-dots-visible');
           });
 
           if (arrayLikes.includes(auth.currentUser.uid)) {
@@ -167,7 +168,7 @@ export default (section) => {
 
           // EVENTOS DE CLICK PARA EDITAR LOS POST
           btnEdit.addEventListener('click', () => {
-            contbtnsEditAndDelete.classList.toggle('three-dots_visible');
+            contbtnsEditAndDelete.classList.toggle('three-dots-visible');
             btnSave.classList.toggle('hidden-btn');
             contentPost.setAttribute('contentEditable', 'true');
             contentPost.focus();

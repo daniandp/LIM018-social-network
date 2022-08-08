@@ -22,7 +22,7 @@ describe('REGISTER', () => {
     btnModal = document.querySelector('.btn-redirect');
   });
 
-  it('click del boton login para retorno de error CAMPOS VACIOS', () => {
+  it('Click del boton login para retorno de error CAMPOS VACIOS', () => {
     expect(btnRegister instanceof HTMLElement).toBe(true);
 
     // PRIMER CLICK SIRVE PARA VER EL ERROR AL ESTAR LOS CAMPOS VACIOS
@@ -30,7 +30,7 @@ describe('REGISTER', () => {
     expect(msgError.innerHTML).toBe('Debes completar todos los campos para continuar');
   });
 
-  describe('validateEmail', () => {
+  describe('VALIDATE-EMAIL', () => {
     it('validateEmail deberia ser una función', () => {
       expect(typeof validateEmail).toBe('function');
     });
@@ -45,7 +45,6 @@ describe('REGISTER', () => {
   });
 
   it('Evento register', () => {
-    // const mockFn = jest.fn();
     expect(inputEmail instanceof HTMLElement).toBe(true);
     registerUserAuth.mockImplementationOnce((email, password) => {
       expect(email).toBe('email@verify.com');
@@ -60,18 +59,6 @@ describe('REGISTER', () => {
       });
     });
 
-    /* registerUserFirestore.mockImplementationOnce((email, name, nickname, uid, photoURL) => {
-      expect(email).toBe('email@verify.com');
-      expect(name).toBe('123456');
-      expect(nickname).toBe('rosalia');
-      expect(uid).toBe('asb');
-      expect(photoURL).toBe('fdgg');
-      expect(registerUserFirestore).toHaveBeenCalled();
-    }); */
-    /*    sendEmailVerif.mockImplementationOnce(() => {
-      console.log('Estamos aqui');
-      expect(sendEmailVerif).toHaveBeenCalled();
-    }); */
     inputEmail.value = 'email@verify.com';
     inputPass.value = '123456';
     inputName.value = 'rosalia';
@@ -104,7 +91,7 @@ describe('REGISTER', () => {
     btnRegister.click();
   });
 
-  it('si el email no tiene un formato válido', () => {
+  it('Si el email no tiene un formato válido', () => {
     registerUserAuth.mockImplementationOnce((email, password) => {
       expect(email).toBe('email@verify');
       expect(password).toBe('123abc');

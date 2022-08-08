@@ -3,10 +3,7 @@ import { logOut } from '../firebase/auth.js';
 
 // FUNCIÓN PARA IR A ARRIBA
 export const scrollUp = () => {
-  const scroll = document.documentElement.scrollTop;
-  if (scroll > 0) {
-    window.scrollTo(0, 1);
-  }
+  window.scrollTo(0, 0);
 };
 
 export default () => {
