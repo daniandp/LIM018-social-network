@@ -35,13 +35,20 @@ export const divPostPublicated = `
               <i class="bi bi-chat-dots"></i>
               <span class="span-text"> Comentar </span>
             </div>
-            <div id="modal-message-confirm" class="modal">
+            <div id="modal-message-confirm-edit" class="modal">
               <div class="modal-cont">
                 <h2>Twitchtter</h2>
-                <p id="modal-question"></p>
-                <button type="button" id="btn-confirm" class="btn-confirm-delete btn-general">Aceptar</button>
-                <button type="button" id="btn-cancel" class="btn-cancel-delete btn-general">Cancelar</button>
+                <p id="modal-edit">¿Estás seguro que deseas guardar los cambios?</p>
+                <button type="button" id="btn-confirm-edit" class="btn-confirm-delete btn-general">Aceptar</button>
+                <button type="button" id="btn-cancel-edit" class="btn-cancel-delete btn-general">Cancelar</button>
               </div>
             </div>
-            <div id="modal-small" class="msg-hidden"></div> 
+            <div id="modal-message-confirm-delete" class="modal">
+              <div class="modal-cont">
+                <h2>Twitchtter</h2>
+                <p id="modal-delete">¿Estás seguro que quieres eliminar el post?</p>
+                <button type="button" id="btn-confirm-delete" class="btn-confirm-delete btn-general">Aceptar</button>
+                <button type="button" id="btn-cancel-delete" class="btn-cancel-delete btn-general">Cancelar</button>
+              </div>
+            </div>
           </div>`;

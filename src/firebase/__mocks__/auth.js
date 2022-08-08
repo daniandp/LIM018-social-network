@@ -20,6 +20,5 @@ export const logOut = jest.fn();
 export const auth = { currentUser: { uid: '123' } };
 export const getPost = () => { };
 export const createPost = jest.fn();
-/* export const getDoc = () => {
-  return Promise.resolve({ data: () => user })
-} */
+export const deletePost = jest.fn();
+export const editPost = jest.fn();

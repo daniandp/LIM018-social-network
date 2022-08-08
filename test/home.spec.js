@@ -1,6 +1,6 @@
 import { createPost } from '../src/firebase/auth.js';
 import home from '../src/view/home.js';
-/* import post from '../src/view/post.js'; */
+import { querySnapshot } from '../src/view/post.js';
 import { userImage } from '../src/view/profile.js';
 import { divPostPublicated } from './postTemplate.js';
 
@@ -11,8 +11,12 @@ describe('HOME', () => {
   let inputPost;
   let btnSharePost;
   let containerPrincipalPost;
-  let threeDots;
-  let contbtnsEditAndDelete;
+  // let threeDots;
+  // let contbtnsEditAndDelete;
+  let btnDelete;
+  let btnModalConfirmDelete;
+  let modalDelete;
+
   beforeEach(() => {
     viewHome = home();
     document.body.appendChild(viewHome);
@@ -20,8 +24,11 @@ describe('HOME', () => {
     btnSharePost = document.getElementById('btn-share-post');
     containerPrincipalPost = document.querySelector('.container-post');
     containerPrincipalPost.innerHTML = divPostPublicated;
-    threeDots = containerPrincipalPost.querySelector('.bi-three-dots');
-    contbtnsEditAndDelete = containerPrincipalPost.querySelector('.cont-btns-edit-delete');
+    // threeDots = containerPrincipalPost.querySelector('.bi-three-dots');
+    // contbtnsEditAndDelete = containerPrincipalPost.querySelector('.cont-btns-edit-delete');
+    btnDelete = document.querySelector('.btn-delete');
+    btnModalConfirmDelete = document.querySelector('#btn-confirm-delete');
+    modalDelete = document.getElementById('modal-message-confirm-delete');
   });
 
   describe('PROFILE', () => {
@@ -54,11 +61,16 @@ describe('HOME', () => {
       expect(inputPost.textContent).toBe('Debes escribir algo en tu publicación');
     });
 
-    it('Ocultar o mostrar el menú de editar y eliminar ', async () => {
-      expect(threeDots instanceof HTMLElement).toBe(true);
-      expect(contbtnsEditAndDelete.classList.contains('three-dots-visible')).toBe(false);
-      await threeDots.click();
-      expect(contbtnsEditAndDelete.classList.contains('three-dots-visible')).toBe(true);
+    it('Se muestra modal para cancelar o aceptar acción de eliminar', () => {
+      expect(btnDelete instanceof HTMLElement).toBe(true);
+      expect(btnModalConfirmDelete instanceof HTMLElement).toBe(true);
+      console.log(modalDelete.innerHTML);
+      console.log(querySnapshot);
+      btnDelete.click();
+      expect(modalDelete.classList.contains('modal-visible')).toBe(true);
+      // expect(contbtnsEditAndDelete.classList.contains('three-dots-visible')).toBe(false);
+      // await threeDots.click();
+      // expect(contbtnsEditAndDelete.classList.contains('three-dots-visible')).toBe(true);
     });
   });
 });
