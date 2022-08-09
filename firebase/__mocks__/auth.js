@@ -6,38 +6,19 @@ export const signInWithPopup = () => {
   });
 };
 
-export const registerUserAuth = () => {
-  Promise.resolve({
-    user: {
-      email: 'yunoshe1@gmail.com',
-      pass: '123',
-    },
-  });
+const user = {
+  name: 'rosalia',
+  imgProfile: 'https://lh3.googleusercontent.com/a/AItbvmn72LYQ0Zp37_jVQ7TKfGSS7U70b0APdDt0j2r-=s96-c',
 };
 
-export const logInWithEmailAndPass = jest.fn().mockImplementation((email, password) => {
-  const promise = new Promise((resolve, reject) => {
-    let test = false;
-    if (email === 'email2@verify.com' && password === '123abc') {
-      reject(new Error('Firebase: Error (auth/wrong-password).'));
-    }
-
-    if (email === 'notfound@verify.com' && password === '123abc') {
-      reject(new Error('Firebase: Error (auth/user-not-found).'));
-    }
-
-    if (email === 'notfound@verifycom' && password === '123abc') {
-      reject(new Error('Firebase: Error (auth/invalid-email).'));
-    }
-
-    if (email === 'email@verify.com' && password === '123456') {
-      test = true;
-    }
-    resolve({
-      user: {
-        emailVerified: test,
-      },
-    });
-  });
-  return promise;
-});
+export const registerUserAuth = jest.fn();
+export const sendEmailVerif = jest.fn();
+export const registerUserFirestore = jest.fn();
+export const logInWithEmailAndPass = jest.fn();
+export const getUser = () => Promise.resolve({ data: () => user });
+export const logOut = jest.fn();
+export const auth = { currentUser: { uid: '123' } };
+export const getPost = () => { };
+export const createPost = jest.fn();
+export const deletePost = jest.fn();
+export const editPost = jest.fn();

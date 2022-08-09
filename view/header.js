@@ -1,6 +1,11 @@
 /* eslint-disable import/no-unresolved */
 import { logOut } from '../firebase/auth.js';
 
+// FUNCIÓN PARA IR A ARRIBA
+export const scrollUp = () => {
+  window.scrollTo(0, 0);
+};
+
 export default () => {
   // CREACIÓN DEL TEMPLATE
   const viewHeader = `
@@ -46,13 +51,6 @@ export default () => {
   const menuHeader = section.querySelector('.nav-toggle');
   const navOptions = section.querySelector('.nav-options');
 
-  // FUNCIÓN PARA IR A ARRIBA
-  const scrollUp = () => {
-    const scroll = document.documentElement.scrollTop;
-    if (scroll > 0) {
-      window.scrollTo(0, 1);
-    }
-  };
   // EVENTO CLICK DE LA FLECHA IR A ARRIBA
   arrowTop.addEventListener('click', scrollUp);
   // EVENTO CLICK PARA DESPLEGAR EL MENÚ

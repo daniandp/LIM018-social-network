@@ -1,13 +1,16 @@
 import { auth, getUser } from '../firebase/auth.js';
 
+export const userImage = (imgProfile) => (imgProfile !== null ? imgProfile : 'img/perfilwhite.png');
+
 export default (divProfile) => {
   const infoUser = divProfile;
   getUser(auth.currentUser.uid)
     .then((user) => {
       let userName = user.data().name;
-      const userImgProfile = user.data().imgProfile !== null ? user.data().imgProfile : 'img/perfilwhite.png';
+      const userImgProfile = userImage(user.data().imgProfile);
       userName = userName.split(' ', 2).join(' ');
-      const viewProfile = `<div class="img-card-profile">
+      const viewProfile = `
+        <div class="img-card-profile">
           <img src=${userImgProfile} alt="imagen de perfil" referrerpolicy="no-referrer">
         </div>
         <div class="user-name">
@@ -15,10 +18,7 @@ export default (divProfile) => {
         </div>
         <div class="user-info">
           <div class="about-user">
-            <span class="about-me">Mis juegos favoritos son...</span>
-          </div>
-          <div class="more-info">
-            <span class"more-about-me">Interacción</span>
+            <span class="about-me">Mis juegos favoritos son LOL y Fallguys</span>
           </div>
       </div>`;
 

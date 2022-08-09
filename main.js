@@ -17,10 +17,8 @@ stateUser(auth, (user) => {
   if (user !== null && user.emailVerified) {
     // SI EL USUARIO ESTÁ VERIFICADO SE REDIRIGE A HOME
     window.location.hash = '#/home';
-    // console.log('Usuario logueado y verificado', user.emailVerified);
   } else {
     // EL USUARIO SE DESLOGUEA SI NO ESTÁ VERIFICADO
     logOut();
-    // console.log('No hay usuario logueado ni verificado');
   }
 });
