@@ -1,3 +1,233 @@
+# Twitchtter
+## La red social creada por gamers para gamers
+
+Esta red social fue creada con la finalidad de que los gamers puedan interactuar y compartir 
+publicaciones referentes a sus juegos favoritos.Permite a cualquier usuario crearse una cuenta con 
+correo y contraseña o con Google y loguearse con ella; crear, editar, borrar y "likear" publicaciones.
+
+
+#### Imagenes finales del proyecto
+
+![pantalla de welcome](./src/img/pantallaWelcome.png)
+
+![pantalla de login](./src/img/pantallaLogin.png)
+
+![pantalla de registro](./src/img/pantallaRegister.png)
+
+![pantalla de home](./src/img/pantallaHome.png)
+
+![versión mobile](./src/img/pantallaMobile.png)
+
+
+## Investigación UX
+
+#### ¿Quiénes son los principales usuarios de mi producto?
+
+Personas aficionadas a los videojuegos que desean formar parte de una red social donde puedan 
+interactuar con la comunidad gamer.
+
+#### ¿Cuál es el objetivo de los usuarios en relación con mi producto?
+
+* Formar parte de una comunidad
+* Crear una cuenta e iniciar sesión.
+* Crear publicaciones con las cuales la comunidad pueda interactuar.
+* Interactuar con las publicaciones de otros usuarios a través de likes.
+* Editar o eliminar su propio contenido.
+
+#### ¿Cómo mi producto resuelve un problema o necesidad?
+
+Le permite al usuario tener un espacio donde pueda conectarse con personas que compartan 
+sus mismos intereses a través de una aplicación amigable.
+
+#### Primeros prototipos de baja fidelidad
+
+![prototipo de baja 1](./src/img/prototipoBaja1.png)
+
+![prototipo de baja 2](./src/img/prototipoBaja2.png)
+
+#### Resumen del feedback recibido
+
+* En la primera versión del diseño el color principal no era atractivo y no convencía a los usuarios.
+* El fondo no era llamativo, ya que era un color sólido, por lo que se decide agregar una imagen de fondo. 
+* El primer logo generaba confusión por la posición de las luces y sombras, por ello se cambió.
+* En el header del home todas las opciones estaban a la vista, por lo que nos recomendaron hacerlas menos 
+accesible, incluyéndolas en menú desplegable.
+* Al ser una plataforma nueva, los iconos no eran reconocidos por los usuarios, por lo que nos 
+recomendaron colocar etiquetas descriptivas para que el usuario supiera su función.
+
+ #### Prototipos de alta fidelidad
+ 
+![prototipos de alta fidelidad](./src/img/prototipoDeAlta.png)
+
+### Historias de Usuario
+
+#### HU1: Interfaz de usuario
+
+Yo como gamer
+Quiero entrar a la página de Twitchtter y ver una interfaz de registro o inicio de sesión
+Para acceder a Twitchtter
+
+Criterios de aceptación:
+* Que haya una interfaz amigable de registro y de logueo
+* Que tenga las opciones de registro y de logueo
+* Que tenga la opción de cambiar contraseña si la olvidó
+* Que la interfaz esté debidamente identificada
+* Que pueda ver la interfaz en mi teléfono, tablet y en la computadora
+
+Definición de terminado:
+* Que pase el test unitario
+* Que pase el test de usabilidad
+* Que todo el código esté subido al repositorio
+* Que pase el code review
+* Que esté desplegado en git pages
+
+#### HU 2: Registro de usuario
+
+Yo como usuario de Twitchtter
+Quiero poder registrarme con mi correo y contraseña o con mi cuenta de Google en Twitchtter
+Para hacer uso de esta red social
+
+Criterios de aceptación:
+* Debe haber campos de texto para que el usuario ingrese sus datos (correo, nombre, nickname, contraseña)
+* El correo debe ser una cuenta válida
+* Si el correo no es válido, debe mostrar un mensaje indicándolo
+* Que la contraseña tenga 6 o más caracteres
+* Solo se puede crear un usuario por correo y si el correo ya existe debe mostrar un mensaje
+* El usuario debe ingresar su nombre
+* El usuario debe ingresar su nickname
+* Los campos no deben estar vacíos, si no debe mostrar un mensaje
+* Debe haber un botón para el completar el registro
+* El usuario puede registrarse por autenticación de Google
+* Una vez registrado, el usuario debe verificar su correo a través del email que se le envió.
+
+Definición de terminado:
+* Que pase el test unitario
+* Que pase el test de usabilidad
+* Que todo el código esté subido al repositorio
+* Que pase el code review
+* Que esté desplegado en git pages
+
+#### HU 3: Login de usuario
+Yo como usuario de Twitchtter
+Quiero poder loguearme con mi correo y contraseña o con mi cuenta de Google en Twitchtter
+Para hacer acceder a la red social
+
+Criterios de aceptación:
+* Debe haber campos de texto para que el usuario ingrese sus datos (correo, contraseña)
+* El correo debe estar registrado y ser una cuenta verificada
+* Si el correo no está registrado y verificado, debe mostrar un mensaje indicándolo
+* Si la contraseña es incorrecta debe mostrar un mensaje indicandolo
+* Los campos no deben estar vacíos, sino debe mostrar un mensaje indicandolo
+* Debe haber un botón para el logueo
+* El usuario puede iniciar sesión por autenticación de google
+* Si los datos del usuario son válidos, debe redirigir al home
+
+Definición de terminado:
+* Que pase el test unitario
+* Que pase el test de usabilidad
+* Que todo el código esté subido al repositorio
+* Que pase el code review
+* Que esté desplegado en git pages
+
+#### HU4: Interfaz de inicio
+Yo como usuario de Twitchtter
+Quiero ver una interfaz de inicio una vez haya iniciado sesión
+Para poder ver el timeline y las actualizaciones
+
+Criterios de aceptación:
+* Quiero ver una barra de navegación
+* Quiero poder ver un área donde pueda escribir mis post
+* Quiero ver una tarjeta de perfil sobre mi (nombre, foto, etc)
+* Quiero por ver un area con todos los post en general ya publicados
+* Quisiera tener la opción de cerrar sesión.
+
+Definición de terminado:
+* Que pase el test unitario
+* Que pase el test de usabilidad
+* Que todo el código esté subido al repositorio
+* Que pase el code review
+* Que esté desplegado en git pages
+
+#### HU5: Crear post
+Yo como usuario de Twitchtter
+Quiero poder postear y que los post se vean en un timeline general
+Para compartir mis opiniones y ver la de los demás
+
+Criterios de aceptación:
+* Que haya un campo de texto para ingresar mi opinión
+* Que haya un botón para publicar mi post
+* Que se puedan agregar emojis a los post
+* Que los post puedan ser públicos o privados.
+* Que se pueda cargar una imagen a los post 
+* Al publicar el post se muestre en la parte superior del timeline
+
+Definición de terminado:
+* Que pase el test unitario
+* Que pase el test de usabilidad
+* Que todo el código esté subido al repositorio
+* Que pase el code review
+* Que esté desplegado en git pages
+
+#### HU6: Editar Post
+Yo como usuario de Twitchtter
+Quiero poder editar mis post
+Para rectificar cualquier error 
+
+Criterios de aceptación:
+* Que haya una opción de editar el post y tenga funcionalidad
+* Al querer editar que se habilite el área del texto 
+* Antes de editar un post me dé la opción de confirmación
+* Al confirmar la edición se muestre en el timeline el post actualizado
+
+Definición de terminado:
+* Que pase el test unitario
+* Que pase el test de usabilidad
+* Que todo el código esté subido al repositorio
+* Que pase el code review
+* Que esté desplegado en git pages
+
+#### HU7: Eliminar Post 
+Yo como usuario de Twitchtter
+Quiero poder eliminar un post específico
+Para que ya no exista en la red social
+
+Criterios de aceptación:
+* Que haya una opción de eliminar un post específico y tenga funcionalidad
+* Antes de eliminar un post me dé la opción de confirmación
+* Una vez dada la confirmación ya no se debe mostrar en timeline
+
+Definición de terminado:
+* Que pase el test unitario
+* Que pase el test de usabilidad
+* Que todo el código esté subido al repositorio
+* Que pase el code review
+* Que esté desplegado en git pages
+
+####  HU8: Dar y quitar like a los post 
+Yo como usuario de Twitchtter
+Quiero poder dar like y quitar el like de un post
+Para demostrar si me gustó la publicación
+
+Criterios de aceptación:
+* Que se pueda dar like a las publicaciones
+* Al dar like que se aumente el número de likes
+* Que se pueda quitar el like a las publicaciones
+* Al quitar el like que disminuya el número de likes
+
+
+Definición de terminado:
+* Que pase el test unitario
+* Que pase el test de usabilidad
+* Que todo el código esté subido al repositorio
+* Que pase el code review
+* Que esté desplegado en git pages
+
+
+## Un pequeño vistazo
+
+![gif de twitchtter](./src/img/twitchtter.gif)
+
+
 # Creando una Red Social
 
 ## Índice
