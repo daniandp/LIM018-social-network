@@ -1,6 +1,6 @@
-import { createPost } from '../src/firebase/auth.js';
+import { createPost, editPost } from '../src/firebase/auth.js';
 import home from '../src/view/home.js';
-import { querySnapshot } from '../src/view/post.js';
+import { querySnapshot, likeOrDisLike, showModalDelete } from '../src/view/post.js';
 import { userImage } from '../src/view/profile.js';
 import { divPostPublicated } from './postTemplate.js';
 
@@ -11,10 +11,8 @@ describe('HOME', () => {
   let inputPost;
   let btnSharePost;
   let containerPrincipalPost;
-  // let threeDots;
-  // let contbtnsEditAndDelete;
-  let btnDelete;
   let btnModalConfirmDelete;
+  let btnModalCancelDelete;
   let modalDelete;
 
   beforeEach(() => {
@@ -24,10 +22,8 @@ describe('HOME', () => {
     btnSharePost = document.getElementById('btn-share-post');
     containerPrincipalPost = document.querySelector('.container-post');
     containerPrincipalPost.innerHTML = divPostPublicated;
-    // threeDots = containerPrincipalPost.querySelector('.bi-three-dots');
-    // contbtnsEditAndDelete = containerPrincipalPost.querySelector('.cont-btns-edit-delete');
-    btnDelete = document.querySelector('.btn-delete');
     btnModalConfirmDelete = document.querySelector('#btn-confirm-delete');
+    btnModalCancelDelete = document.querySelector('#btn-cancel-delete');
     modalDelete = document.getElementById('modal-message-confirm-delete');
   });
 
@@ -61,16 +57,49 @@ describe('HOME', () => {
       expect(inputPost.textContent).toBe('Debes escribir algo en tu publicación');
     });
 
-    it('Se muestra modal para cancelar o aceptar acción de eliminar', () => {
-      expect(btnDelete instanceof HTMLElement).toBe(true);
-      expect(btnModalConfirmDelete instanceof HTMLElement).toBe(true);
-      console.log(modalDelete.innerHTML);
-      console.log(querySnapshot);
-      btnDelete.click();
-      expect(modalDelete.classList.contains('modal-visible')).toBe(true);
-      // expect(contbtnsEditAndDelete.classList.contains('three-dots-visible')).toBe(false);
-      // await threeDots.click();
-      // expect(contbtnsEditAndDelete.classList.contains('three-dots-visible')).toBe(true);
+    describe('likeOrDisLike', () => {
+      it('Si ya el usuario logueado dio like a un post debe retirar el id del usuario del array de likes', () => {
+        const arrayLikes = ['sUeKi4n6tzcYVnsR93u4uX6aRzs1', 'SWyr63xtfSSUxiFCLh74YLRIOT62', 'B06Faq1V1ENbGRVkWK00MUVpgyz2'];
+        const postId = '7IcWtOlNgm3Qk8RWEzOn';
+        const authCurrentUserUid = 'B06Faq1V1ENbGRVkWK00MUVpgyz2';
+        expect(typeof likeOrDisLike).toBe('function');
+        likeOrDisLike(arrayLikes, postId, authCurrentUserUid);
+        expect(editPost).toHaveBeenCalled();
+      });
+      it('Si el usuario le dio like debe agregar al array de likes', () => {
+        const arrayLikes = ['sUeKi4n6tzcYVnsR93u4uX6aRzs1', 'SWyr63xtfSSUxiFCLh74YLRIOT62'];
+        const postId = '7IcWtOlNgm3Qk8RWEzOn';
+        const authCurrentUserUid = 'B06Faq1V1ENbGRVkWK00MUVpgyz2';
+        expect(typeof likeOrDisLike).toBe('function');
+        likeOrDisLike(arrayLikes, postId, authCurrentUserUid);
+        expect(editPost).toHaveBeenCalled();
+      });
+    });
+    describe('showModalDelete', () => {
+      it('Probando eliminar', () => {
+        const postId = '7IcWtOlNgm3Qk8RWEzOn';
+        expect(typeof showModalDelete).toBe('function');
+        showModalDelete(
+          postId,
+          modalDelete,
+          containerPrincipalPost,
+          btnModalCancelDelete,
+          btnModalConfirmDelete,
+        );
+      });
+    });
+    describe('querySnapShot', () => {
+      it('Recorrido de post para extraer la data', () => {
+        const post = {
+          uid: '123',
+          likes: ['sUeKi4n6tzcYVnsR93u4uX6aRzs1', 'SWyr63xtfSSUxiFCLh74YLRIOT62', 'B06Faq1V1ENbGRVkWK00MUVpgyz2'],
+        };
+        const queryPost = {
+          docs: [{ data: () => post }],
+        };
+        expect(typeof querySnapshot).toBe('function');
+        querySnapshot(queryPost);
+      });
     });
   });
 });

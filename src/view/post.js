@@ -2,10 +2,30 @@ import {
   createPost, auth, getPost, getUser, deletePost, editPost,
 } from '../firebase/auth.js';
 
+export const likeOrDisLike = (arrayLikes, postId, authCurrentUserUid) => {
+  if (arrayLikes.includes(authCurrentUserUid)) {
+    const filterUser = arrayLikes.filter((uidUser) => uidUser !== authCurrentUserUid);
+    editPost(postId, { likes: filterUser });
+  } else {
+    editPost(postId, { likes: [...arrayLikes, authCurrentUserUid] });
+  }
+};
+export const showModalDelete = (postId, modal, contbtnsEditAndDelete, btnConfirm, btnCancel) => {
+  const modalDelete = modal;
+  const btnModalConfirmDelete = btnConfirm;
+  const btnModalCancelDelete = btnCancel;
+  modalDelete.classList.add('modal-visible');
+  contbtnsEditAndDelete.classList.toggle('three-dots-visible');
+
+  btnModalConfirmDelete.addEventListener('click', () => deletePost(postId));
+
+  btnModalCancelDelete.addEventListener('click', () => modalDelete.classList.remove('modal-visible'));
+};
+
 export const querySnapshot = (queryPost) => {
   const arrPostsandUsers = []; // array que va a almacenar las promesas
   const containerPostPublicated = document.querySelector('.container-post');
-  queryPost.forEach((post) => {
+  queryPost.docs.forEach((post) => {
     // RELACIONANDO POSTS Y USUARIOS
     const objPostandUser = getUser(post.data().uid)
       .then((user) => ({ post, user }));
@@ -102,43 +122,21 @@ export const querySnapshot = (queryPost) => {
           threeDots.classList.remove('hidden-btn');
         }
         threeDots.addEventListener('click', () => {
-          console.log('aloooooooo?');
           contbtnsEditAndDelete.classList.toggle('three-dots-visible');
           btnSave.classList.add('hidden-btn');
           contentPost.setAttribute('contentEditable', 'false');
         });
 
-        window.addEventListener('scroll', () => {
-          contbtnsEditAndDelete.classList.remove('three-dots-visible');
-        });
+        window.addEventListener('scroll', () => contbtnsEditAndDelete.classList.remove('three-dots-visible'));
 
         if (arrayLikes.includes(auth.currentUser.uid)) {
           btnLike.classList.add('active-like');
         }
 
-        btnLike.addEventListener('click', () => {
-          if (arrayLikes.includes(auth.currentUser.uid)) {
-            const filterUser = arrayLikes.filter((uidUser) => uidUser !== auth.currentUser.uid);
-            editPost(post.id, { likes: filterUser });
-          } else {
-            editPost(post.id, { likes: [...arrayLikes, auth.currentUser.uid] });
-          }
-        });
+        btnLike.addEventListener('click', () => likeOrDisLike(arrayLikes, post.id, auth.currentUser.uid));
 
         // EVENTO CLICK PARA ELIMINAR LOS POST
-        const showModalDelete = () => {
-          modalDelete.classList.add('modal-visible');
-          contbtnsEditAndDelete.classList.toggle('three-dots-visible');
-
-          btnModalConfirmDelete.addEventListener('click', () => {
-            deletePost(post.id);
-          });
-
-          btnModalCancelDelete.addEventListener('click', () => {
-            modalDelete.classList.remove('modal-visible');
-          });
-        };
-        btnDelete.addEventListener('click', showModalDelete);
+        btnDelete.addEventListener('click', () => showModalDelete(post.id, modalDelete, contbtnsEditAndDelete, btnModalConfirmDelete, btnModalCancelDelete));
 
         // EVENTOS DE CLICK PARA EDITAR LOS POST
         btnEdit.addEventListener('click', () => {
