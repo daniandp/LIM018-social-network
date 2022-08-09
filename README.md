@@ -156,9 +156,6 @@ Para compartir mis opiniones y ver la de los demás
 Criterios de aceptación:
 * Que haya un campo de texto para ingresar mi opinión
 * Que haya un botón para publicar mi post
-* Que se puedan agregar emojis a los post
-* Que los post puedan ser públicos o privados.
-* Que se pueda cargar una imagen a los post 
 * Al publicar el post se muestre en la parte superior del timeline
 
 Definición de terminado:
