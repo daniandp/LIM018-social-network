@@ -43,12 +43,8 @@ export const registerUserFirestore = (email, name, nickname, uid, imgProfile) =>
 export const authGoogle = () => {
   signInWithPopup(auth, provider)
     .then((result) => {
-      const credential = GoogleAuthProvider.credentialFromResult(result);
-      const token = credential.accessToken;
-      console.log(token);
+      GoogleAuthProvider.credentialFromResult(result);
       const user = result.user;
-      console.log(user);
-      console.log(user.uid);
       registerUserFirestore(
         user.email,
         user.displayName,
@@ -56,9 +52,6 @@ export const authGoogle = () => {
         user.uid,
         user.photoURL,
       );
-    }).catch((error) => {
-      const errorMessage = error.message;
-      console.log(errorMessage);
     });
 };
 
@@ -67,10 +60,7 @@ export const logInWithEmailAndPass = (email, pass) => signInWithEmailAndPassword
 
 // Función para cerrar sesión de los usuarios logueados
 export const logOut = () => {
-  signOut(auth).then(() => {
-  }).catch((error) => {
-    console.log(error);
-  });
+  signOut(auth);
 };
 
 // Función para crear posts
